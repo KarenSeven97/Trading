@@ -63,7 +63,7 @@ export function ImportPreview({
     if (
       !confirm(
         data.type === "backup"
-          ? "完整恢复会替换当前账本，建议先导出备份。确认恢复？"
+          ? (journal.mode === "live" ? "完整恢复会替换公开共享账本，影响所有访问者。请先备份。确认恢复？" : "完整恢复会替换当前演示账本，建议先备份。确认恢复？")
           : `确认导入 ${rows.filter((r) => r.include).length} 条成交？`,
       )
     )
@@ -138,7 +138,7 @@ export function ImportPreview({
               {data.journal.bars.length} 组行情
             </p>
             <div className="subtle-note">
-              将替换当前账本的成交、笔记、设置、自选和缓存。另一种账本不会受到影响。
+              将替换当前账本的成交、笔记、设置、自选和缓存。正式账本的恢复会同步给所有访问者；另一种账本不会受到影响。
             </div>
           </>
         )}

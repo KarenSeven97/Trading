@@ -1,6 +1,6 @@
 # Trade Journal
 
-个人美股交易记录与复盘 Web MVP。React 19 + TypeScript + Vite；本地优先，无账户、无云服务也能完整记账。仅记录成交，不向券商发送订单。
+个人美股交易记录与复盘 Web MVP。React 19 + TypeScript + Vite；本地优先，正式账本连接 Supabase 公共共享数据库，无需注册账号；断网可继续记账。仅记录成交，不向券商发送订单。
 
 ## 启动
 
@@ -118,12 +118,17 @@ public/
 
 ## 数据与扩展边界
 
-IndexedDB 数据库 `trade-journal-v1`，版本 1；`journals` store，以 `live/demo` 为键保存一个完整快照。创建与升级脚本在 `storage.ts`。不需要 SQL 或服务器数据库迁移。结构详见 `docs/DATA_MODEL.md`。
+IndexedDB 数据库 `trade-journal-v1`，版本 1；`journals` store 以 `live/demo` 保存本机快照，`cloud-state` 保存最近同步基线与待上传状态。结构详见 `docs/DATA_MODEL.md`。
 
-当前不含 Supabase 登录与跨设备同步；持久化通过 `load/persist` 隔离，云同步可以另加适配层，但必须设计用户身份、权限、全局版本及冲突合并后再启用。当前冲突策略是拒绝旧快照覆盖，要求重载，绝不宣称已有云同步。
+正式账本采用用户明确选择的 B 模式：无需登录，任何访问者都可查看、新增、修改、删除同一份交易。Supabase `Trading` 项目使用 `public.trading_shared_ledger` 的单一 `main` 行保存原始成交、笔记、自选及财务设置，Dashboard 与 FIFO 匹配仍从成交重新计算。数据库定义和初始化 SQL：`database/shared-ledger.sql`。不使用 Supabase Auth、service_role 或秘密密钥。
 
-同一 URL 不同浏览器/设备各有独立账本；localhost 与线上地址也各有独立账本。清除站点数据会删除本地记录。定期导出完整备份；可从同类型账本导入到其他设备。
+`src/data/cloudConfig.ts` 内置项目 URL 与可公开的 publishable key，因此 Sites、GitHub Pages 和安装后的 PWA 连接同一账本。复制项目自用时必须改为自己的 Supabase 项目并运行 SQL；不要误用当前公共共享账本。此 key 依赖数据库 RLS 和校验触发器，不是私有凭证。
 
+保存先写本机，再以 revision CAS 更新云端；打开正式账本、回到窗口、网络恢复及每 15 秒空闲时同步。编辑弹窗期间暂停轮询。首次连接自动合并本机旧记录，通过 ID/成交指纹识别已有副本，并合并笔记与标签。演示成交禁止上传。
+
+基于最近同步快照进行三方合并：不同记录的新增/编辑可合并；同一记录的不同修改、删除对编辑、合并后超卖会报错，保留本机待同步数据，不静默覆盖。错误提示下可先下载本机完整备份，再明确选择载入云端；之后可核对备份通过导入预览补录。离线状态不表示已完成云端保存，请看到“共享账本已同步”后再清除浏览器数据。完整备份恢复到正式账本会影响所有访问者。
+
+演示账本、历史行情缓存、深浅主题和行情代理 URL 仅保存在当前设备；财务设置与真实成交统一共享。当前为小型个人共享账本，单快照上限 4 MB / 20,000 条成交，不是无限规模的多租户系统。
 ## PWA
 
 生产构建附 manifest、192/512px 图标和 Service Worker。首次联网打开后缓存应用壳与已加载资源；后续离线可使用本地账本。行情查询需要网络。iPhone/iPad Safari 通过分享菜单「添加到主屏幕」安装，Chrome 支持时会展示安装入口。私有站点的首次访问需要联网验证访问权限。此次仅验证构建资产，未在实体 iOS 设备测试安装或断网冷启动。
@@ -134,7 +139,7 @@ IndexedDB 数据库 `trade-journal-v1`，版本 1；`journals` store，以 `live
 - 不支持拆股、合股、分红、税务和多币种成本。出现公司行动需先人工核对成交口径；不应把本工具当成税务报表。
 - 在线行情接入代码已实现，但实际联网成功、权限和延迟尚未使用用户密钥验证。行情缺失时只可导入，不虚构。
 - 日柱图为了浏览器性能最多显示范围内前 730 个自然日，区间汇总/交易列表按完整所选范围计算；可缩小范围查看其余日期。
-- 无云端备份与自动同步，无法恢复未备份且已清除的浏览器数据。
+- 尚未同步成功的离线修改及本机演示数据，清除浏览器数据后无法恢复；请定期导出备份。
 - 390px 视口验证为桌面浏览器内的响应式 iframe；不是实体 iPhone/iPad 浏览器兼容性认证。
 
 验证结果及未验证项目见 `docs/VALIDATION.md`。
@@ -155,7 +160,7 @@ IndexedDB 数据库 `trade-journal-v1`，版本 1；`journals` store，以 `live
 
 网页顶部「安装应用」提供浏览器原生安装入口及各平台说明。Windows/Mac 用 Chrome 或 Edge 安装；iPhone/iPad 用 Safari 的分享菜单 → 添加到主屏幕；Android 用 Chrome 菜单安装。首次联网访问完成缓存后可离线记账，行情仍需网络。
 
-构建会生成带资源哈希的 Service Worker，预缓存应用代码、样式、图标与应用壳。每次发布使用独立缓存版本。更新可在关闭全部旧应用窗口后重新打开生效。用户的交易记录保存在自己的 IndexedDB，公开源码和公开页面不会把你的浏览器交易记录上传到仓库。
+构建会生成带资源哈希的 Service Worker，预缓存应用代码、样式、图标与应用壳。每次发布使用独立缓存版本。更新可在关闭全部旧应用窗口后重新打开生效。正式交易记录同步到 Supabase 公共共享账本，同时在 IndexedDB 缓存；不会把交易记录提交到 GitHub 仓库。演示记录仅保存在本机。
 
 已准备 `.github/workflows/pages.yml`：仓库名 `Trading`，默认分支 `main`。推送后在 GitHub Settings → Pages → Source 选择 GitHub Actions。工作流执行 npm ci、测试及构建，按 `/Trading/` 子路径发布。只有成功推送并运行工作流后，GitHub Pages 网页才会可用。
 

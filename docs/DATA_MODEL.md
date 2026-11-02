@@ -27,3 +27,6 @@ FIFO 的费用分配：每个批次保存剩余数量与剩余买入费用。每
 V1 不需要外部数据库迁移。未来 IndexedDB schema 升级应增加 openDB version 并提供 migration；云端实现需要用户标识、稳定记录 ID、服务端唯一约束与显式冲突处理。现有 revision 只保护本地，不是跨设备同步协议。
 
 复盘新增 `OpenLot` 派生类型：`buy`（原始买入成交）、`quantity`（剩余数量）、`cost` 与 `remainingFee`。由 FIFO 剩余队列生成，不写入 IndexedDB，也不计入日报。复盘卡片分别显示原始买入量与剩余量，避免把部分平仓的原始数量误认为仍在持仓。
+
+## Public shared ledger (B mode)
+`database/shared-ledger.sql` declares the Supabase container, SELECT/UPDATE RLS for anon/authenticated, document validation trigger and SECURITY INVOKER CAS RPC. The main row is never deleted; deleting an execution updates its JSON document. revision is a server-side concurrency token distinct from the local IndexedDB revision. Cloud document.revision is always 0, and derived profits are never a separately persisted source of truth. Each browser stores a baseline snapshot for three-way merges and pending offline writes. Local cache/appearance/proxy settings and all demo data remain device-local. No identity is created.

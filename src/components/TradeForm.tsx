@@ -138,7 +138,7 @@ export function TradeForm({
           />
           {journal.mode === "demo"
             ? "演示账本 · 不计入正式记录"
-            : "正式账本 · 保存到当前浏览器"}
+            : "正式账本 · 本机保存后同步到公开共享账本"}
           <span className="right muted">FIFO / USD</span>
         </div>
         {!editing && (

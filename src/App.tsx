@@ -24,9 +24,10 @@ import {
 } from "./domain/model";
 import { calculate, money } from "./domain/ledger";
 import { et } from "./domain/time";
-import { load, persist } from "./data/storage";
+import { load, persist, loadLocal, syncShared, useCloudVersion, getSyncStatus, subscribeSync } from "./data/storage";
+import { cloudEnabled } from "./data/cloudConfig";
 import { demoJournal } from "./data/demo";
-import { parseBackup, parseExecutions } from "./data/transfer";
+import { backup, download, parseBackup, parseExecutions } from "./data/transfer";
 import { Dashboard, type Range } from "./components/Dashboard";
 import { Stocks } from "./components/Stocks";
 import { Reviews } from "./components/Reviews";
@@ -44,14 +45,16 @@ function initialPage(): Page {
 }
 export default function App() {
   const instanceId = useRef(uid());
+  const [syncStatus, setSyncStatus] = useState(getSyncStatus);
+  useEffect(() => subscribeSync(() => setSyncStatus(getSyncStatus())), []);
   const [journal, setJournal] = useState<Journal | null>(null),
     [page, setPage] = useState<Page>(initialPage),
     [mode, setMode] = useState<"live" | "demo">(() =>
       (() => {
         try {
-          return localStorage.getItem("tj-mode") === "live" ? "live" : "demo";
+          return localStorage.getItem("tj-mode") === "demo" ? "demo" : "live";
         } catch {
-          return "demo";
+          return "live";
         }
       })(),
     ),
@@ -140,6 +143,32 @@ export default function App() {
     };
     return () => ch.close();
   }, [mode, journal?.revision]);
+  async function refreshShared() {
+    try {
+      const next = await syncShared();
+      setJournal(current => current?.mode === "live" ? next : current);
+      setStale(false);
+    } catch (e) { notify((e as Error).message); }
+  }
+  useEffect(() => {
+    if (!cloudEnabled || mode !== "live" || loading || form || detail || settingsOpen || importData) return;
+    let cancelled = false;
+    const refresh = () => { void syncShared().then(next => {
+      if (!cancelled) { setJournal(next); setStale(false); }
+    }).catch(() => {}); };
+    const timer = setInterval(refresh, 15000);
+    addEventListener("focus", refresh);
+    addEventListener("online", refresh);
+    return () => { cancelled = true; clearInterval(timer); removeEventListener("focus", refresh); removeEventListener("online", refresh); };
+  }, [mode, loading, form, detail, settingsOpen, importData]);
+  async function resolveCloudConflict() {
+    try {
+      const local = await loadLocal("live");
+      download(`trading-before-cloud-${Date.now()}.json`, backup(local), "application/json");
+      if (!confirm("本机完整备份已下载。载入云端会放弃本机尚未同步的修改，请确认备份文件已保存。继续？")) return;
+      setJournal(await useCloudVersion()); setStale(false);
+    } catch(e) { notify((e as Error).message); }
+  }
   async function save(next: Journal) {
     if (stale) throw new Error("账本已在其他页面更新，请先刷新");
     const result = await persist(next);
@@ -153,7 +182,7 @@ export default function App() {
       });
       ch.close();
     }
-    notify("已保存到当前浏览器");
+    notify(result.mode === "live" && cloudEnabled ? (getSyncStatus().kind === "synced" ? "已保存并同步到共享账本" : "已保存本机，云端尚未同步；请查看同步提示") : "已保存到当前浏览器");
   }
   function nav(p: Page) {
     location.hash = p;
@@ -242,7 +271,7 @@ export default function App() {
         </div>
         <h2>Trade Journal</h2>
         <div className="spinner" />
-        <p>正在读取本地账本…</p>
+        <p>正在读取账本…</p>
       </div>
     );
   if (fatal || !journal)
@@ -313,7 +342,7 @@ export default function App() {
           <p>
             {mode === "demo"
               ? "演示数据独立保存，放心探索。"
-              : "你的成交只保存在当前浏览器。"}
+              : cloudEnabled ? "所有访问者共用一个公开账本。" : "你的成交只保存在当前浏览器。"}
           </p>
         </div>
         <div className="sidebar-bottom">
@@ -401,6 +430,13 @@ export default function App() {
             </button>
           </div>
         )}
+        {mode === "live" && cloudEnabled && (
+          <div className={`cloud-banner ${syncStatus.kind}`} role="status">
+            <div><strong>公开共享账本</strong><span>无需登录 · 所有访问者共同查看和编辑</span><small>{syncStatus.message}</small></div>
+            <div className="cloud-actions"><button className="btn secondary" disabled={syncStatus.kind === "syncing" || !!form || settingsOpen || !!importData || !!detail} onClick={() => void refreshShared()}><RefreshCw size={15} />{syncStatus.kind === "syncing" ? "同步中…" : "立即同步"}</button>
+            {syncStatus.kind === "error" && <button className="text-btn" onClick={() => void resolveCloudConflict()}>备份并载入云端</button>}</div>
+          </div>
+        )}
         {stale && (
           <div className="stale-banner">
             其他标签页已更新账本。
@@ -450,7 +486,7 @@ export default function App() {
           </span>
           <span>
             <ShieldCheck size={13} />
-            数据留在你的设备
+            {mode === "live" && cloudEnabled ? "Supabase 共享账本 · 本机缓存" : "演示数据保存在本机"}
           </span>
         </footer>
       </div>
