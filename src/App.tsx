@@ -26,7 +26,7 @@ import { calculate, money } from "./domain/ledger";
 import { et } from "./domain/time";
 import { load, persist, loadLocal, syncShared, useCloudVersion, getSyncStatus, subscribeSync } from "./data/storage";
 import { cloudEnabled } from "./data/cloudConfig";
-import { demoJournal } from "./data/demo";
+import { accountFunds } from "./domain/funds";
 import { backup, download, parseBackup, parseExecutions } from "./data/transfer";
 import { Dashboard, type Range } from "./components/Dashboard";
 import { Stocks } from "./components/Stocks";
@@ -49,15 +49,7 @@ export default function App() {
   useEffect(() => subscribeSync(() => setSyncStatus(getSyncStatus())), []);
   const [journal, setJournal] = useState<Journal | null>(null),
     [page, setPage] = useState<Page>(initialPage),
-    [mode, setMode] = useState<"live" | "demo">(() =>
-      (() => {
-        try {
-          return localStorage.getItem("tj-mode") === "demo" ? "demo" : "live";
-        } catch {
-          return "live";
-        }
-      })(),
-    ),
+    [mode] = useState<"live" | "demo">("live"),
     [loading, setLoading] = useState(true),
     [fatal, setFatal] = useState(""),
     [notice, setNotice] = useState(""),
@@ -93,8 +85,7 @@ export default function App() {
     setImportData(null);
     load(mode)
       .then(async (j) => {
-        if (j.mode === "demo" && j.revision === 0)
-          j = await persist(demoJournal());
+
         if (!cancelled) {
           setJournal(j);
           setStale(false);
@@ -288,6 +279,7 @@ export default function App() {
         </button>
       </div>
     );
+  const funds = accountFunds(journal);
   const detailTrade = detail?.tradeId
       ? ledger?.trades.find((t) => t.id === detail.tradeId)
       : undefined,
@@ -325,33 +317,17 @@ export default function App() {
         <div className="sidebar-rule" />
         <div className="ledger-select">
           <span className="sidebar-label">当前账本</span>
-          <div className="segmented">
-            <button
-              className={mode === "live" ? "active" : ""}
-              onClick={() => setMode("live")}
-            >
-              正式
-            </button>
-            <button
-              className={mode === "demo" ? "active" : ""}
-              onClick={() => setMode("demo")}
-            >
-              演示
-            </button>
-          </div>
-          <p>
-            {mode === "demo"
-              ? "演示数据独立保存，放心探索。"
-              : cloudEnabled ? "所有访问者共用一个公开账本。" : "你的成交只保存在当前浏览器。"}
-          </p>
+          <strong>正式账本</strong><p>所有访问者共用一个公开账本。</p>
         </div>
         <div className="sidebar-bottom">
           <div className="capital-card">
             <span>
-              固定初始本金 <ShieldCheck size={14} />
+              初始本金 <ShieldCheck size={14} />
             </span>
             <strong>{money(journal.settings.capital, false)}</strong>
-            <small>所有收益率的统一基准</small>
+            <button className="text-btn" onClick={() => setSettingsOpen(true)}>调整本金</button>
+            <small>未平仓占用（含买入费用）</small><b>{money(funds.occupied, false)}</b>
+            <small>剩余可用（含已实现盈亏）</small><b>{money(funds.available, false)}</b>
           </div>
           <button
             className="sidebar-settings"
@@ -398,12 +374,6 @@ export default function App() {
               {et().toFormat("yyyy.MM.dd")} · 美东 ET
             </span>
             <button
-              className="mobile-mode badge"
-              onClick={() => setMode(mode === "demo" ? "live" : "demo")}
-            >
-              {mode === "demo" ? "演示账本 ⇄" : "正式账本 ⇄"}
-            </button>
-            <button
               className="icon-btn mobile-settings"
               aria-label="设置"
               onClick={() => setSettingsOpen(true)}
@@ -419,17 +389,6 @@ export default function App() {
             </button>
           </div>
         </header>
-        {mode === "demo" && (
-          <div className="demo-banner">
-            <span className="badge">DEMO</span>
-            <span>
-              正在浏览演示账本。成交与合成行情均为示例，不计入正式统计。
-            </span>
-            <button onClick={() => setMode("live")}>
-              进入正式账本 <ArrowUpRight size={14} />
-            </button>
-          </div>
-        )}
         {mode === "live" && cloudEnabled && (
           <div className={`cloud-banner ${syncStatus.kind}`} role="status">
             <div><strong>公开共享账本</strong><span>无需登录 · 所有访问者共同查看和编辑</span><small>{syncStatus.message}</small></div>

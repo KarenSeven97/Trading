@@ -409,28 +409,7 @@ export function Dashboard({
           </h1>
           <p>记录每一次决策，看清每一步成长。</p>
         </div>
-        <div className="date-controls">
-          <CalendarDays size={16} />
-          <input
-            aria-label="统计开始日期"
-            type="date"
-            value={range.start}
-            max={range.end}
-            onChange={(e) => {
-              if (e.target.value) setRange({ ...range, start: e.target.value });
-            }}
-          />
-          <span>—</span>
-          <input
-            aria-label="统计结束日期"
-            type="date"
-            min={range.start}
-            value={range.end}
-            onChange={(e) => {
-              if (e.target.value) setRange({ ...range, end: e.target.value });
-            }}
-          />
-        </div>
+
       </div>
       <div className="metrics">
         <article className="card today-card">
@@ -488,7 +467,7 @@ export function Dashboard({
         </article>
         <article className="card cumulative">
           <div className="metric-label">
-            累计已实现净盈亏
+            累计已实现净盈亏 · 全部历史
             <ArrowUpRight size={17} />
           </div>
           <Pnl value={total} large />
@@ -533,6 +512,29 @@ export function Dashboard({
               ))}
             </div>
           </div>
+        <div className="date-controls dashboard-range">
+          <CalendarDays size={16} />
+          <input
+            aria-label="统计开始日期"
+            type="date"
+            value={range.start}
+            max={range.end}
+            onChange={(e) => {
+              if (e.target.value) setRange({ ...range, start: e.target.value });
+            }}
+          />
+          <span>—</span>
+          <input
+            aria-label="统计结束日期"
+            type="date"
+            min={range.start}
+            value={range.end}
+            onChange={(e) => {
+              if (e.target.value) setRange({ ...range, end: e.target.value });
+            }}
+          />
+        </div>
+          <p className="muted small">日期仅筛选每日盈亏图和交易明细；累计收益始终包含全部历史成交。</p>
           <DailyChart
             days={days}
             start={range.start}

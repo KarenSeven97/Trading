@@ -167,7 +167,7 @@ export function Settings({
         </div>
         <p className="muted small">
           完整备份包含成交、笔记、自选、设置与行情缓存。CSV
-          仅用于成交交换，不包含完整复盘。正式账本会自动同步到公开共享数据库；演示账本仅保存在本机。请仍定期导出完整备份。
+          仅用于成交交换，不包含完整复盘。正式账本会自动同步到公开共享数据库。请仍定期导出完整备份。
         </p>
         <div className="backup-actions">
           <button
@@ -208,7 +208,7 @@ export function Settings({
             onClick={() =>
               download(
                 "executions-template.csv",
-                "symbol,side,price,quantity,time,fee,note,tags,ledgerMode,source\nAMD,buy,100,10,2026-10-26T14:00:00Z,1,入场判断,反弹,demo,demo\nAMD,sell,105,10,2026-10-26T15:00:00Z,1,离场判断,止盈,demo,demo\n",
+                "symbol,side,price,quantity,time,fee,note,tags,ledgerMode,source\nAMD,buy,100,10,2026-10-26T14:00:00Z,1,入场判断,反弹,live,manual\nAMD,sell,105,10,2026-10-26T15:00:00Z,1,离场判断,止盈,live,manual\n",
                 "text/csv",
               )
             }
@@ -227,7 +227,7 @@ export function Settings({
           }}
         />
         <div className="subtle-note">
-          正式账本无需登录，所有访问者共用并可修改同一份记录。离线修改先保存本机，联网后自动尝试同步；请确认“共享账本已同步”后再清除浏览器数据。演示账本、行情缓存、主题与行情代理地址仅保存在本机。
+          正式账本无需登录，所有访问者共用并可修改同一份记录。离线修改先保存本机，联网后自动尝试同步；请确认“共享账本已同步”后再清除浏览器数据。行情缓存、主题与行情代理地址仅保存在本机。
         </div>
       </div>
     </Modal>

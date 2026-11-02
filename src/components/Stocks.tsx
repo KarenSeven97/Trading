@@ -16,7 +16,7 @@ import type { Journal, BarSet, Execution } from "../domain/model";
 import { calculate, money, D, percent } from "../domain/ledger";
 import { et, dayKey, displayTime } from "../domain/time";
 import {
-  intervals,
+
   ProxyProvider,
   defaultMarketProxy,
   parseOHLCV,
@@ -45,8 +45,8 @@ export function Stocks({
   notify: (s: string) => void;
   onSettings: () => void;
 }) {
-  const [interval, setInterval] = useState("5min"),
-    [start, setStart] = useState(et().minus({ days: 6 }).toISODate()!),
+  const [interval, setInterval] = useState("15min"),
+    [start, setStart] = useState(et().toISODate()!),
     [end, setEnd] = useState(et().toISODate()!),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
@@ -60,6 +60,7 @@ export function Stocks({
     [providerData, setProviderData] = useState<BarSet | null>(null),
     [searching, setSearching] = useState(false),
     [quoteBusy, setQuoteBusy] = useState(false);
+  const historyCache = useRef(new Map<string, { data: BarSet; until: number }>());
   const upload = useRef<HTMLInputElement>(null),
     request = useRef<AbortController | null>(null),
     quoteRequest = useRef<AbortController | null>(null);
@@ -137,7 +138,20 @@ export function Stocks({
     request.current?.abort();
     setBusy(false);
     setError("");
-  }, [symbol, interval, start, end]);
+    if (start > end) return;
+    const timer = window.setTimeout(() => void fetchHistory(), 350);
+    return () => { window.clearTimeout(timer); request.current?.abort(); };
+  }, [symbol, interval, start, end, provider]);
+  useEffect(() => {
+    if (!focusId) { setInterval("15min"); setStart(et().toISODate()!); setEnd(et().toISODate()!); }
+    const controller = new AbortController();
+    const first=et().minus({days:6}).toISODate()!, last=et().toISODate()!;
+    void provider.history(symbol,"1day",first,last,controller.signal).then(d=>{
+      if (!controller.signal.aborted) historyCache.current.set(`${symbol}|1day|${first}|${last}`,{data:d,until:Date.now()+60000});
+    }).catch(()=>{});
+    void provider.quote(symbol,controller.signal).then(q=>{ if(!controller.signal.aborted)setQuotes(v=>({...v,[symbol]:q})); }).catch(()=>{});
+    return ()=>controller.abort();
+  }, [symbol, provider]);
   useEffect(() => {
     setQuotes({});
   }, [provider]);
@@ -156,28 +170,12 @@ export function Stocks({
     setBusy(true);
     setError("");
     try {
-      const d = await provider.history(
-        selectedSymbol,
-        selectedInterval,
-        start,
-        end,
-        controller.signal,
-      );
+      const key = `${selectedSymbol}|${selectedInterval}|${start}|${end}`;
+      const hit = historyCache.current.get(key);
+      const d = (hit && hit.until > Date.now() ? hit.data : null) || await provider.history(selectedSymbol, selectedInterval, start, end, controller.signal);
       if (!controller.signal.aborted) {
+        historyCache.current.set(key,{data:d,until:Date.now()+60000});
         setProviderData(d);
-        await onSave({
-          ...journal,
-          bars: [
-            ...journal.bars.filter(
-              (b) =>
-                b.symbol !== selectedSymbol || b.interval !== selectedInterval,
-            ),
-            d,
-          ],
-        });
-        notify(`已载入 ${d.bars.length} 根历史 K 线`);
-        if (d.bars.length >= 5000)
-          setError("已达供应商单次 5000 根上限，请缩小日期范围分段查询。");
       }
     } catch (e) {
       if (!controller.signal.aborted) setError((e as Error).message);
@@ -469,11 +467,11 @@ export function Stocks({
             </div>
             <div className="chart-controls">
               <div className="segmented compact">
-                {intervals.map((it) => (
+                {["15min", "1day"].map((it) => (
                   <button
                     key={it}
                     className={interval === it ? "active" : ""}
-                    onClick={() => setInterval(it)}
+                    onClick={() => { setInterval(it); setStart(it === "1day" ? et().minus({days:6}).toISODate()! : et().toISODate()!); setEnd(et().toISODate()!); }}
                   >
                     {it === "1day" ? "日线" : it.replace("min", " 分")}
                   </button>
@@ -503,10 +501,10 @@ export function Stocks({
               <button
                 className="btn secondary compact"
                 disabled={busy}
-                onClick={fetchHistory}
+                onClick={() => { historyCache.current.delete(`${symbol}|${interval}|${start}|${end}`); void fetchHistory(); }}
               >
                 <RefreshCw size={14} className={busy ? "spin" : ""} />
-                {busy ? "加载中" : "获取行情"}
+                {busy ? "加载中" : "刷新行情"}
               </button>
             </div>
             {error && (
