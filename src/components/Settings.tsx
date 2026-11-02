@@ -138,15 +138,13 @@ export function Settings({
           >
             <input
               type="text"
-              placeholder="例如 http://localhost:8787"
+              placeholder="留空使用内置 Alpaca IEX 免费行情"
               value={s.proxyUrl}
               onChange={(e) => setS({ ...s, proxyUrl: e.target.value })}
             />
           </Field>
           <p className="muted small">
-            源码附带 Twelve Data Node 代理。密钥仅在服务端 .env
-            配置。免费/付费、实时/延迟和历史分钟线范围以供应商账户权限为准；此版本未内置或购买行情套餐。线上
-            HTTPS 应用需要可通过 HTTPS 访问的代理。
+            留空默认使用 Alpaca IEX 免费行情：覆盖单一交易所，非全市场综合报价，成交稀疏时可能缺少部分 K 线。密钥仅存于 Supabase Edge Functions Secrets。可填写自定义代理地址以切换服务；行情缓存保存在本机。
           </p>
           {error && (
             <div role="alert" className="error">

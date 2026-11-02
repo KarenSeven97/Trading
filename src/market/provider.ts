@@ -1,3 +1,5 @@
+import { cloudConfig } from "../data/cloudConfig";
+export const defaultMarketProxy = cloudConfig.url + "/functions/v1/alpaca-market";
 import Papa from "papaparse";
 import { D } from "../domain/ledger";
 import type { BarSet, PriceBar, Execution } from "../domain/model";
@@ -52,12 +54,13 @@ export class ProxyProvider implements MarketProvider {
     const u = new URL(this.base.replace(/\/$/, "") + path, location.origin);
     Object.entries(args).forEach(([k, v]) => u.searchParams.set(k, v));
     const response = await fetch(u, {
+      headers: u.origin === cloudConfig.url && u.pathname.startsWith("/functions/v1/alpaca-market/") ? { apikey: cloudConfig.key } : {},
       signal: signal
         ? AbortSignal.any([signal, AbortSignal.timeout(20000)])
         : AbortSignal.timeout(20000),
     });
-    if (!response.ok) throw new Error(`行情服务响应 ${response.status}`);
     const data = await response.json();
+    if (!response.ok) throw new Error(data.error || `行情服务响应 ${response.status}`);
     if (data.error) throw new Error(data.error);
     return data;
   }

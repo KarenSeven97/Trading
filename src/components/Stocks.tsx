@@ -18,6 +18,7 @@ import { et, dayKey, displayTime } from "../domain/time";
 import {
   intervals,
   ProxyProvider,
+  defaultMarketProxy,
   parseOHLCV,
   demoBars,
   type Quote,
@@ -64,9 +65,7 @@ export function Stocks({
     quoteRequest = useRef<AbortController | null>(null);
   const provider = useMemo(
     () =>
-      journal.settings.proxyUrl
-        ? new ProxyProvider(journal.settings.proxyUrl)
-        : null,
+      new ProxyProvider(journal.settings.proxyUrl || defaultMarketProxy),
     [journal.settings.proxyUrl],
   );
   const ledger = useMemo(

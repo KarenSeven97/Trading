@@ -152,7 +152,7 @@ IndexedDB 数据库 `trade-journal-v1`，版本 1；`journals` store 以 `live/d
 
 成交时间仍按美国纽约时间填写，表单下方实时显示对应北京时间。夏令时北京快12小时、冬令时快13小时，内部 UTC 保存。走势图新增 FIFO 连线规则说明，交易详情支持展开每一批匹配数量、买卖价格、分摊费用与净盈亏。
 
-行情选择建议：对于个人收盘复盘，可优先评估 Alpaca Basic 的历史数据接口；官方 FAQ 说明，无实时 SIP 订阅时查询 SIP 历史数据的 end 至少早于当前15分钟。免费实时 IEX 仅覆盖一个交易所，不能当成全市场综合报价。当前源码仍提供 Twelve Data 代理，尚未接入 Alpaca；这个建议不表示已配置或验证 Alpaca Key。
+行情选择建议：对于个人收盘复盘，可优先评估 Alpaca Basic 的历史数据接口；官方 FAQ 说明，无实时 SIP 订阅时查询 SIP 历史数据的 end 至少早于当前15分钟。免费实时 IEX 仅覆盖一个交易所，不能当成全市场综合报价。当前源码仍提供 Twelve Data 代理，现已接入 Alpaca IEX；见下方更新说明。
 
 官方资料：<https://docs.alpaca.markets/us/docs/about-market-data-api>、<https://docs.alpaca.markets/us/docs/market-data-faq>。
 
@@ -165,3 +165,8 @@ IndexedDB 数据库 `trade-journal-v1`，版本 1；`journals` store 以 `live/d
 已准备 `.github/workflows/pages.yml`：仓库名 `Trading`，默认分支 `main`。推送后在 GitHub Settings → Pages → Source 选择 GitHub Actions。工作流执行 npm ci、测试及构建，按 `/Trading/` 子路径发布。只有成功推送并运行工作流后，GitHub Pages 网页才会可用。
 
 自定义构建路径可设置 `VITE_BASE_PATH=/Trading/`；普通域名部署留空。`.env`、node_modules、dist 和本地构建状态不提交，服务端行情密钥只能自行配置在服务端。
+
+## Alpaca 行情接入（2026-11-02）
+默认行情代理为 Supabase Edge Function `alpaca-market`，源码 `supabase/functions/alpaca-market/index.ts`。在 Edge Functions Secrets 设置 ALPACA_API_KEY 和 ALPACA_SECRET_KEY（Paper keys），不要提交实际密钥。函数自行验证项目 publishable apikey，verify_jwt=false，限制 GET 路由、固定上游、CORS 来源和缓存数量；不提供下单接口。
+支持股票搜索、最近可用报价、1/5/15 分钟与日线。使用 IEX/raw 未复权数据，单一交易所，非综合行情，可能有缺失分钟线。日期输入按纽约时间及夏令时转换，日线转换成对应 ET 日期的 UTC 零点以匹配图表约定。自动分页，上限 20000 根，超出要求缩小范围，不静默截断。报价基于最近 IEX 成交对前交易日 IEX 收盘，时间显示实际成交时间，不保证当前实时。金额涨跌使用 Decimal。
+代理地址留空自动启用内置服务；如旧设备填过其他代理，请清空并保存。错误会显示供应商权限、额度或配置原因，无行情时不生成模拟数据。实际验证 AMD 5 分钟历史、报价、QQQM 搜索均返回200；无需开通付费套餐。对公众再分发行情须自行确认供应商许可，当前免费接入不等于获授商业分发权。
