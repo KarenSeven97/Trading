@@ -1,0 +1,35 @@
+{
+  "name": "trade-journal",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build && node scripts/build-pwa.mjs",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "vitest run",
+    "market-server": "node --env-file-if-exists=.env server/market-proxy.mjs"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "decimal.js": "^10.6.0",
+    "idb": "^8.0.3",
+    "luxon": "^3.7.0",
+    "lightweight-charts": "^5.0.9",
+    "lucide-react": "^0.468.0",
+    "papaparse": "^5.5.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@types/luxon": "^3.7.0",
+    "@types/papaparse": "^5.3.16",
+    "vitest": "^3.2.4",
+    "@types/node": "^24.0.0",
+    "fake-indexeddb": "^6.2.0"
+  }
+}
