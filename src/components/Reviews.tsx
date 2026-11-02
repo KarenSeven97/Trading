@@ -68,11 +68,9 @@ export function Reviews({
     <>
       <div className="page-heading">
         <div>
-          <span className="eyebrow">REFLECT. LEARN. REPEAT.</span>
           <h1>
             交易复盘<span className="heading-dot">.</span>
           </h1>
-          <p>所有买入都有记录，只有已卖出的部分确认收益。</p>
         </div>
         <button className="btn primary" onClick={() => setPreview(true)}>
           <NotebookPen size={17} />
@@ -92,7 +90,6 @@ export function Reviews({
           <b>{all.filter((e) => entryHasNotes(journal, e)).length}</b>
           <span>已有笔记的记录</span>
         </div>
-        <div className="review-quote">好的复盘，先于下一次交易。</div>
       </div>
       <section className="card review-filters">
         <div className="filter-bar">

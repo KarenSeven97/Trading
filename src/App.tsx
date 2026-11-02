@@ -315,10 +315,6 @@ export default function App() {
           ))}
         </nav>
         <div className="sidebar-rule" />
-        <div className="ledger-select">
-          <span className="sidebar-label">当前账本</span>
-          <strong>正式账本</strong><p>所有访问者共用一个公开账本。</p>
-        </div>
         <div className="sidebar-bottom">
           <div className="capital-card">
             <span>
@@ -368,6 +364,7 @@ export default function App() {
             <b>{navItems.find((n) => n.id === page)?.label}</b>
           </div>
           <div className="topbar-actions">
+            <button className={`text-btn sync-button ${syncStatus.kind}`} title={syncStatus.message} aria-label="同步账本" disabled={syncStatus.kind === "syncing" || !!form || settingsOpen || !!importData || !!detail} onClick={() => void refreshShared()}><RefreshCw size={15} className={syncStatus.kind === "syncing" ? "spin" : ""} /><span>{syncStatus.kind === "syncing" ? "同步中" : syncStatus.kind === "error" ? "同步失败" : syncStatus.kind === "pending" ? "待同步" : "同步"}</span></button>
             <InstallApp />
             <span className="clock">
               <span className="status-dot" />
@@ -389,13 +386,7 @@ export default function App() {
             </button>
           </div>
         </header>
-        {mode === "live" && cloudEnabled && (
-          <div className={`cloud-banner ${syncStatus.kind}`} role="status">
-            <div><strong>公开共享账本</strong><span>无需登录 · 所有访问者共同查看和编辑</span><small>{syncStatus.message}</small></div>
-            <div className="cloud-actions"><button className="btn secondary" disabled={syncStatus.kind === "syncing" || !!form || settingsOpen || !!importData || !!detail} onClick={() => void refreshShared()}><RefreshCw size={15} />{syncStatus.kind === "syncing" ? "同步中…" : "立即同步"}</button>
-            {syncStatus.kind === "error" && <button className="text-btn" onClick={() => void resolveCloudConflict()}>备份并载入云端</button>}</div>
-          </div>
-        )}
+        {syncStatus.kind === "error" && <div className="sync-error" role="alert"><span>{syncStatus.message}</span><button className="text-btn" onClick={() => void resolveCloudConflict()}>备份并载入云端</button></div>}
         {stale && (
           <div className="stale-banner">
             其他标签页已更新账本。
@@ -438,16 +429,7 @@ export default function App() {
             />
           )}
         </main>
-        <footer className="app-footer">
-          <span>
-            Trade Journal <span className="muted">/</span>{" "}
-            每一次交易，都值得复盘。
-          </span>
-          <span>
-            <ShieldCheck size={13} />
-            {mode === "live" && cloudEnabled ? "Supabase 共享账本 · 本机缓存" : "演示数据保存在本机"}
-          </span>
-        </footer>
+
       </div>
       <nav className="bottom-nav">
         {navItems.map(({ id, label, Icon }) => (

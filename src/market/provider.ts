@@ -28,7 +28,7 @@ export interface MarketProvider {
   ): Promise<{ symbol: string; name: string }[]>;
 }
 export function validateBars(bars: PriceBar[]) {
-  if (!bars.length) throw new Error("供应商未返回行情，请缩小范围或检查权限");
+  if (!bars.length) throw new Error("所选时段没有 IEX 成交 K 线；盘前或成交稀疏时可能无数据，请扩大日期范围或切换日线");
   const sorted = [...bars].sort((a, b) => a.time - b.time);
   for (let i = 0; i < sorted.length; i++) {
     const b = sorted[i];

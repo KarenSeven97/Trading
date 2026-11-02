@@ -1,3 +1,4 @@
+import { instrumentName } from "../domain/instrumentNames";
 import { useEffect, useState, useMemo, useRef } from "react";
 import { DateTime } from "luxon";
 import {
@@ -13,7 +14,7 @@ import {
   Info,
 } from "lucide-react";
 import type { Journal, BarSet, Execution } from "../domain/model";
-import { calculate, money, D, percent } from "../domain/ledger";
+import { calculate, money, D, percent, tone } from "../domain/ledger";
 import { et, dayKey, displayTime } from "../domain/time";
 import {
 
@@ -46,7 +47,7 @@ export function Stocks({
   onSettings: () => void;
 }) {
   const [interval, setInterval] = useState("15min"),
-    [start, setStart] = useState(et().toISODate()!),
+    [start, setStart] = useState(et().minus({days:6}).toISODate()!),
     [end, setEnd] = useState(et().toISODate()!),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
@@ -143,7 +144,7 @@ export function Stocks({
     return () => { window.clearTimeout(timer); request.current?.abort(); };
   }, [symbol, interval, start, end, provider]);
   useEffect(() => {
-    if (!focusId) { setInterval("15min"); setStart(et().toISODate()!); setEnd(et().toISODate()!); }
+    if (!focusId) { setInterval("15min"); setStart(et().minus({days:6}).toISODate()!); setEnd(et().toISODate()!); }
     const controller = new AbortController();
     const first=et().minus({days:6}).toISODate()!, last=et().toISODate()!;
     void provider.history(symbol,"1day",first,last,controller.signal).then(d=>{
@@ -284,11 +285,9 @@ export function Stocks({
     <>
       <div className="page-heading">
         <div>
-          <span className="eyebrow">THE CONTEXT BEHIND EVERY TRADE</span>
           <h1>
             股票与点位<span className="heading-dot">.</span>
           </h1>
-          <p>回到当时的走势，理解每一次买卖。</p>
         </div>
         <button
           className="btn secondary"
@@ -344,7 +343,7 @@ export function Stocks({
                   }
                 >
                   <b>{r.symbol}</b>
-                  <small>{r.name}</small>
+                  <small>{instrumentName(r.symbol, r.name)}</small>
                   <Plus size={14} />
                 </button>
               ))}
@@ -354,7 +353,7 @@ export function Stocks({
             {journal.watchlist.map((s, i) => {
               const q = quotes[s],
                 name =
-                  journal.instruments.find((x) => x.symbol === s)?.name || s;
+                  instrumentName(s, journal.instruments.find((x) => x.symbol === s)?.name);
               return (
                 <div
                   key={s}
@@ -366,14 +365,10 @@ export function Stocks({
                       <small>{name}</small>
                     </div>
                     <div className="watch-price">
-                      <b>{q ? money(q.price, false) : "—"}</b>
+                      <b className={q ? tone(q.change) : "muted"}>{q ? money(q.price, false) : "—"}</b>
                       <small
                         className={
-                          q
-                            ? Number(q.change) >= 0
-                              ? "candle-up"
-                              : "candle-down"
-                            : "muted"
+                          q ? tone(q.change) : "muted"
                         }
                       >
                         {q ? percent(q.percent) : "暂无报价"}
@@ -439,7 +434,7 @@ export function Stocks({
             <div className="stock-heading">
               <div>
                 <h2>
-                  {symbol} <span>{instrument?.name || symbol}</span>
+                  {symbol} <span>{instrumentName(symbol, instrument?.name)}</span>
                 </h2>
                 <div className="stock-price">
                   {quote ? (
@@ -447,7 +442,7 @@ export function Stocks({
                       {money(quote.price, false)}
                       <small
                         className={
-                          D(quote.change).gte(0) ? "candle-up" : "candle-down"
+                          tone(quote.change)
                         }
                       >
                         {money(quote.change)} ({percent(quote.percent)})
@@ -471,7 +466,7 @@ export function Stocks({
                   <button
                     key={it}
                     className={interval === it ? "active" : ""}
-                    onClick={() => { setInterval(it); setStart(it === "1day" ? et().minus({days:6}).toISODate()! : et().toISODate()!); setEnd(et().toISODate()!); }}
+                    onClick={() => { setInterval(it); setStart(et().minus({days:6}).toISODate()!); setEnd(et().toISODate()!); }}
                   >
                     {it === "1day" ? "日线" : it.replace("min", " 分")}
                   </button>

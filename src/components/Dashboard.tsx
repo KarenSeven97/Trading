@@ -403,11 +403,10 @@ export function Dashboard({
     <>
       <div className="page-heading">
         <div>
-          <span className="eyebrow">YOUR TRADING, IN PERSPECTIVE</span>
           <h1>
             交易表现<span className="heading-dot">.</span>
           </h1>
-          <p>记录每一次决策，看清每一步成长。</p>
+          
         </div>
 
       </div>
