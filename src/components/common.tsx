@@ -1,3 +1,4 @@
+import { useDisplayMoney } from "../currency/display";
 import { useEffect, useRef, type ReactNode } from "react";
 import { X, ArrowUpRight, ArrowDownRight, Minus } from "lucide-react";
 import { money, percent, pct, tone } from "../domain/ledger";
@@ -10,9 +11,10 @@ export function Pnl({
   capital?: string;
   large?: boolean;
 }) {
+  const displayMoney = useDisplayMoney();
   return (
     <span className={`pnl ${tone(value)} ${large ? "large" : ""}`}>
-      <span>{money(value)}</span>
+      <span>{displayMoney(value)}</span>
       {capital && <small>{percent(pct(value, capital))}</small>}
     </span>
   );

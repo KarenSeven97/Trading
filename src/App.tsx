@@ -1,3 +1,6 @@
+import { MoneyContext } from "./currency/display";
+import { displayMoney } from "./currency/fx";
+import { useCurrency } from "./currency/useCurrency";
 import { InstallApp } from "./components/InstallApp";
 import { useEffect, useState, useMemo, useRef } from "react";
 import {
@@ -68,6 +71,8 @@ export default function App() {
     }),
 
     [stale, setStale] = useState(false);
+  const fx = useCurrency(s => setNotice(s));
+  const viewMoney = useMemo(() => (value: Parameters<typeof money>[0], sign=true) => displayMoney(value, sign, fx.currency, fx.rate), [fx.currency, fx.rate]);
   const ledger = useMemo(
     () => (journal ? calculate(journal.executions) : null),
     [journal],
@@ -320,10 +325,10 @@ export default function App() {
             <span>
               初始本金 <ShieldCheck size={14} />
             </span>
-            <strong>{money(journal.settings.capital, false)}</strong>
+            <strong>{viewMoney(journal.settings.capital, false)}</strong>
             <button className="text-btn" onClick={() => setSettingsOpen(true)}>调整本金</button>
-            <small>未平仓占用（含买入费用）</small><b>{money(funds.occupied, false)}</b>
-            <small>剩余可用（含已实现盈亏）</small><b>{money(funds.available, false)}</b>
+            <small>未平仓占用（含买入费用）</small><b>{viewMoney(funds.occupied, false)}</b>
+            <small>剩余可用（含已实现盈亏）</small><b>{viewMoney(funds.available, false)}</b>
           </div>
           <button
             className="sidebar-settings"
@@ -365,6 +370,7 @@ export default function App() {
           </div>
           <div className="topbar-actions">
             <button className={`text-btn sync-button ${syncStatus.kind}`} title={syncStatus.message} aria-label="同步账本" disabled={syncStatus.kind === "syncing" || !!form || settingsOpen || !!importData || !!detail} onClick={() => void refreshShared()}><RefreshCw size={15} className={syncStatus.kind === "syncing" ? "spin" : ""} /><span>{syncStatus.kind === "syncing" ? "同步中" : syncStatus.kind === "error" ? "同步失败" : syncStatus.kind === "pending" ? "待同步" : "同步"}</span></button>
+            <div className="currency-control"><button className="text-btn currency-toggle" aria-label="切换美元人民币显示" aria-pressed={fx.currency === "CNY"} disabled={fx.busy} onClick={fx.toggle} title="仅转换交易表现和本金区域；股票及成交单价保持 USD">{fx.busy ? "获取汇率…" : fx.currency === "USD" ? "USD ⇄ 人民币" : "人民币 ⇄ USD"}</button>{fx.currency === "CNY" && fx.rate && <small title="Frankfurter 每日参考汇率，非银行成交汇率">1 USD = {fx.rate.rate} CNY · {fx.rate.date}</small>}</div>
             <InstallApp />
             <span className="clock">
               <span className="status-dot" />
@@ -397,14 +403,14 @@ export default function App() {
         )}
         <main className="content">
           {page === "dashboard" ? (
-            <Dashboard
+            <MoneyContext.Provider value={viewMoney}><Dashboard
               journal={journal}
               range={range}
               setRange={setRange}
               onOpen={(id) => setDetail({ tradeId: id })}
               onChart={chart}
               onExecution={openExecution}
-            />
+            /></MoneyContext.Provider>
           ) : page === "stocks" ? (
             <Stocks
               journal={journal}

@@ -1,3 +1,4 @@
+import { useDisplayMoney } from "../currency/display";
 import { useMemo, useState } from "react";
 import { DateTime } from "luxon";
 import {
@@ -52,7 +53,7 @@ export function TradeList({
           <thead>
             <tr>
               <th>股票 / 平仓</th>
-              <th>买入 → 卖出均价</th>
+              <th>买入 → 卖出均价 USD</th>
               <th>平仓数量</th>
               <th>已实现净盈亏</th>
               <th>本金收益率</th>
@@ -176,6 +177,7 @@ function DailyChart({
   extra: string[];
   onSelect: (date: string) => void;
 }) {
+  const money = useDisplayMoney();
   const [hover, setHover] = useState<string | null>(null);
   const dates: string[] = [];
   let dt = DateTime.fromISO(start, { zone: ZONE }),
@@ -238,7 +240,7 @@ function DailyChart({
               textAnchor="end"
               className="axis-text"
             >
-              {v === 0 ? "0" : Math.round(v)}
+              {v === 0 ? "0" : money(v, false)}
             </text>
           </g>
         ))}
@@ -328,6 +330,8 @@ export function Dashboard({
   onChart: (symbol: string, id: string) => void;
   onExecution: (e: Execution) => void;
 }) {
+  const usdMoney = money;
+  const displayMoney = useDisplayMoney();
   const ledger = useMemo(
       () => calculate(journal.executions),
       [journal.executions],
@@ -433,7 +437,7 @@ export function Dashboard({
           </div>
           <div className="target-number">
             {session ? percent(journal.settings.dailyTarget) : "今日休市"}
-            <small>{session ? money(goal, false) : "不设常规目标"}</small>
+            <small>{session ? displayMoney(goal, false) : "不设常规目标"}</small>
           </div>
           <div className="progress-track">
             <div
@@ -445,7 +449,7 @@ export function Dashboard({
               <>
                 <span>
                   {diff.gte(0) ? "距离目标" : "超出目标"}{" "}
-                  <b>{money(diff.abs(), false)}</b>
+                  <b>{displayMoney(diff.abs(), false)}</b>
                 </span>
                 <span className={tone(todayPnl)}>{Math.round(progress)}%</span>
               </>
@@ -474,7 +478,7 @@ export function Dashboard({
             {percent(pct(total, journal.settings.capital))}
           </span>
           <div className="metric-foot">
-            固定本金 <b>{money(journal.settings.capital, false)}</b>
+            固定本金 <b>{displayMoney(journal.settings.capital, false)}</b>
           </div>
         </article>
       </div>
@@ -547,7 +551,7 @@ export function Dashboard({
             <span>
               区间净盈亏{" "}
               <b className={tone(sum(inRange.map((t) => t.pnl)))}>
-                {money(sum(inRange.map((t) => t.pnl)))}
+                {displayMoney(sum(inRange.map((t) => t.pnl)))}
               </b>
             </span>
             <span>
@@ -602,7 +606,7 @@ export function Dashboard({
                 <button
                   key={date}
                   className={`calendar-day ${activeMonth ? "" : "outside"} ${pnl ? tone(pnl) : ""} ${date === today ? "today" : ""} ${selectedDate === date ? "selected" : ""}`}
-                  title={`${date} ${money(pnl || 0)}${isSession(date, journal.settings.extraClosedDays) ? "" : " · 休市日"}`}
+                  title={`${date} ${displayMoney(pnl || 0)}${isSession(date, journal.settings.extraClosedDays) ? "" : " · 休市日"}`}
                   onClick={() =>
                     setSelectedDate(selectedDate === date ? "" : date)
                   }
@@ -610,7 +614,7 @@ export function Dashboard({
                   <span>{d.day}</span>
                   <small>
                     {pnl
-                      ? money(pnl)
+                      ? displayMoney(pnl)
                       : isSession(date, journal.settings.extraClosedDays)
                         ? "—"
                         : "休"}
@@ -621,7 +625,7 @@ export function Dashboard({
           </div>
           <div className="calendar-foot">
             <span>
-              本月合计 <b className={tone(monthPnl)}>{money(monthPnl)}</b>
+              本月合计 <b className={tone(monthPnl)}>{displayMoney(monthPnl)}</b>
             </span>
             <span className="muted">{currentMonthTrades.length} 笔平仓</span>
           </div>
@@ -697,8 +701,8 @@ export function Dashboard({
               ledger.positions.map((p) => (
                 <span key={p.symbol}>
                   <b>{p.symbol}</b> {p.quantity} 股 · 未平仓成本{" "}
-                  {money(p.cost, false)} · 待分摊费用{" "}
-                  {money(p.remainingFee, false)}
+                  {displayMoney(p.cost, false)} · 待分摊费用{" "}
+                  {displayMoney(p.remainingFee, false)}
                 </span>
               ))
             ) : (
@@ -718,7 +722,7 @@ export function Dashboard({
                   </span>
                   <b>{e.symbol}</b>
                   <span>
-                    {money(e.price, false)} × {e.quantity}
+                    {usdMoney(e.price, false)} × {e.quantity}
                   </span>
                   <span className="muted">
                     {dayKey(e.time)} {displayTime(e.time).split(" ")[1]} ET
@@ -730,8 +734,8 @@ export function Dashboard({
         </details>
       </section>
       <p className="footnote">
-        USD · 美东时间（自动处理夏令时） · 固定本金{" "}
-        {money(journal.settings.capital, false)} · FIFO · 仅统计已实现净盈亏
+        金额按所选显示币种 · 成交单价 USD · 美东时间（自动处理夏令时） · 固定本金{" "}
+        {displayMoney(journal.settings.capital, false)} · FIFO · 仅统计已实现净盈亏
       </p>
     </>
   );
