@@ -200,3 +200,8 @@ IndexedDB 数据库 `trade-journal-v1`，版本 1；`journals` store 以 `live/d
 
 ## 桌面安装入口
 侧栏常驻“下载安装”，顶部保留下载图标。浏览器提供 PWA 安装事件时显示“安装到此设备”；否则提供系统/浏览器安装步骤。Windows 另可下载 `Trading.url` 桌面快捷方式，用默认浏览器打开当前部署地址；该文件是网址快捷方式，PWA 安装使用浏览器原生安装流程。快捷方式按当前部署 base path 生成，兼容 GitHub Pages 子目录。
+
+## 2026-11-03 PWA 安装路径修复
+构建脚本按 `VITE_BASE_PATH` 生成清单的 `id`、`start_url`、`scope` 和图标路径。GitHub Pages 使用 `/Trading/` 作为应用身份；Sites 根目录使用 `/`。清单中的 `id: "./"` 会按源站解析为根 ID，不能用于区分同一 GitHub Pages 域名下不同项目。
+安装图标及 favicon 改用192/512 PNG，避免 Chrome 安装检查依赖 SVG；移除混合 `any maskable` 声明和 SVG 离线预缓存依赖。Service Worker 在文档已完成加载时也可注册，并在失败时记录警告，便于诊断。未更改 IndexedDB、共享账本和任何成交记录；不要为更新清除网站数据。
+缺少截图只影响 Richer PWA Install UI，暂不添加含个人交易记录的安装截图。浏览器自身的地址栏按钮仍由 Chrome 控制，清单验证通过不等于本机地址栏按钮已实测。

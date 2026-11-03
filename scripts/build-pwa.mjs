@@ -1,7 +1,11 @@
+import {createPwaManifest} from './pwa-manifest.mjs';
 import {readFile,writeFile,readdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
+const manifest=createPwaManifest(JSON.parse(await readFile('public/manifest.webmanifest','utf8')),process.env.VITE_BASE_PATH || '/');
+await writeFile('dist/manifest.webmanifest',JSON.stringify(manifest,null,2)+'\n');
 const assets=(await readdir('dist/assets')).map(f=>'assets/'+f);
-const files=['index.html','manifest.webmanifest','icon.svg','icon-192.png','icon-512.png',...assets];
+const files=['index.html','manifest.webmanifest','icon-192.png','icon-512.png',...assets];
 const hash=createHash('sha256');for(const f of files)hash.update(await readFile('dist/'+f));
-const sw=(await readFile('public/sw.js','utf8')).replace('__BUILD__',hash.digest('hex').slice(0,16)).replace('const PRECACHE = [];','const PRECACHE = '+JSON.stringify(files)+';');
-await writeFile('dist/sw.js',sw);console.log(`PWA: precached ${files.length} assets`);
+const precache=[...files,'manifest.webmanifest?v=2'];
+const sw=(await readFile('public/sw.js','utf8')).replace('__BUILD__',hash.digest('hex').slice(0,16)).replace('const PRECACHE = [];','const PRECACHE = '+JSON.stringify(precache)+';');
+await writeFile('dist/sw.js',sw);console.log(`PWA: precached ${precache.length} assets`);
