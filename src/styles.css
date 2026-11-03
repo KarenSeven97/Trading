@@ -3767,3 +3767,19 @@ td .pnl {
   .chart-controls > .date-controls input { flex-basis: 100%; width: 100%; }
   .chart-controls > .date-controls > span { display: none; }
 }
+
+/* A single destination-currency icon keeps every toolbar slot equally spaced. */
+.topbar { min-height: 70px; }
+.topbar-actions { align-items: center; gap: 8px; }
+.topbar .currency-toggle { padding: 10px; }
+.funds-rate { margin: 0 5px 10px; color: var(--muted); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.target-number { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 500; letter-spacing: -1.2px; }
+.target-number > span { font-family: inherit; font-weight: 500; font-variant-numeric: tabular-nums; }
+.install-guide section { display: grid; gap: 8px; }
+.install-guide p { font-size: 14px; }
+@media (max-width: 700px) {
+  .topbar { min-height: 64px; padding: 10px 16px; }
+  .topbar-actions { gap: 8px; justify-content: flex-end; }
+  .funds-rate { margin: 0 0 9px; font-size: 13px; }
+}
+@media (max-width: 700px) { .desktop-shortcut { display: none; } }

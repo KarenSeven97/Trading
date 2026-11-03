@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   AlertCircle,
   RefreshCw,
+  Download,
 } from "lucide-react";
 import {
   emptyJournal,
@@ -55,6 +56,7 @@ export default function App() {
     [fatal, setFatal] = useState(""),
     [notice, setNotice] = useState(""),
     [settingsOpen, setSettingsOpen] = useState(false),
+    [installOpen, setInstallOpen] = useState(false),
     [form, setForm] = useState<{ editing?: Execution } | null>(null),
     [detail, setDetail] = useState<{
       tradeId?: string;
@@ -280,6 +282,8 @@ export default function App() {
       </div>
     );
   const funds = accountFunds(journal);
+  const rateLabel = fx.rate ? `${fx.error ? "缓存 · " : ""}$1 = ¥${fx.rate.rate}` : fx.busy ? "汇率加载中…" : "汇率暂不可用";
+  const rateTitle = fx.rate ? `参考汇率 ${fx.rate.date} · Frankfurter${fx.error ? " · " + fx.error : ""}` : fx.error || "正在获取参考汇率";
   const detailTrade = detail?.tradeId
       ? ledger?.trades.find((t) => t.id === detail.tradeId)
       : undefined,
@@ -316,7 +320,7 @@ export default function App() {
         </nav>
         <div className="sidebar-rule" />
         <div className="sidebar-bottom">
-          <FundsCard capital={journal.settings.capital} occupied={funds.occupied} available={funds.available} format={viewMoney} onEdit={()=>setSettingsOpen(true)}/>
+          <FundsCard capital={journal.settings.capital} occupied={funds.occupied} available={funds.available} rateLabel={rateLabel} rateTitle={rateTitle} format={viewMoney} onEdit={()=>setSettingsOpen(true)}/>
           <button
             className="sidebar-settings"
             onClick={() => setSettingsOpen(true)}
@@ -324,6 +328,7 @@ export default function App() {
             <SettingsIcon size={18} />
             账户与数据设置
           </button>
+          <button className="sidebar-settings desktop-install" onClick={() => setInstallOpen(true)}><Download size={18}/>下载安装</button>
           <div className="sidebar-footer">
             <button
               className="icon-btn"
@@ -354,8 +359,8 @@ export default function App() {
           </div>
           <div className="topbar-actions">
             <button className={`toolbar-button sync-button ${syncStatus.kind}`} title={syncStatus.message} aria-label="同步账本" disabled={syncStatus.kind === "syncing" || !!form || settingsOpen || !!importData || !!detail} onClick={() => void refreshShared()}><RefreshCw size={21} className={syncStatus.kind === "syncing" ? "spin" : ""} /></button>
-            <div className="currency-control"><button className="toolbar-button currency-toggle" aria-label="切换美元人民币显示" aria-pressed={fx.currency === "CNY"} disabled={fx.busy} onClick={fx.toggle} title="切换表现与本金的显示币种"><CurrencySwapIcon currency={fx.currency}/></button><small title={fx.rate ? `参考汇率 ${fx.rate.date} · Frankfurter${fx.error?' · '+fx.error:''}` : fx.error || '正在获取参考汇率'}>{fx.rate ? `${fx.error?'缓存 · ':''}$1 = ¥${fx.rate.rate}` : fx.busy ? '汇率加载中…' : '汇率暂不可用'}</small></div>
-            <InstallApp />
+            <button className="toolbar-button currency-toggle" aria-label={fx.currency === "USD" ? "切换为人民币" : "切换为美元"} disabled={fx.busy} onClick={fx.toggle} title={fx.currency === "USD" ? "切换为人民币" : "切换为美元"}><CurrencySwapIcon currency={fx.currency}/></button>
+            <InstallApp open={installOpen} onOpen={() => setInstallOpen(true)} onClose={() => setInstallOpen(false)}/>
             <button
               className="toolbar-button toolbar-settings"
               aria-label="设置"
@@ -372,7 +377,7 @@ export default function App() {
             </button>
           </div>
         </header>
-        <div className="mobile-capital"><FundsCard capital={journal.settings.capital} occupied={funds.occupied} available={funds.available} format={viewMoney} onEdit={()=>setSettingsOpen(true)}/></div>
+        <div className="mobile-capital"><FundsCard capital={journal.settings.capital} occupied={funds.occupied} available={funds.available} rateLabel={rateLabel} rateTitle={rateTitle} format={viewMoney} onEdit={()=>setSettingsOpen(true)}/></div>
         {syncStatus.kind === "error" && <div className="sync-error" role="alert"><span>{syncStatus.message}</span><button className="text-btn" onClick={() => void resolveCloudConflict()}>备份并载入云端</button></div>}
         {stale && (
           <div className="stale-banner">
