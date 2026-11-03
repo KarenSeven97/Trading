@@ -616,8 +616,7 @@ export function Stocks({
                   区间内实际成交 <span className="count">{es.length}</span>
                 </h2>
                 <p>
-                  以下时间与价格均来自账本，独立于行情。缺失对应 K
-                  线时不绘制标记。
+                  标记来自实际成交；缺失行情处保留成交点，不补造 K 线。
                 </p>
               </div>
             </div>
