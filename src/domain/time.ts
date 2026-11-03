@@ -30,6 +30,16 @@ export function beijingPreview(local: string) {
     return null;
   }
 }
+export const beijingInput = (iso?: string) =>
+  (iso ? DateTime.fromISO(iso, {zone:"utc"}) : DateTime.now()).setZone("Asia/Shanghai").toFormat("yyyy-MM-dd'T'HH:mm:ss");
+export function beijingToUTC(local:string) {
+  const dt=DateTime.fromISO(local,{zone:"Asia/Shanghai"});
+  if(!dt.isValid || dt.toFormat("yyyy-MM-dd'T'HH:mm:ss") !== (local.length===16 ? local+":00" : local)) throw new Error("北京时间无效，请检查日期与时间");
+  return dt.toUTC().toISO()!;
+}
+export function easternPreview(local:string) {
+  try{return et(beijingToUTC(local)).toFormat("yyyy-MM-dd HH:mm:ss ZZZZ");}catch{return null;}
+}
 function observed(dt: DateTime) {
   return dt.weekday === 6
     ? dt.minus({ days: 1 })

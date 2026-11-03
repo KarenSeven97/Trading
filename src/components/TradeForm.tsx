@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { uid, type Execution, type Journal } from "../domain/model";
 import { calculate, D } from "../domain/ledger";
-import { localInput, toUTC, beijingPreview } from "../domain/time";
+import { beijingInput, beijingToUTC, easternPreview } from "../domain/time";
 import { Field, Modal } from "./common";
 type Row = {
   side: "buy" | "sell";
@@ -17,7 +17,7 @@ const newRow = (side: "buy" | "sell", fee: string): Row => ({
   price: "",
   quantity: "",
   fee,
-  local: localInput(),
+  local: beijingInput(),
   note: "",
 });
 export function TradeForm({
@@ -45,7 +45,7 @@ export function TradeForm({
               price: editing.price,
               quantity: editing.quantity,
               fee: editing.fee,
-              local: localInput(editing.time),
+              local: beijingInput(editing.time),
               note: editing.note,
             },
           ]
@@ -91,9 +91,9 @@ export function TradeForm({
         quantity: r.quantity.trim(),
         fee: r.fee.trim() || "0",
         time:
-          editing && r.local === localInput(editing.time)
+          editing && r.local === beijingInput(editing.time)
             ? editing.time
-            : toUTC(r.local),
+            : beijingToUTC(r.local),
         note: r.note,
         tags: tags
           .split(/[,，、]/)
@@ -252,11 +252,11 @@ export function TradeForm({
               </Field>
             </div>
             <Field
-              label="成交日期与时间 · 美东 ET *"
+              label="成交日期与时间 · 北京时间 *"
               hint={
-                beijingPreview(r.local)
-                  ? `请填写美国纽约时间，不是北京时间。对应北京时间：${beijingPreview(r.local)}。自动处理夏令时。`
-                  : "请填写美国纽约时间；夏令时跳过或重复的时刻需核对后录入。"
+                easternPreview(r.local)
+                  ? `对应美东时间：${easternPreview(r.local)}。自动处理夏令时。`
+                  : "请填写北京时间（Asia/Shanghai）。"
               }
             >
               <input

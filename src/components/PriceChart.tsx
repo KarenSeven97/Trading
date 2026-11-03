@@ -1,8 +1,9 @@
-import { locateExecution } from "../market/barMapping";
+import { executionAxisTime, executionTimeline } from "../market/executionTimeline";
 import { useEffect, useRef, useState, useMemo } from "react";
 import {
   createChart,
   CandlestickSeries,
+  LineSeries,
   ColorType,
   CrosshairMode,
   type IChartApi,
@@ -38,6 +39,8 @@ export function PriceChart({
     () => executions.filter((e) => e.symbol === data.symbol),
     [executions, data.symbol],
   );
+  const timeline = useMemo(()=>executionTimeline(data,es),[data,es]);
+  const timeIndices = useMemo(()=>new Map(timeline.map((p,i)=>[p.time,i])),[timeline]);
   const dark = theme === "dark",
     step = data.interval === "1day" ? 86400 : parseInt(data.interval) * 60;
   useEffect(() => {
@@ -105,10 +108,12 @@ export function PriceChart({
       priceFormat: { type: "price", precision: 4, minMove: 0.0001 },
       autoscaleInfoProvider: (base: () => AutoscaleInfo | null) => {
         const result = base();
-        if (!result || !result.priceRange) return null;
-        const visiblePrices = es
-          .filter((e) => locateExecution(data, e) !== null)
-          .map((e) => Number(e.price));
+        const visiblePrices = es.map((e) => Number(e.price));
+        if (!result || !result.priceRange) {
+          if(!visiblePrices.length)return result;
+          const low=Math.min(...visiblePrices),high=Math.max(...visiblePrices);
+          return {priceRange:{minValue:low*0.995,maxValue:high*1.005}};
+        }
         if (visiblePrices.length) {
           result.priceRange.minValue = Math.min(
             result.priceRange.minValue,
@@ -122,11 +127,21 @@ export function PriceChart({
         return result;
       },
     });
-    s.setData(data.bars.map((b) => ({ ...b, time: b.time as UTCTimestamp })));
+    s.setData(timeline.map((b) => ({ ...b, time: b.time as UTCTimestamp })));
+    // Actual execution prices provide an axis even if every OHLC bar is missing.
+    // This transparent series draws no invented market-price path.
+    const anchor = c.addSeries(LineSeries, {
+      color:"transparent", lineVisible:false, lastValueVisible:false,
+      priceLineVisible:false, crosshairMarkerVisible:false,
+      autoscaleInfoProvider:()=>es.length ? {priceRange:{minValue:Math.min(...es.map(e=>Number(e.price)))*0.995,maxValue:Math.max(...es.map(e=>Number(e.price)))*1.005}} : null,
+    });
+    const anchorValues=new Map(es.map(e=>[executionAxisTime(data,e),Number(e.price)]));
+    anchor.setData([...anchorValues].sort(([a],[b])=>a-b).map(([time,value])=>({time:time as UTCTimestamp,value})));
     c.timeScale().fitContent();
     chart.current = c;
     series.current = s;
-    const update = () => setTick((t) => t + 1);
+    let renderFrame=0;
+    const update = () => { cancelAnimationFrame(renderFrame); renderFrame=requestAnimationFrame(()=>setTick(t=>t+1)); };
     c.timeScale().subscribeVisibleLogicalRangeChange(update);
     c.subscribeCrosshairMove((param) => {
       const d = param.seriesData.get(s) as
@@ -149,6 +164,7 @@ export function PriceChart({
     });
     return () => {
       cancelAnimationFrame(frame);
+      cancelAnimationFrame(renderFrame);
       observer.disconnect();
       node.removeEventListener("wheel", update);
       node.removeEventListener("pointermove", update);
@@ -157,7 +173,7 @@ export function PriceChart({
       chart.current = null;
       series.current = null;
     };
-  }, [data, dark, es, step]);
+  }, [data, dark, es, step, timeline]);
   useEffect(() => {
     if (!ready || !focusId || !chart.current) return;
     const e = es.find((e) => e.id === focusId),
@@ -166,32 +182,29 @@ export function PriceChart({
       );
     if (!e && !t) return;
     const times = t
-      ? [...t.buys, t.sell].map((e) => Date.parse(e.time) / 1000)
-      : [Date.parse(e!.time) / 1000];
+      ? [...t.buys, t.sell].map((e) => executionAxisTime(data,e))
+      : [executionAxisTime(data,e!)];
     const min = Math.min(...times),
       max = Math.max(...times);
-    const first = data.bars.findIndex((b) => b.time >= min - step * 8),
-      last = data.bars.findIndex((b) => b.time >= max + step * 8);
+    const first = timeline.findIndex((b) => b.time >= min - step * 8),
+      last = timeline.findIndex((b) => b.time >= max + step * 8);
     if (first >= 0)
       chart.current.timeScale().setVisibleLogicalRange({
         from: Math.max(0, first - 3),
-        to: last < 0 ? data.bars.length + 3 : last + 3,
+        to: last < 0 ? timeline.length + 3 : last + 3,
       });
     setTick((n) => n + 1);
   }, [ready, focusId, data]);
   function point(e: Execution) {
     if (!chart.current || !series.current || !host.current) return null;
-    const located = locateExecution(data, e);
-    if (!located) return null;
-    const i = located.index,
-      fraction = located.fraction;
-    const x = chart.current.timeScale().logicalToCoordinate(i as any),
-      next = chart.current.timeScale().logicalToCoordinate((i + 1) as any),
-      y = series.current.priceToCoordinate(Number(e.price));
-    if (x === null || y === null) return null;
-    const exact = x + (next === null ? 0 : (next - x) * fraction);
-    if (exact < 0 || exact > host.current.clientWidth - 65 || y < 0 || y > 370)
-      return null;
+    const i = timeIndices.get(executionAxisTime(data,e));
+    if(i === undefined)return null;
+    const exact=chart.current.timeScale().logicalToCoordinate(i as any),
+      y=series.current.priceToCoordinate(Number(e.price));
+    if(exact === null || y === null)return null;
+    const plotWidth=host.current.clientWidth-chart.current.priceScale("right").width();
+    const plotHeight=host.current.clientHeight-chart.current.timeScale().height();
+    if(exact<0||exact>plotWidth||y<0||y>plotHeight)return null;
     return { x: exact, y };
   }
   const points = ready
@@ -206,7 +219,7 @@ export function PriceChart({
     <div className="chart-shell">
       <div className="ohlc-legend">
         {legend ||
-          `${data.interval === "1day" ? "日线" : "分钟线"} · 未复权 / 时间轴美东 ET`}
+          `${data.interval === "1day" ? "日线" : "分钟线"} · 美东 ET · 无行情处仅标实际成交`}
       </div>
       <div ref={host} className="lw-chart" />
       <svg className="trade-lines" width="100%" height="410" aria-hidden="true">

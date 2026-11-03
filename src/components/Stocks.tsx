@@ -108,6 +108,7 @@ export function Stocks({
         e.symbol === symbol && dayKey(e.time) >= start && dayKey(e.time) <= end,
     )
     .sort((a, b) => Date.parse(a.time) - Date.parse(b.time) || a.seq - b.seq);
+  const chartData: BarSet | null = data || (es.length ? {symbol,interval,source:"无历史行情 · 仅展示实际成交",demo:false,importedAt:"",bars:[]} : null);
   useEffect(() => {
     if (!focusId) return;
     const e = journal.executions.find((e) => e.id === focusId),
@@ -507,18 +508,18 @@ export function Stocks({
                 {error}
               </div>
             )}
-            {data ? (
+            {chartData ? (
               <>
                 <div
-                  className={`data-source ${data.demo ? "demo-source" : ""}`}
+                  className={`data-source ${chartData.demo ? "demo-source" : ""}`}
                 >
                   <Info size={14} />
-                  {data.source} · {data.bars.length} 根 K 线
-                  {data.demo && <strong>DEMO</strong>}
+                  {chartData.source} · {chartData.bars.length} 根 K 线
+                  {chartData.demo && <strong>DEMO</strong>}
                 </div>
                 <PriceChart
-                  data={data}
-                  executions={journal.executions}
+                  data={chartData}
+                  executions={es}
                   trades={ledger.trades}
                   focusId={focusId}
                   theme={journal.settings.theme}
