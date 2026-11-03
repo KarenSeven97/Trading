@@ -32,7 +32,7 @@ export function PriceChart({
   const host = useRef<HTMLDivElement>(null),
     chart = useRef<IChartApi | null>(null),
     series = useRef<ISeriesApi<"Candlestick"> | null>(null),
-    [tick, setTick] = useState(0),
+    [, setTick] = useState(0),
     [legend, setLegend] = useState(""),
     [ready, setReady] = useState(false);
   const es = useMemo(
@@ -219,7 +219,7 @@ export function PriceChart({
     <div className="chart-shell">
       <div className="ohlc-legend">
         {legend ||
-          `${data.interval === "1day" ? "日线" : "分钟线"} · 美东 ET · 无行情处仅标实际成交`}
+          `${data.interval === "1day" ? "日线" : "分钟线"} · 美东 ET`}
       </div>
       <div ref={host} className="lw-chart" />
       <svg className="trade-lines" width="100%" height="410" aria-hidden="true">
@@ -306,7 +306,6 @@ export function PriceChart({
           放大 +
         </button>
       </div>
-      <span className="sr-only">图表更新 {tick}</span>
     </div>
   );
 }

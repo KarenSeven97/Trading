@@ -153,17 +153,14 @@ export function TradeDetail({
               </b>
               <span className="muted">成交费用 {money(x.fee, false)}</span>
             </div>
-            <p className={x.note ? "" : "muted"}>
-              {x.note || "尚未添加成交笔记"}
-            </p>
+            {x.note && <p>{x.note}</p>}
             <small className="muted">
               数据来源：
               {x.source === "demo"
                 ? "演示"
                 : x.source === "csv"
                   ? "CSV 导入"
-                  : "手动录入"}{" "}
-              · UTC {x.time}
+                  : "手动录入"}
             </small>
           </section>
         ))}
@@ -190,9 +187,7 @@ export function TradeDetail({
         {trade && (
           <>
             <div className="subtle-note">
-              FIFO 将本笔卖出匹配到 {trade.matches.length}{" "}
-              个买入批次。净盈亏已分摊买入和卖出费用，本金收益率{" "}
-              {percent(pct(trade.pnl, journal.settings.capital))}。
+本金收益率 {percent(pct(trade.pnl, journal.settings.capital))}
             </div>
             <details className="fifo-detail">
               <summary>查看 FIFO 逐批匹配与费用</summary>
@@ -225,7 +220,7 @@ export function TradeDetail({
                 rows={5}
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                placeholder="为什么赚或亏？是否按计划执行？最大的错误和下次的改进是什么？"
+                placeholder="复盘笔记（选填）"
               />
             </Field>
             <Field label="复盘标签">
@@ -244,7 +239,7 @@ export function TradeDetail({
               </div>
             )}
             <footer className="form-footer">
-              <span className="muted">复盘是为了改进过程</span>
+
               <button className="btn primary" disabled={busy} onClick={save}>
                 <Check size={16} />
                 {busy ? "保存中…" : "保存复盘"}

@@ -1,5 +1,5 @@
 import { useDisplayMoney } from "../currency/display";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { DateTime } from "luxon";
 import {
   ArrowUpRight,
@@ -155,9 +155,7 @@ export function TradeList({
       </div>
     </>
   ) : (
-    <Empty title="这段时间还没有已平仓交易">
-      买入后，只有卖出的部分才会计入表现。
-    </Empty>
+    <Empty title="暂无已平仓交易"/>
   );
 }
 function DailyChart({
@@ -179,6 +177,15 @@ function DailyChart({
 }) {
   const money = useDisplayMoney();
   const [hover, setHover] = useState<string | null>(null);
+  const chartHost = useRef<HTMLDivElement>(null);
+  const [chartWidth, setChartWidth] = useState(850);
+  useEffect(() => {
+    const host = chartHost.current;
+    if (!host) return;
+    const observer = new ResizeObserver(([entry]) => setChartWidth(entry.contentRect.width));
+    observer.observe(host);
+    return () => observer.disconnect();
+  }, []);
   const dates: string[] = [];
   let dt = DateTime.fromISO(start, { zone: ZONE }),
     limit = 0;
@@ -192,8 +199,8 @@ function DailyChart({
     max = Math.max(goal * 1.5, 30, ...values),
     min = Math.min(-30, ...values),
     height = 225,
-    w = 850,
-    left = 55,
+    w = Math.max(250, chartWidth),
+    left = 86,
     right = 16,
     top = 20,
     bottom = 35,
@@ -203,7 +210,7 @@ function DailyChart({
     barW = Math.max(1, Math.min(24, step * 0.52));
   const selected = (hover && days[hover]) || { pnl: "0", count: 0 };
   return (
-    <div className="daily-chart">
+    <div className="daily-chart" ref={chartHost}>
       <div className="chart-legend">
         <span>
           <i className="legend-dot blue" />
@@ -291,7 +298,7 @@ function DailyChart({
                 rx={3}
                 fill={v > 0 ? "#3288DB" : v < 0 ? "#E2AD2F" : "var(--border)"}
               />
-              {(dates.length < 10 || i % Math.ceil(dates.length / 9) === 0) && (
+              {(i % Math.ceil(dates.length / Math.max(2, Math.floor((w - left - right) / 65)))) === 0 && (
                 <text
                   x={x}
                   y={height - 9}
@@ -408,9 +415,9 @@ export function Dashboard({
       <div className="page-heading">
         <div>
           <h1>
-            交易表现<span className="heading-dot">.</span>
+            交易表现
           </h1>
-          
+
         </div>
 
       </div>
@@ -427,7 +434,7 @@ export function Dashboard({
             <span>本金收益率</span>
           </div>
           <div className="metric-foot">
-            已完成 {days[today]?.count || 0} 笔平仓 <span>未平仓不计入</span>
+            已平仓 {days[today]?.count || 0} 笔
           </div>
         </article>
         <article className="card target-card">
@@ -453,7 +460,7 @@ export function Dashboard({
                 </span>
               </>
             ) : (
-              <span>交易目标只作比较，不是交易指令</span>
+              <span>休市</span>
             )}
           </div>
         </article>
@@ -469,7 +476,7 @@ export function Dashboard({
         </article>
         <article className="card cumulative">
           <div className="metric-label">
-            累计已实现净盈亏 · 全部历史
+            累计已实现净盈亏
             <ArrowUpRight size={17} />
           </div>
           <Pnl value={total} large />
@@ -489,7 +496,7 @@ export function Dashboard({
                 <ChartColumn size={17} />
                 每日盈亏
               </h2>
-              <p>只关注已落袋的结果</p>
+
             </div>
             <div className="mini-tabs">
               {[
@@ -536,7 +543,7 @@ export function Dashboard({
             }}
           />
         </div>
-          <p className="muted small">日期仅筛选每日盈亏图和交易明细；累计收益始终包含全部历史成交。</p>
+
           <DailyChart
             days={days}
             start={range.start}
@@ -613,7 +620,7 @@ export function Dashboard({
                   <span>{d.day}</span>
                   <small>
                     {pnl
-                      ? displayMoney(pnl)
+                      ? <><span>{displayMoney(pnl).split(".")[0]}</span><span>.{displayMoney(pnl).split(".")[1]}</span></>
                       : isSession(date, journal.settings.extraClosedDays)
                         ? "—"
                         : "休"}
@@ -636,11 +643,7 @@ export function Dashboard({
             <h2>
               已平仓交易 <span className="count">{filtered.length}</span>
             </h2>
-            <p>
-              {selectedDate
-                ? `${selectedDate} 的平仓成交`
-                : "每笔卖出单独展示，多批买入按 FIFO 匹配"}
-            </p>
+            {selectedDate && <p>{selectedDate}</p>}
           </div>
           {selectedDate && (
             <button className="text-btn" onClick={() => setSelectedDate("")}>
@@ -732,10 +735,7 @@ export function Dashboard({
           </div>
         </details>
       </section>
-      <p className="footnote">
-        金额按所选显示币种 · 成交单价 USD · 美东时间（自动处理夏令时） · 固定本金{" "}
-        {displayMoney(journal.settings.capital, false)} · FIFO · 仅统计已实现净盈亏
-      </p>
+
     </>
   );
 }

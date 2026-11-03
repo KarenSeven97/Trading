@@ -58,7 +58,7 @@ export function Reviews({
   async function copy() {
     try {
       await navigator.clipboard.writeText(text);
-      notify("已复制交易与笔记汇总（含未平仓买入）");
+      notify("已复制笔记汇总");
     } catch {
       notify("浏览器禁止自动复制，请在汇总预览中选中文本复制");
       setPreview(true);
@@ -69,7 +69,7 @@ export function Reviews({
       <div className="page-heading">
         <div>
           <h1>
-            交易复盘<span className="heading-dot">.</span>
+            交易复盘
           </h1>
         </div>
         <button className="btn primary" onClick={() => setPreview(true)}>
@@ -84,11 +84,11 @@ export function Reviews({
         </div>
         <div>
           <b>{all.filter((e) => e.kind === "open").length}</b>
-          <span>未平仓买入批次</span>
+          <span>未平仓批次</span>
         </div>
         <div>
           <b>{all.filter((e) => entryHasNotes(journal, e)).length}</b>
-          <span>已有笔记的记录</span>
+          <span>有笔记</span>
         </div>
       </div>
       <section className="card review-filters">
@@ -163,9 +163,7 @@ export function Reviews({
             {open.length}
           </span>
         </div>
-        <p className="review-filter-hint">
-          已平仓按卖出日期筛选，未平仓按买入日期筛选。部分卖出后，剩余数量另列为未平仓批次；未平仓不属于盈利或亏损交易。
-        </p>
+
       </section>
       <div className="review-grid">
         {entries.map((entry) => {
@@ -317,9 +315,7 @@ export function Reviews({
         })}
       </div>
       {!entries.length && (
-        <Empty title="没有符合条件的交易记录">
-          买入后即可在这里查看和记录笔记，无需等待平仓。
-        </Empty>
+<Empty title="暂无符合条件的记录"/>
       )}
       {preview && (
         <Modal
@@ -328,11 +324,7 @@ export function Reviews({
           wide
         >
           <div className="form-body">
-            <p className="muted">
-              按记录时间从早到晚排列，含 {closed.length} 条已平仓明细和{" "}
-              {open.length}{" "}
-              个未平仓买入批次。未平仓卖出与收益显示「—」，不计入收益统计。
-            </p>
+
             <div className="inline">
               <button className="btn primary" onClick={copy}>
                 <Copy size={16} />

@@ -294,7 +294,7 @@ export function Stocks({
       <div className="page-heading">
         <div>
           <h1>
-            股票与点位<span className="heading-dot">.</span>
+            股票与点位
           </h1>
         </div>
         <button
@@ -428,11 +428,6 @@ export function Stocks({
               );
             })}
           </div>
-          <p className="watch-note">
-            {provider
-              ? "报价时效受行情订阅权限影响"
-              : "未配置行情服务，可直接添加代码并导入历史行情。"}
-          </p>
         </aside>
         <div className="stock-main">
           <section className="card stock-chart-card">
@@ -454,13 +449,13 @@ export function Stocks({
                       </small>
                     </>
                   ) : (
-                    <span className="muted">暂无可用实时报价</span>
+                    <span className="muted">暂无报价</span>
                   )}
                 </div>
                 <small className="muted">
                   {quote
                     ? `${displayTime(quote.time)} ET · ${quote.source}`
-                    : "配置行情代理后可更新报价，或导入历史 OHLCV。"}
+                    : ""}
                 </small>
               </div>
               <span className="badge">{instrument?.type || "股票"}</span>
@@ -544,27 +539,15 @@ export function Stocks({
                     <i className="legend-line yellow" />
                     亏损连线
                   </span>
-                  <small>蜡烛：青绿涨 / 紫红跌 · 与盈亏配色独立</small>
+                  <small>蜡烛：青绿涨 / 紫红跌</small>
                 </div>
-                <details className="fifo-explainer">
-                  <summary>分批买卖的连线如何匹配？</summary>
-                  <p>
-                    按 FIFO
-                    先进先出：每笔卖出先匹配最早尚未卖完的买入批次。一个买入点可连向多个卖出点，一次卖出也可连接多个买入点。剩余未平仓部分暂时没有卖出连线。
-                  </p>
-                  <p>
-                    每条线的净盈亏 = 匹配数量 ×（实际卖价 − 实际买价）−
-                    分摊买入费 −
-                    分摊卖出费。蓝色为盈利，黄色为亏损，灰色为零盈亏。连线不是股价轨迹或交易建议；数量与费用明细见交易详情。
-                  </p>
-                </details>
               </>
             ) : (
               <div className="no-chart">
                 <Empty
                   title={busy ? "正在获取真实历史行情…" : "此区间暂无历史行情"}
                 >
-                  <p>没有价格数据时，不绘制或推测 K 线。</p>
+
                   <div className="inline center">
                     <button
                       className="btn primary"
@@ -581,10 +564,7 @@ export function Stocks({
               </div>
             )}
             <div className="chart-bottom">
-              <span>
-                {focusId ? "已定位关联交易 · " : ""}拖动平移 · 滚轮 / 双指缩放 ·
-                点击 B / S 查看笔记
-              </span>
+{focusId && <span>已定位交易</span>}
               <button
                 className="text-btn"
                 onClick={() => upload.current?.click()}
@@ -619,9 +599,7 @@ export function Stocks({
                 <h2>
                   区间内实际成交 <span className="count">{es.length}</span>
                 </h2>
-                <p>
-                  标记来自实际成交；缺失行情处保留成交点，不补造 K 线。
-                </p>
+
               </div>
             </div>
             {es.length ? (
@@ -642,7 +620,7 @@ export function Stocks({
                     <span className="muted">
                       {dayKey(e.time)} {displayTime(e.time).split(" ")[1]} ET
                     </span>
-                    <span className="execution-note">{e.note || "无笔记"}</span>
+                    {e.note && <span className="execution-note">{e.note}</span>}
                   </button>
                 ))}
               </div>
@@ -650,10 +628,7 @@ export function Stocks({
               <p className="muted padded">此日期范围内没有成交记录。</p>
             )}
           </section>
-          <p className="footnote">
-            历史分钟数据范围受供应商套餐限制。跨除权日比较请使用未复权数据；本
-            MVP 暂不支持拆股等公司行动。
-          </p>
+
           <a
             className="attribution"
             href="https://www.tradingview.com/"

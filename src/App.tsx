@@ -1,3 +1,4 @@
+import { CurrencySwapIcon } from "./components/CurrencySwapIcon";
 import { FundsCard } from "./components/FundsCard";
 import { MoneyContext } from "./currency/display";
 import { displayMoney } from "./currency/fx";
@@ -10,16 +11,11 @@ import {
   NotebookPen,
   Settings as SettingsIcon,
   Plus,
-  PanelLeftClose,
-  ArrowUpRight,
-  ShieldCheck,
   Sun,
   Moon,
   CheckCircle2,
   AlertCircle,
-  Download,
   RefreshCw,
-  ArrowLeftRight,
 } from "lucide-react";
 import {
   emptyJournal,
@@ -245,19 +241,16 @@ export default function App() {
     {
       id: "dashboard" as Page,
       label: "交易表现",
-      en: "Overview",
       Icon: BarChart3,
     },
     {
       id: "stocks" as Page,
       label: "股票与点位",
-      en: "Market & trades",
       Icon: ChartCandlestick,
     },
     {
       id: "reviews" as Page,
       label: "交易复盘",
-      en: "Journal",
       Icon: NotebookPen,
     },
   ];
@@ -301,12 +294,12 @@ export default function App() {
             <BarChart3 size={21} />
           </span>
           <div>
-            Trade Journal<small>个人交易记录与复盘</small>
+            Trade Journal
           </div>
         </a>
-        <span className="sidebar-label">WORKSPACE</span>
+
         <nav>
-          {navItems.map(({ id, label, en, Icon }) => (
+          {navItems.map(({ id, label, Icon }) => (
             <button
               key={id}
               className={page === id ? "active" : ""}
@@ -315,7 +308,7 @@ export default function App() {
               <Icon size={19} />
               <span>
                 {label}
-                <small>{en}</small>
+
               </span>
               {page === id && <span className="nav-indicator" />}
             </button>
@@ -332,8 +325,6 @@ export default function App() {
             账户与数据设置
           </button>
           <div className="sidebar-footer">
-            <span className="status-dot" />
-            本地优先 · V1.0{" "}
             <button
               className="icon-btn"
               aria-label="切换深浅主题"
@@ -359,12 +350,11 @@ export default function App() {
       <div className="main">
         <header className="topbar">
           <div className="breadcrumb">
-            我的工作区 <span>/</span>{" "}
             <b>{navItems.find((n) => n.id === page)?.label}</b>
           </div>
           <div className="topbar-actions">
-            <button className={`toolbar-button sync-button ${syncStatus.kind}`} title={syncStatus.message} aria-label="同步账本" disabled={syncStatus.kind === "syncing" || !!form || settingsOpen || !!importData || !!detail} onClick={() => void refreshShared()}><RefreshCw size={15} className={syncStatus.kind === "syncing" ? "spin" : ""} /><span>{syncStatus.kind === "syncing" ? "同步中" : syncStatus.kind === "error" ? "同步失败" : syncStatus.kind === "pending" ? "待同步" : "同步"}</span></button>
-            <div className="currency-control"><button className="toolbar-button currency-toggle" aria-label="切换美元人民币显示" aria-pressed={fx.currency === "CNY"} disabled={fx.busy} onClick={fx.toggle} title="切换表现与本金的显示币种"><span className={fx.currency==='CNY'?'selected-currency':''}>¥</span><ArrowLeftRight size={15}/><span className={fx.currency==='USD'?'selected-currency':''}>$</span></button><small title={fx.rate ? `参考汇率 ${fx.rate.date} · Frankfurter${fx.error?' · '+fx.error:''}` : fx.error || '正在获取参考汇率'}>{fx.rate ? `${fx.error?'缓存 · ':''}$1 = ¥${fx.rate.rate}` : fx.busy ? '汇率加载中…' : '汇率暂不可用'}</small></div>
+            <button className={`toolbar-button sync-button ${syncStatus.kind}`} title={syncStatus.message} aria-label="同步账本" disabled={syncStatus.kind === "syncing" || !!form || settingsOpen || !!importData || !!detail} onClick={() => void refreshShared()}><RefreshCw size={21} className={syncStatus.kind === "syncing" ? "spin" : ""} /></button>
+            <div className="currency-control"><button className="toolbar-button currency-toggle" aria-label="切换美元人民币显示" aria-pressed={fx.currency === "CNY"} disabled={fx.busy} onClick={fx.toggle} title="切换表现与本金的显示币种"><CurrencySwapIcon currency={fx.currency}/></button><small title={fx.rate ? `参考汇率 ${fx.rate.date} · Frankfurter${fx.error?' · '+fx.error:''}` : fx.error || '正在获取参考汇率'}>{fx.rate ? `${fx.error?'缓存 · ':''}$1 = ¥${fx.rate.rate}` : fx.busy ? '汇率加载中…' : '汇率暂不可用'}</small></div>
             <InstallApp />
             <button
               className="toolbar-button toolbar-settings"
@@ -378,8 +368,7 @@ export default function App() {
               aria-label="新增交易"
               onClick={() => setForm({})}
             >
-              <Plus size={17} />
-              <span>新增交易</span>
+              <Plus size={21} />
             </button>
           </div>
         </header>

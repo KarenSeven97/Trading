@@ -96,9 +96,7 @@ export function ImportPreview({
               {rows.filter((r) => r.include).length} 条
             </p>
             <div className="subtle-note">
-              相同 ID
-              或相同股票、方向、时间、价格、数量和费用会标记为可能重复，默认跳过。真实的同时间同价格成交可手动勾选，导入时生成独立
-              ID。
+              疑似重复默认跳过，可手动勾选导入。
             </div>
             <div className="import-rows">
               {rows.map((r, i) => (
@@ -138,7 +136,7 @@ export function ImportPreview({
               {data.journal.bars.length} 组行情
             </p>
             <div className="subtle-note">
-              将替换当前账本的成交、笔记、设置、自选和缓存。正式账本的恢复会同步给所有访问者；另一种账本不会受到影响。
+              将替换成交、笔记、设置、自选和缓存，并同步给所有访问者。
             </div>
           </>
         )}

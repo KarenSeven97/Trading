@@ -68,12 +68,12 @@ export function Settings({
           <div className="settings-title">
             <ShieldCheck size={19} />
             <h3>统计规则</h3>
-            <span className="badge">本地优先</span>
+
           </div>
           <div className="form-grid">
             <Field
               label="初始本金 · USD"
-              hint="所有期间收益率统一使用此固定分母。"
+
             >
               <input
                 required
@@ -84,7 +84,7 @@ export function Settings({
             </Field>
             <Field
               label="每日目标收益率 · %"
-              hint="仅供交易日比较，不设置周、月强制目标。"
+
             >
               <input
                 required
@@ -114,27 +114,26 @@ export function Settings({
             </Field>
           </div>
           <div className="subtle-note">
-            USD · America/New_York（自动处理夏令时） · FIFO 先进先出 ·
-            仅统计已实现净盈亏。当前版本不提供现金出入金记账，不会把资金流入当作收益。
+            USD · 美东时间 · FIFO · 仅已实现盈亏
           </div>
           <Field
             label="额外休市日"
-            hint="每行 YYYY-MM-DD；内置常规 NYSE 休市规则，临时停市可在此补充。"
+            hint="每行 YYYY-MM-DD"
           >
             <textarea
               rows={2}
               value={extra}
               onChange={(e) => setExtra(e.target.value)}
-              placeholder="例如 2026-12-24（仅示例，请核实实际日历）"
+              placeholder="YYYY-MM-DD"
             />
           </Field>
           <div className="settings-title">
             <Database size={19} />
-            <h3>可选历史行情服务</h3>
+            <h3>历史行情</h3>
           </div>
           <Field
             label="行情代理 URL"
-            hint="留空也可正常记账。填写自己部署并信任的服务地址，不要填写 API Key。"
+            hint="填写可信服务地址，请勿填写 API Key"
           >
             <input
               type="text"
@@ -144,7 +143,7 @@ export function Settings({
             />
           </Field>
           <p className="muted small">
-            留空默认使用 Alpaca IEX 免费行情：覆盖单一交易所，非全市场综合报价，成交稀疏时可能缺少部分 K 线。密钥仅存于 Supabase Edge Functions Secrets。可填写自定义代理地址以切换服务；行情缓存保存在本机。
+            Alpaca IEX：单一交易所，可能缺少 K 线。暂不支持拆股等公司行动。
           </p>
           {error && (
             <div role="alert" className="error">
@@ -152,7 +151,7 @@ export function Settings({
             </div>
           )}
           <div className="form-footer">
-            <span className="muted">收益率分母始终固定</span>
+
             <button className="btn primary" disabled={busy}>
               {busy ? "保存中…" : "保存设置"}
             </button>
@@ -161,13 +160,10 @@ export function Settings({
         <div className="settings-title">
           <Database size={19} />
           <h3>备份与恢复</h3>
-          <span className="badge">
-            {journal.mode === "demo" ? "演示账本" : "正式账本"}
-          </span>
+
         </div>
         <p className="muted small">
-          完整备份包含成交、笔记、自选、设置与行情缓存。CSV
-          仅用于成交交换，不包含完整复盘。正式账本会自动同步到公开共享数据库。请仍定期导出完整备份。
+          JSON 包含全部数据；CSV 仅包含成交。
         </p>
         <div className="backup-actions">
           <button
@@ -227,7 +223,7 @@ export function Settings({
           }}
         />
         <div className="subtle-note">
-          正式账本无需登录，所有访问者共用并可修改同一份记录。离线修改先保存本机，联网后自动尝试同步；请确认“共享账本已同步”后再清除浏览器数据。行情缓存、主题与行情代理地址仅保存在本机。
+          共享记录无需登录，所有访问者均可编辑。清除本机数据前，请先同步或备份。
         </div>
       </div>
     </Modal>

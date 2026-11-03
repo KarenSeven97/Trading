@@ -132,15 +132,6 @@ export function TradeForm({
   return (
     <Modal title={editing ? "编辑成交记录" : "新增交易"} onClose={onClose} wide>
       <form onSubmit={save} className="form-body">
-        <div className="form-intro">
-          <span
-            className={`status-dot ${journal.mode === "demo" ? "demo" : ""}`}
-          />
-          {journal.mode === "demo"
-            ? "演示账本 · 不计入正式记录"
-            : "正式账本 · 本机保存后同步到公开共享账本"}
-          <span className="right muted">FIFO / USD</span>
-        </div>
         {!editing && (
           <div className="segmented">
             <button
@@ -255,8 +246,8 @@ export function TradeForm({
               label="成交日期与时间 · 北京时间 *"
               hint={
                 easternPreview(r.local)
-                  ? `对应美东时间：${easternPreview(r.local)}。自动处理夏令时。`
-                  : "请填写北京时间（Asia/Shanghai）。"
+                  ? `对应美东时间：${easternPreview(r.local)}`
+                  : "北京时间"
               }
             >
               <input
@@ -272,8 +263,8 @@ export function TradeForm({
                 rows={2}
                 placeholder={
                   r.side === "buy"
-                    ? "为什么入场？准备如何退出？（选填）"
-                    : "为什么离场？当时如何判断？（选填）"
+                    ? "选填"
+                    : "选填"
                 }
                 value={r.note}
                 onChange={(e) => patch(i, "note", e.target.value)}
@@ -296,7 +287,7 @@ export function TradeForm({
         {mode !== "quick" && (
           <Field
             label="完整交易复盘"
-            hint="保存到本次最后一笔卖出，可随后继续编辑。"
+            hint="关联最后一笔卖出"
           >
             <textarea
               rows={3}
@@ -328,7 +319,7 @@ export function TradeForm({
           </div>
         )}
         <footer className="form-footer">
-          <span className="muted">仅记录成交，不执行交易</span>
+
           <button type="button" className="btn secondary" onClick={onClose}>
             取消
           </button>

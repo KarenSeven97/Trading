@@ -2562,13 +2562,13 @@ td .pnl {
     height: 64px;
     min-height: 64px;
     padding: 0 17px;
-    position: sticky;
-    top: 0;
-    z-index: 40;
+    position: static;
+    top: auto;
+    z-index: auto;
     background: var(--bg);
   }
   .breadcrumb {
-    font-size: 11px;
+    font-size: 13px;
   }
   .breadcrumb > span,
   .breadcrumb > b {
@@ -2595,7 +2595,7 @@ td .pnl {
     background: var(--panel2);
     padding: 7px 9px;
     min-height: 31px;
-    font-size: 9px;
+    font-size: 13px;
   }
   .mobile-settings {
     min-width: 36px;
@@ -2603,7 +2603,7 @@ td .pnl {
   }
   .demo-banner {
     padding: 10px 17px;
-    font-size: 9px;
+    font-size: 13px;
     align-items: flex-start;
     gap: 7px;
     line-height: 1.8;
@@ -2619,7 +2619,7 @@ td .pnl {
   }
   .demo-banner button {
     margin: 0 0 0 auto;
-    font-size: 9px;
+    font-size: 13px;
     min-height: 24px;
     padding: 0;
     flex: none;
@@ -2634,7 +2634,7 @@ td .pnl {
   }
   .eyebrow,
   .page-heading .eyebrow {
-    font-size: 7px;
+    font-size: 13px;
     letter-spacing: 1.5px;
   }
   h1 {
@@ -2643,7 +2643,7 @@ td .pnl {
     margin-bottom: 6px;
   }
   .page-heading p {
-    font-size: 10px;
+    font-size: 13px;
   }
   .page-heading .date-controls {
     margin: 0;
@@ -2654,12 +2654,12 @@ td .pnl {
   }
   .date-controls input {
     width: 117px;
-    font-size: 11px;
+    font-size: 13px;
     min-height: 30px;
   }
   .page-heading > .btn {
     margin-left: auto;
-    font-size: 10px;
+    font-size: 13px;
     padding: 8px 10px;
   }
   .page-heading:has(> .btn) {
@@ -2676,11 +2676,11 @@ td .pnl {
     border-radius: 10px;
   }
   .metric-label {
-    font-size: 9px;
+    font-size: 13px;
     gap: 4px;
   }
   .metric-label .badge {
-    font-size: 7px;
+    font-size: 13px;
     padding: 3px 4px;
   }
   .pnl.large {
@@ -2692,19 +2692,19 @@ td .pnl {
     margin-top: 12px;
   }
   .return-chip {
-    font-size: 10px;
+    font-size: 13px;
     gap: 3px;
     margin-top: 8px;
   }
   .return-chip span {
-    font-size: 8px;
+    font-size: 13px;
     margin-left: 3px;
   }
   .return-chip svg {
     width: 14px;
   }
   .metric-foot {
-    font-size: 8px;
+    font-size: 13px;
     padding: 11px 0;
     margin-top: 14px;
     gap: 3px;
@@ -2713,7 +2713,7 @@ td .pnl {
     display: none;
   }
   .metric-foot b {
-    font-size: 9px;
+    font-size: 13px;
   }
   .target-number {
     font-size: 24px;
@@ -2722,24 +2722,24 @@ td .pnl {
     flex-wrap: wrap;
   }
   .target-number small {
-    font-size: 9px;
+    font-size: 13px;
   }
   .progress-track {
     margin-top: 19px;
     height: 4px;
   }
   .target-caption {
-    font-size: 8px;
+    font-size: 13px;
     margin-top: 12px;
     align-items: flex-start;
   }
   .target-caption b {
     display: block;
     margin-top: 3px;
-    font-size: 10px;
+    font-size: 13px;
   }
   .target-caption > span:last-child {
-    font-size: 9px;
+    font-size: 13px;
   }
   .stacked-metrics .pnl {
     font-size: 16px;
@@ -2747,7 +2747,7 @@ td .pnl {
     gap: 5px;
   }
   .stacked-metrics .pnl small {
-    font-size: 8px;
+    font-size: 13px;
   }
   .stacked-metrics > div:first-child {
     padding-bottom: 11px;
@@ -2768,12 +2768,12 @@ td .pnl {
     margin-top: 12px;
   }
   .metrics > .cumulative > .metric-foot {
-    font-size: 8px;
+    font-size: 13px;
     padding: 11px 0;
     margin-top: 14px;
   }
   .small-return {
-    font-size: 10px;
+    font-size: 13px;
   }
   .metrics > .cumulative > .small-return {
     margin-top: 7px;
@@ -2796,24 +2796,24 @@ td .pnl {
     gap: 7px;
   }
   .card-header p {
-    font-size: 9px;
+    font-size: 13px;
   }
   .mini-tabs button {
-    font-size: 8px;
+    font-size: 13px;
     padding: 4px 7px;
   }
   .daily-chart {
     padding: 17px 6px 0;
   }
   .chart-legend {
-    font-size: 7px;
+    font-size: 13px;
     gap: 12px;
     padding-left: 10px;
     padding-bottom: 8px;
   }
   .chart-legend b {
     width: 100%;
-    font-size: 8px;
+    font-size: 13px;
   }
   .daily-chart svg {
     min-height: 160px;
@@ -2825,13 +2825,13 @@ td .pnl {
   .chart-summary {
     gap: 16px;
     margin: 0 16px;
-    font-size: 8px;
+    font-size: 13px;
     padding: 13px 0;
     justify-content: space-between;
   }
   .chart-summary b {
     margin-left: 2px;
-    font-size: 8px;
+    font-size: 13px;
   }
   .calendar-grid {
     padding: 0 13px 14px;
@@ -2842,10 +2842,10 @@ td .pnl {
     gap: 5px;
   }
   .calendar-day > span {
-    font-size: 10px;
+    font-size: 13px;
   }
   .calendar-day small {
-    font-size: 8px;
+    font-size: 13px;
     letter-spacing: -0.5px;
   }
   .calendar-card .card-header {
@@ -2858,7 +2858,7 @@ td .pnl {
     width: 15px;
   }
   .calendar-nav {
-    font-size: 10px;
+    font-size: 13px;
     gap: 5px;
   }
   .calendar-nav .icon-btn {
@@ -2868,7 +2868,7 @@ td .pnl {
   .calendar-foot {
     padding: 14px 0;
     margin: 0 16px;
-    font-size: 9px;
+    font-size: 13px;
   }
   .transactions .card-header {
     padding-bottom: 15px;
@@ -2876,7 +2876,7 @@ td .pnl {
     flex-wrap: wrap;
   }
   .transactions .card-header .text-btn {
-    font-size: 10px;
+    font-size: 13px;
     min-height: 25px;
   }
   .filter-bar {
@@ -2885,7 +2885,7 @@ td .pnl {
   }
   .filter-bar input,
   .filter-bar select {
-    font-size: 10px;
+    font-size: 13px;
     min-height: 37px;
     padding: 8px;
   }
@@ -2932,12 +2932,12 @@ td .pnl {
     height: 32px;
   }
   .trade-card b {
-    font-size: 12px;
+    font-size: 13px;
   }
   .trade-card small {
     display: block;
     color: var(--faint);
-    font-size: 8px;
+    font-size: 13px;
     margin-top: 4px;
   }
   .trade-card .pnl {
@@ -2947,7 +2947,7 @@ td .pnl {
   }
   .trade-card .pnl small {
     color: inherit;
-    font-size: 10px;
+    font-size: 13px;
   }
   .trade-card-bottom {
     display: flex;
@@ -2955,7 +2955,7 @@ td .pnl {
     align-items: center;
     margin-top: 13px;
     color: var(--muted);
-    font-size: 9px;
+    font-size: 13px;
   }
   .trade-card-bottom svg {
     color: var(--faint);
@@ -2965,7 +2965,7 @@ td .pnl {
     padding: 0 16px;
   }
   .executions-panel summary {
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.9;
   }
   .executions-panel summary > .muted {
@@ -2975,39 +2975,39 @@ td .pnl {
   }
   .execution-list > button {
     flex-wrap: wrap;
-    font-size: 10px;
+    font-size: 13px;
     gap: 8px;
     padding: 12px 1px;
   }
   .execution-list > button .muted {
     width: 100%;
     margin-left: 0;
-    font-size: 9px;
+    font-size: 13px;
   }
   .execution-list > button > svg {
     display: none;
   }
   .positions {
-    font-size: 9px;
+    font-size: 13px;
   }
   .positions > span {
     line-height: 1.7;
   }
   .footnote {
-    font-size: 8px;
+    font-size: 13px;
     margin-top: 16px;
     line-height: 2;
   }
   .app-footer {
     margin-top: 5px;
     padding: 18px 17px 106px;
-    font-size: 8px;
+    font-size: 13px;
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
   }
   .app-footer > span:last-of-type {
-    font-size: 8px;
+    font-size: 13px;
   }
   .bottom-nav {
     display: flex;
@@ -3034,7 +3034,7 @@ td .pnl {
     gap: 5px;
     min-width: 80px;
     min-height: 55px;
-    font-size: 10px;
+    font-size: 13px;
   }
   .bottom-nav button.active {
     color: var(--blue2);
@@ -3084,10 +3084,10 @@ td .pnl {
     gap: 18px;
   }
   .form-intro {
-    font-size: 10px;
+    font-size: 13px;
   }
   .form-intro .right {
-    font-size: 9px;
+    font-size: 13px;
   }
   .form-grid {
     gap: 12px;
@@ -3099,7 +3099,7 @@ td .pnl {
     grid-column: 1/-1;
   }
   .field {
-    font-size: 11px;
+    font-size: 13px;
     gap: 7px;
   }
   .field input,
@@ -3110,7 +3110,7 @@ td .pnl {
     min-height: 44px;
   }
   .field small {
-    font-size: 9px;
+    font-size: 13px;
   }
   .execution-form {
     padding: 14px;
@@ -3124,7 +3124,7 @@ td .pnl {
   .segmented button {
     min-height: 36px;
     padding: 6px 9px;
-    font-size: 11px;
+    font-size: 13px;
   }
   .form-footer {
     gap: 9px;
@@ -3132,13 +3132,13 @@ td .pnl {
     padding-top: 16px;
   }
   .form-footer > .muted {
-    font-size: 9px;
+    font-size: 13px;
     flex: 1;
     min-width: 100px;
   }
   .form-footer .btn {
     min-height: 42px;
-    font-size: 11px;
+    font-size: 13px;
     padding: 9px 13px;
   }
   .detail-hero .pnl.large {
@@ -3147,10 +3147,10 @@ td .pnl {
     gap: 0;
   }
   .detail-hero .pnl.large small {
-    font-size: 12px;
+    font-size: 13px;
   }
   .detail-hero > .btn {
-    font-size: 10px;
+    font-size: 13px;
     padding: 8px 10px;
   }
   .detail-stats {
@@ -3159,14 +3159,14 @@ td .pnl {
     padding: 16px;
   }
   .detail-stats b {
-    font-size: 12px;
+    font-size: 13px;
     margin-top: 7px;
   }
   .detail-stats small {
-    font-size: 9px;
+    font-size: 13px;
   }
   .execution-detail .section-top .inline {
-    font-size: 10px;
+    font-size: 13px;
     gap: 7px;
   }
   .execution-detail .section-top > .inline:last-child {
@@ -3177,43 +3177,43 @@ td .pnl {
     min-height: 38px;
   }
   .execution-values {
-    font-size: 10px;
+    font-size: 13px;
     align-items: flex-start;
   }
   .execution-values > b {
-    font-size: 11px;
+    font-size: 13px;
   }
   .execution-detail p {
-    font-size: 12px;
+    font-size: 13px;
   }
   .execution-detail > small {
-    font-size: 8px;
+    font-size: 13px;
   }
   .settings-title h3 {
-    font-size: 12px;
+    font-size: 13px;
   }
   .backup-actions .btn {
-    font-size: 11px;
+    font-size: 13px;
     flex: 1;
     min-width: 135px;
   }
   .import-rows > label {
     padding: 13px 10px;
-    font-size: 10px;
+    font-size: 13px;
     gap: 7px;
   }
   .import-rows small {
-    font-size: 8px;
+    font-size: 13px;
     width: 100%;
     padding-left: 25px;
   }
   .import-stats {
-    font-size: 11px;
+    font-size: 13px;
     flex-wrap: wrap;
   }
   .toast {
     bottom: calc(85px + env(safe-area-inset-bottom));
-    font-size: 11px;
+    font-size: 13px;
     z-index: 250;
     padding: 12px 14px;
   }
@@ -3226,17 +3226,17 @@ td .pnl {
     font-size: 24px;
   }
   .review-overview span {
-    font-size: 9px;
+    font-size: 13px;
   }
   .review-filters .dates {
-    font-size: 9px;
+    font-size: 13px;
     gap: 7px;
   }
   .review-filters .dates input {
     width: 115px;
     min-width: 0;
     flex: 1;
-    font-size: 9px;
+    font-size: 13px;
   }
   .review-filters .dates > .right {
     display: block;
@@ -3254,7 +3254,7 @@ td .pnl {
   }
   .review-card-head .symbol-cell small {
     max-width: 155px;
-    font-size: 8px;
+    font-size: 13px;
   }
   .review-card-head h2 {
     font-size: 15px;
@@ -3264,19 +3264,19 @@ td .pnl {
     padding-top: 17px;
   }
   .review-trade b {
-    font-size: 12px;
+    font-size: 13px;
   }
   .review-trade small {
-    font-size: 8px;
+    font-size: 13px;
   }
   .review-meta {
-    font-size: 9px;
+    font-size: 13px;
   }
   .note-excerpt p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .review-card-foot .text-btn {
-    font-size: 10px;
+    font-size: 13px;
   }
   .review-card-foot .icon-btn {
     min-height: 35px;
@@ -3296,7 +3296,7 @@ td .pnl {
     padding: 11px 12px;
   }
   .watch-search input {
-    font-size: 12px;
+    font-size: 13px;
     min-height: 38px;
   }
   .watch-search .icon-btn {
@@ -3313,16 +3313,16 @@ td .pnl {
     padding: 13px 12px 9px;
   }
   .watch-symbol b {
-    font-size: 11px;
+    font-size: 13px;
   }
   .watch-symbol small {
-    font-size: 8px;
+    font-size: 13px;
   }
   .watch-symbol .watch-price b {
-    font-size: 11px;
+    font-size: 13px;
   }
   .watch-symbol .watch-price small {
-    font-size: 9px;
+    font-size: 13px;
   }
   .watch-actions .icon-btn {
     min-width: 28px;
@@ -3337,20 +3337,20 @@ td .pnl {
   .stock-heading h2 span {
     display: block;
     margin: 7px 0 0;
-    font-size: 10px;
+    font-size: 13px;
   }
   .stock-price {
     font-size: 22px;
     gap: 8px;
   }
   .stock-price small {
-    font-size: 10px;
+    font-size: 13px;
   }
   .stock-price > .muted {
     font-size: 13px;
   }
   .stock-heading > div > small {
-    font-size: 8px;
+    font-size: 13px;
   }
   .chart-controls {
     padding: 11px;
@@ -3362,11 +3362,11 @@ td .pnl {
   }
   .chart-controls .btn {
     order: 2;
-    font-size: 9px;
+    font-size: 13px;
     min-height: 36px;
   }
   .segmented.compact button {
-    font-size: 10px;
+    font-size: 13px;
     min-height: 33px;
     padding: 6px 8px;
   }
@@ -3379,10 +3379,10 @@ td .pnl {
   }
   .date-controls.small input {
     width: 114px;
-    font-size: 10px;
+    font-size: 13px;
   }
   .data-source {
-    font-size: 8px;
+    font-size: 13px;
     padding: 9px 12px;
     line-height: 1.8;
     flex-wrap: wrap;
@@ -3394,11 +3394,11 @@ td .pnl {
   .marker-legend {
     padding: 12px;
     gap: 10px;
-    font-size: 8px;
+    font-size: 13px;
   }
   .marker-legend small {
     width: 100%;
-    font-size: 8px;
+    font-size: 13px;
   }
   .chart-bottom {
     padding: 12px;
@@ -3407,16 +3407,16 @@ td .pnl {
   }
   .chart-bottom > span {
     width: 100%;
-    font-size: 8px;
+    font-size: 13px;
   }
   .chart-bottom .text-btn {
-    font-size: 9px;
+    font-size: 13px;
   }
   .chart-executions .card-header {
     padding: 16px 14px;
   }
   .chart-executions .card-header p {
-    font-size: 9px;
+    font-size: 13px;
     line-height: 1.7;
   }
   .chart-executions .execution-list {
@@ -3424,13 +3424,13 @@ td .pnl {
   }
   .execution-note {
     padding-left: 0;
-    font-size: 10px;
+    font-size: 13px;
   }
   .execution-marker {
     width: 25px;
     height: 25px;
     line-height: 21px;
-    font-size: 11px;
+    font-size: 13px;
   }
   .chart-tools button {
     padding: 6px 8px;
@@ -3446,7 +3446,7 @@ td .pnl {
     margin: 11px;
   }
   .app-footer .text-btn {
-    font-size: 9px;
+    font-size: 13px;
   }
   .review-card .ticker-icon {
     width: 30px;
@@ -3552,34 +3552,34 @@ td .pnl {
 }
 @media (max-width: 700px) {
   .review-filter-hint {
-    font-size: 9px;
+    font-size: 13px;
     padding: 0 14px 13px;
   }
   .review-overview {
     gap: 22px;
   }
   .review-overview span {
-    font-size: 8px;
+    font-size: 13px;
   }
   .review-overview b {
     font-size: 23px;
   }
   .pending-pnl > small {
-    font-size: 8px;
+    font-size: 13px;
   }
   .review-card-head .symbol-cell small {
     max-width: 150px;
   }
   .open-review-card .review-card-head h2 .badge {
-    font-size: 7px;
+    font-size: 13px;
     margin-left: 3px;
   }
   .fifo-match-row {
-    font-size: 10px;
+    font-size: 13px;
     flex-wrap: wrap;
   }
   .fifo-match-row small {
-    font-size: 9px;
+    font-size: 13px;
   }
 }
 .fifo-detail {
@@ -3625,14 +3625,145 @@ td .pnl {
 .install-action{white-space:nowrap;min-height:40px}@media(max-width:700px){.install-action{min-width:36px;min-height:36px;padding:7px}.install-action>span{display:none}.install-action svg{width:19px;height:19px}}
 
 .cloud-banner{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 28px;background:var(--panel);border-bottom:1px solid var(--border)}
-.cloud-banner>div:first-child{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;min-width:0}.cloud-banner strong{color:#3288db}.cloud-banner span,.cloud-banner small{color:var(--muted);font-size:12px}.cloud-banner small{width:100%;overflow-wrap:anywhere}.cloud-banner.error small,.cloud-banner.pending small{color:#e2ad2f}.cloud-actions{display:flex;gap:10px;flex-shrink:0;align-items:center}.cloud-actions .btn{white-space:nowrap}@media(max-width:700px){.cloud-banner{padding:12px 16px;align-items:flex-start;flex-direction:column;gap:10px}.cloud-actions{flex-wrap:wrap}.cloud-banner span{font-size:11px}}
+.cloud-banner>div:first-child{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;min-width:0}.cloud-banner strong{color:#3288db}.cloud-banner span,.cloud-banner small{color:var(--muted);font-size:12px}.cloud-banner small{width:100%;overflow-wrap:anywhere}.cloud-banner.error small,.cloud-banner.pending small{color:#e2ad2f}.cloud-actions{display:flex;gap:10px;flex-shrink:0;align-items:center}.cloud-actions .btn{white-space:nowrap}@media(max-width:700px){.cloud-banner{padding:12px 16px;align-items:flex-start;flex-direction:column;gap:10px}.cloud-actions{flex-wrap:wrap}.cloud-banner span{font-size: 13px}}
 
 .sync-button{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:8px;color:var(--muted)}.sync-button.synced{color:var(--blue)}.sync-button.error,.sync-button.pending{color:var(--yellow)}.sync-error{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 24px;font-size:12px;color:var(--yellow);border-bottom:1px solid var(--border)}.sync-error span{overflow-wrap:anywhere}.watch-symbol .watch-price .profit{color:var(--blue)}.watch-symbol .watch-price .loss{color:var(--yellow)}.watch-symbol .watch-price .neutral{color:var(--muted)}
 
-.currency-control{display:flex;flex-direction:column;align-items:flex-end;gap:2px;max-width:250px}.currency-toggle{white-space:nowrap;font-size:12px;min-height:36px}.currency-control small{font-size:9px;color:var(--muted);text-align:right;line-height:1.3}.dashboard-range{flex-wrap:wrap}.daily-chart .axis-text{font-size:9px}@media(max-width:700px){.currency-control{max-width:150px}.currency-control small{font-size:8px}.topbar-actions{flex-wrap:wrap;gap:6px}.currency-toggle{font-size:11px}}
+.currency-control{display:flex;flex-direction:column;align-items:flex-end;gap:2px;max-width:250px}.currency-toggle{white-space:nowrap;font-size:12px;min-height:36px}.currency-control small{font-size:9px;color:var(--muted);text-align:right;line-height:1.3}.dashboard-range{flex-wrap:wrap}.daily-chart .axis-text{font-size:9px}@media(max-width:700px){.currency-control{max-width:150px}.currency-control small{font-size: 13px}.topbar-actions{flex-wrap:wrap;gap:6px}.currency-toggle{font-size: 13px}}
 @media(max-width:1200px){.topbar .breadcrumb{display:none}.topbar{height:auto;min-height:73px;padding:10px 16px}.topbar-actions{width:100%;min-width:0;justify-content:flex-end;flex-wrap:wrap;gap:8px}}@media(max-width:700px){.topbar{min-height:64px}.currency-control{max-width:145px}.currency-toggle{min-height:40px}}
 /* Shared desktop/mobile toolbar and principal summary. */
 .topbar{height:auto;min-height:80px;padding:12px 24px}.topbar-actions{align-items:flex-start;gap:8px}.topbar .toolbar-button{height:40px;min-height:40px;min-width:40px;border:1px solid var(--border);border-radius:9px;background:var(--panel2);color:var(--text);padding:8px 12px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:12px;white-space:nowrap;line-height:1.2}.topbar .toolbar-button:hover{background:var(--hover)}.topbar .toolbar-button:disabled{opacity:.55}.topbar .toolbar-button.primary{background:var(--blue);border-color:var(--blue);color:white}.topbar .toolbar-button.synced{color:var(--blue)}.topbar .toolbar-button.error,.topbar .toolbar-button.pending{color:var(--yellow)}.topbar .toolbar-settings{display:inline-flex}.topbar .currency-control{width:116px;max-width:116px;align-items:stretch;gap:4px}.topbar .currency-toggle{gap:10px}.selected-currency{color:var(--blue);font-weight:700}.currency-toggle span{font-size:18px;line-height:1}.currency-control small{text-align:center;font-size:10px;line-height:1.4;white-space:nowrap}.mobile-capital{display:none}.account-funds{display:grid;gap:13px}.account-funds .funds-label{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:11px;color:var(--muted);min-height:22px}.account-funds .funds-label .icon-btn{width:30px;height:30px;min-width:30px;min-height:30px;padding:5px}.account-funds strong{font-size:23px;margin:4px 0 0}.account-funds b{display:block;font-family:"IBM Plex Mono",monospace;font-size:17px;margin-top:4px;overflow-wrap:anywhere}
 .watch-order-select{max-width:115px;font-size:11px;padding:5px 7px;min-height:32px}.watchlist{display:block}.watchlist>.watch-items{display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto;max-height:620px}.watch-item{position:relative;min-width:0;padding-left:32px;border-left:0;border-top:1px solid var(--border)}.watch-item.active{border-left:0;border-bottom-color:transparent;box-shadow:inset 3px 0 var(--blue)}.watch-item.dragging{opacity:.55;outline:1px dashed var(--blue);outline-offset:-2px}.watch-drag-handle{position:absolute;left:3px;top:12px;width:26px;min-width:26px;min-height:36px;cursor:grab;touch-action:none;user-select:none}.watch-item.dragging .watch-drag-handle{cursor:grabbing}.watchlist .card-header{display:flex;justify-content:space-between;gap:6px}
 @media(max-width:1100px){.watchlist>.watch-items{max-height:340px}.watchlist>.card-header,.watchlist>.watch-search{width:100%}.watch-symbol{width:100%}.watch-item{padding:12px 12px 12px 35px}}
-@media(max-width:700px){.topbar{min-height:78px;padding:10px 16px}.topbar-actions{justify-content:flex-end;gap:7px;flex-wrap:nowrap}.topbar .toolbar-button{min-width:36px;height:38px;min-height:38px;padding:7px 9px}.topbar .sync-button>span,.topbar .install-action>span,.topbar .add-trade>span{display:none}.topbar .add-trade{display:inline-flex}.topbar .currency-control{width:108px;max-width:108px}.currency-control small{font-size:9px}.mobile-capital{display:block;padding:12px 16px 0}.mobile-capital .account-funds{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px;margin:0}.mobile-capital .account-funds strong,.mobile-capital .account-funds b{font-size:clamp(11px,3.4vw,16px);margin:4px 0 0}.mobile-capital .account-funds .funds-label{font-size:10px;min-height:30px}.mobile-capital .account-funds .icon-btn{width:25px;min-width:25px;padding:3px}.watchlist>.watch-items{max-height:320px}}
+@media(max-width:700px){.topbar{min-height:78px;padding:10px 16px}.topbar-actions{justify-content:flex-end;gap:7px;flex-wrap:nowrap}.topbar .toolbar-button{min-width:36px;height:38px;min-height:38px;padding:7px 9px}.topbar .sync-button>span,.topbar .install-action>span,.topbar .add-trade>span{display:none}.topbar .add-trade{display:inline-flex}.topbar .currency-control{width:108px;max-width:108px}.currency-control small{font-size: 13px}.mobile-capital{display:block;padding:12px 16px 0}.mobile-capital .account-funds{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px;margin:0}.mobile-capital .account-funds strong,.mobile-capital .account-funds b{font-size:clamp(11px,3.4vw,16px);margin:4px 0 0}.mobile-capital .account-funds .funds-label{font-size: 13px;min-height:30px}.mobile-capital .account-funds .icon-btn{width:25px;min-width:25px;padding:3px}.watchlist>.watch-items{max-height:320px}}
+
+/* Icon-only toolbar; the rate is a separate, persistent caption. */
+.topbar { min-height: 92px; }
+.topbar .toolbar-button { width: 46px; min-width: 46px; height: 46px; min-height: 46px; padding: 10px; }
+.topbar .toolbar-button > svg { width: 22px; height: 22px; }
+.topbar .currency-control { width: 106px; max-width: 106px; align-items: center; }
+.topbar .currency-toggle { padding: 3px; }
+.topbar .currency-toggle > .currency-swap-icon { width: 38px; height: 38px; }
+.currency-swap-icon .coin-back { fill: var(--panel2); }
+.currency-swap-icon .coin-front { fill: var(--panel2); }
+.currency-control small { font-size: 12px; }
+.form-footer { justify-content: flex-end; }
+@media (max-width: 700px) {
+  :root { font-size: 16px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { font-size: 14px; line-height: 1.5; }
+  small, .small, .badge, .count, .tags, .tags > span, .side-label, .weekday,
+  .pending-pnl > small, .review-buy-batches, .review-buy-batches > small,
+  .review-buy-batches b, .trade-buy-time, .data-source, .ohlc-legend,
+  .chart-tools, .attribution, .fifo-detail, .fifo-match-row small { font-size: 12px; }
+  .topbar { position: static; top: auto; min-height: 92px; padding: 10px 16px; }
+  .topbar-actions { gap: 7px; width: 100%; justify-content: flex-end; align-items: flex-start; }
+  .topbar .toolbar-button { width: 44px; min-width: 44px; height: 44px; min-height: 44px; padding: 10px; }
+  .topbar .currency-toggle { padding: 3px; }
+  .topbar .currency-control { width: 100px; max-width: 100px; }
+  .currency-control small { font-size: 12px; line-height: 1.5; }
+  .mobile-capital { padding-top: 14px; }
+  .mobile-capital .account-funds { gap: 10px; padding: 12px; }
+  .mobile-capital .account-funds .funds-label { font-size: 13px; flex-wrap: wrap; gap: 0; }
+  .mobile-capital .account-funds strong, .mobile-capital .account-funds b { font-size: clamp(14px, 3.8vw, 18px); letter-spacing: -.5px; }
+  .mobile-capital .account-funds .icon-btn { min-height: 30px; }
+  .content { padding-top: 20px; }
+  h2, .card-header h2, .calendar-card .card-header h2, .settings-title h3 { font-size: 16px; }
+  .btn, .text-btn, .field, .side-control > button { font-size: 14px; }
+  .btn, .icon-btn, .text-btn, .segmented button, .segmented.compact button, .mini-tabs button { min-height: 44px; }
+  .icon-btn { min-width: 40px; }
+  .field input, .field select, .field textarea, .filter-bar input, .filter-bar select,
+  .watch-search input, .date-controls input, .date-controls.small input,
+  .review-filters .dates input, .watch-order-select { font-size: 16px; min-height: 44px; }
+  .field small, .subtle-note, .error, .success, .toast { font-size: 13px; line-height: 1.65; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .metrics > .card { min-width: 0; min-height: 190px; padding: 16px 12px 12px; }
+  .metric-label { font-size: 13px; flex-wrap: wrap; line-height: 1.6; }
+  .metric-label .badge { font-size: 12px; }
+  .metric-foot { flex-wrap: wrap; font-size: 13px; }
+  .metric-foot b { font-size: 13px; }
+  .return-chip { flex-wrap: wrap; font-size: 14px; }
+  .return-chip span { font-size: 12px; }
+  .target-number { align-items: flex-start; }
+  .target-number small { font-size: 13px; line-height: 1.6; }
+  .chart-summary { flex-wrap: wrap; gap: 8px 14px; font-size: 13px; }
+  .chart-summary b { font-size: 13px; }
+  .calendar-card .card-header { flex-wrap: wrap; gap: 10px; }
+  .calendar-nav { margin-left: auto; font-size: 14px; }
+  .calendar-nav .icon-btn { min-height: 40px; min-width: 36px; }
+  .calendar-grid { padding: 0 9px 14px; gap: 3px; }
+  .calendar-day { min-height: 64px; padding: 6px 1px; }
+  .calendar-day > span { font-size: 14px; }
+  .calendar-day small { font-family: inherit; font-size: 12px; line-height: 1.35; letter-spacing: -.4px; max-width: 100%; overflow-wrap: anywhere; }
+  .calendar-foot { flex-wrap: wrap; gap: 8px; font-size: 13px; }
+  .filter-bar > input, .filter-bar > select { min-width: 120px; }
+  .filter-bar > svg { display: none; }
+  .trade-card b, .trade-card-bottom, .trade-card .pnl small { font-size: 14px; }
+  .trade-card small { font-size: 13px; line-height: 1.65; }
+  .trade-card .inline { flex-wrap: wrap; }
+  .trade-card .pnl { font-size: 19px; }
+  .review-card-head { flex-wrap: wrap; gap: 12px; }
+  .review-card-head h2 { font-size: 18px; }
+  .review-card-head .symbol-cell small { max-width: 100%; white-space: normal; font-size: 13px; }
+  .review-trade { gap: 10px; }
+  .review-trade b { font-size: 16px; }
+  .review-trade small { font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
+  .review-meta, .note-excerpt p, .execution-detail p, .execution-values, .execution-values > b { font-size: 14px; }
+  .review-overview { justify-content: space-between; gap: 12px; }
+  .review-overview span { font-size: 13px; }
+  .review-overview b { font-size: 26px; }
+  .review-filters .dates { flex-wrap: wrap; }
+  .review-filters .dates input { width: 100%; flex: 1 1 120px; }
+  .watch-order-select { max-width: 145px; }
+  .watch-symbol b, .watch-symbol .watch-price b { font-size: 16px; }
+  .watch-symbol small, .watch-symbol .watch-price small { font-size: 13px; }
+  .watch-symbol .watch-price { gap: 7px; flex-wrap: wrap; }
+  .watch-item { padding-left: 44px; }
+  .watch-drag-handle { min-width: 38px; min-height: 44px; left: 2px; }
+  .watch-actions .icon-btn { min-width: 40px; min-height: 40px; }
+  .watchlist > .watch-items { max-height: 390px; }
+  .stock-heading h2 span, .stock-price small { font-size: 14px; }
+  .stock-heading > div > small { font-size: 12px; }
+  .chart-controls .date-controls { flex-wrap: wrap; gap: 4px; padding: 7px; }
+  .date-controls.small input, .dashboard-range input { width: 0; min-width: 0; flex: 1 1 115px; }
+  .date-controls.small > span, .dashboard-range > span { flex: 0; }
+  .chart-bottom { flex-wrap: wrap; }
+  .execution-list > button, .execution-list > button .muted, .execution-note { font-size: 13px; line-height: 1.7; }
+  .execution-detail .section-top { flex-wrap: wrap; gap: 8px; }
+  .execution-detail .section-top .inline { flex-wrap: wrap; font-size: 13px; }
+  .detail-stats b { font-size: 16px; }
+  .detail-stats small { font-size: 13px; }
+  .bottom-nav button { font-size: 13px; }
+  .summary-text { font-size: 16px; }
+}
+@media (max-width: 360px) {
+  .topbar { padding-left: 12px; padding-right: 12px; }
+  .topbar-actions { gap: 4px; }
+  .topbar .currency-control { width: 96px; max-width: 96px; }
+  .metrics { grid-template-columns: 1fr; }
+  .metrics > .card { min-height: 0; padding: 16px; }
+  .mobile-capital .account-funds { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .mobile-capital .account-funds > :first-child { grid-column: 1/-1; }
+  .mobile-capital .account-funds strong, .mobile-capital .account-funds b { font-size: 18px; }
+}
+@media (max-width: 700px) {
+  .daily-chart svg { height: 225px; min-height: 225px; max-height: none; }
+  .daily-chart .axis-text { font-size: 12px; }
+  .calendar-day small { display: flex; flex-wrap: wrap; justify-content: center; }
+  .calendar-day small > span { white-space: nowrap; }
+  .stacked-metrics .metric-label, .cumulative .metric-label, .metrics > .cumulative > .metric-foot,
+  .executions-panel summary > .muted { font-size: 13px; }
+}
+@media (max-width: 700px) {
+  .chart-controls > .date-controls { flex: 0 0 100%; width: 100%; min-width: 0; }
+  .chart-controls > .date-controls input { width: 0; min-width: 0; flex: 1 1 0; }
+  .chart-controls > .date-controls > span { font-size: 14px; }
+  .stock-price { flex-wrap: wrap; }
+}
+@media (max-width: 700px) {
+  .watch-actions > span, .watch-item .quote-time { font-size: 12px; }
+  .chart-tools button, .marker-legend .marker-badge { font-size: 12px; }
+}
+@media (max-width: 360px) {
+  .chart-controls > .date-controls input { flex-basis: 100%; width: 100%; }
+  .chart-controls > .date-controls > span { display: none; }
+}
