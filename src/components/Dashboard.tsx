@@ -432,12 +432,12 @@ export function Dashboard({
         </article>
         <article className="card target-card">
           <div className="metric-label">
-            每日目标参考{" "}
+            每日目标完成度{" "}
             <span className="badge">{session ? "交易日" : "休市日"}</span>
           </div>
           <div className="target-number">
-            {session ? percent(journal.settings.dailyTarget) : "今日休市"}
-            <small>{session ? displayMoney(goal, false) : "不设常规目标"}</small>
+            <span className={tone(todayPnl)}>{session ? (goal.gt(0) ? `${Math.round(progress)}%` : "—") : "今日休市"}</span>
+            <small>{session ? `目标 ${percent(journal.settings.dailyTarget)} · ${displayMoney(goal, false)}` : "不设常规目标"}</small>
           </div>
           <div className="progress-track">
             <div
@@ -451,7 +451,6 @@ export function Dashboard({
                   {diff.gte(0) ? "距离目标" : "超出目标"}{" "}
                   <b>{displayMoney(diff.abs(), false)}</b>
                 </span>
-                <span className={tone(todayPnl)}>{Math.round(progress)}%</span>
               </>
             ) : (
               <span>交易目标只作比较，不是交易指令</span>

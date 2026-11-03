@@ -1,3 +1,4 @@
+import { FundsCard } from "./components/FundsCard";
 import { MoneyContext } from "./currency/display";
 import { displayMoney } from "./currency/fx";
 import { useCurrency } from "./currency/useCurrency";
@@ -18,6 +19,7 @@ import {
   AlertCircle,
   Download,
   RefreshCw,
+  ArrowLeftRight,
 } from "lucide-react";
 import {
   emptyJournal,
@@ -321,15 +323,7 @@ export default function App() {
         </nav>
         <div className="sidebar-rule" />
         <div className="sidebar-bottom">
-          <div className="capital-card">
-            <span>
-              初始本金 <ShieldCheck size={14} />
-            </span>
-            <strong>{viewMoney(journal.settings.capital, false)}</strong>
-            <button className="text-btn" onClick={() => setSettingsOpen(true)}>调整本金</button>
-            <small>未平仓占用（含买入费用）</small><b>{viewMoney(funds.occupied, false)}</b>
-            <small>剩余可用（含已实现盈亏）</small><b>{viewMoney(funds.available, false)}</b>
-          </div>
+          <FundsCard capital={journal.settings.capital} occupied={funds.occupied} available={funds.available} format={viewMoney} onEdit={()=>setSettingsOpen(true)}/>
           <button
             className="sidebar-settings"
             onClick={() => setSettingsOpen(true)}
@@ -369,22 +363,19 @@ export default function App() {
             <b>{navItems.find((n) => n.id === page)?.label}</b>
           </div>
           <div className="topbar-actions">
-            <button className={`text-btn sync-button ${syncStatus.kind}`} title={syncStatus.message} aria-label="同步账本" disabled={syncStatus.kind === "syncing" || !!form || settingsOpen || !!importData || !!detail} onClick={() => void refreshShared()}><RefreshCw size={15} className={syncStatus.kind === "syncing" ? "spin" : ""} /><span>{syncStatus.kind === "syncing" ? "同步中" : syncStatus.kind === "error" ? "同步失败" : syncStatus.kind === "pending" ? "待同步" : "同步"}</span></button>
-            <div className="currency-control"><button className="text-btn currency-toggle" aria-label="切换美元人民币显示" aria-pressed={fx.currency === "CNY"} disabled={fx.busy} onClick={fx.toggle} title="仅转换交易表现和本金区域；股票及成交单价保持 USD">{fx.busy ? "获取汇率…" : fx.currency === "USD" ? "USD ⇄ 人民币" : "人民币 ⇄ USD"}</button>{fx.currency === "CNY" && fx.rate && <small title="Frankfurter 每日参考汇率，非银行成交汇率">1 USD = {fx.rate.rate} CNY · {fx.rate.date}</small>}</div>
+            <button className={`toolbar-button sync-button ${syncStatus.kind}`} title={syncStatus.message} aria-label="同步账本" disabled={syncStatus.kind === "syncing" || !!form || settingsOpen || !!importData || !!detail} onClick={() => void refreshShared()}><RefreshCw size={15} className={syncStatus.kind === "syncing" ? "spin" : ""} /><span>{syncStatus.kind === "syncing" ? "同步中" : syncStatus.kind === "error" ? "同步失败" : syncStatus.kind === "pending" ? "待同步" : "同步"}</span></button>
+            <div className="currency-control"><button className="toolbar-button currency-toggle" aria-label="切换美元人民币显示" aria-pressed={fx.currency === "CNY"} disabled={fx.busy} onClick={fx.toggle} title="切换表现与本金的显示币种"><span className={fx.currency==='CNY'?'selected-currency':''}>¥</span><ArrowLeftRight size={15}/><span className={fx.currency==='USD'?'selected-currency':''}>$</span></button><small title={fx.rate ? `参考汇率 ${fx.rate.date} · Frankfurter${fx.error?' · '+fx.error:''}` : fx.error || '正在获取参考汇率'}>{fx.rate ? `${fx.error?'缓存 · ':''}$1 = ¥${fx.rate.rate}` : fx.busy ? '汇率加载中…' : '汇率暂不可用'}</small></div>
             <InstallApp />
-            <span className="clock">
-              <span className="status-dot" />
-              {et().toFormat("yyyy.MM.dd")} · 美东 ET
-            </span>
             <button
-              className="icon-btn mobile-settings"
+              className="toolbar-button toolbar-settings"
               aria-label="设置"
               onClick={() => setSettingsOpen(true)}
             >
               <SettingsIcon size={20} />
             </button>
             <button
-              className="btn primary add-trade"
+              className="toolbar-button primary add-trade"
+              aria-label="新增交易"
               onClick={() => setForm({})}
             >
               <Plus size={17} />
@@ -392,6 +383,7 @@ export default function App() {
             </button>
           </div>
         </header>
+        <div className="mobile-capital"><FundsCard capital={journal.settings.capital} occupied={funds.occupied} available={funds.available} format={viewMoney} onEdit={()=>setSettingsOpen(true)}/></div>
         {syncStatus.kind === "error" && <div className="sync-error" role="alert"><span>{syncStatus.message}</span><button className="text-btn" onClick={() => void resolveCloudConflict()}>备份并载入云端</button></div>}
         {stale && (
           <div className="stale-banner">

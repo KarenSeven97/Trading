@@ -1,3 +1,5 @@
+import { SortableWatchItem } from "./SortableWatchItem";
+import { positionFirstOrder, moveWatchSymbol } from "../domain/watchOrder";
 import { instrumentName } from "../domain/instrumentNames";
 import { useEffect, useState, useMemo, useRef } from "react";
 import { DateTime } from "luxon";
@@ -46,6 +48,8 @@ export function Stocks({
   notify: (s: string) => void;
   onSettings: () => void;
 }) {
+  const [watchOrder,setWatchOrder]=useState<'position'|'manual'>(()=>{try{return localStorage.getItem('tj-watch-order')==='manual'?'manual':'position';}catch{return 'position';}});
+  function chooseOrder(mode:'position'|'manual'){setWatchOrder(mode);try{localStorage.setItem('tj-watch-order',mode);}catch{}}
   const [interval, setInterval] = useState("15min"),
     [start, setStart] = useState(et().minus({days:6}).toISODate()!),
     [end, setEnd] = useState(et().toISODate()!),
@@ -74,6 +78,8 @@ export function Stocks({
     () => calculate(journal.executions),
     [journal.executions],
   );
+  const orderedWatchlist=useMemo(()=>watchOrder==='position'?positionFirstOrder(journal.watchlist,ledger.positions):journal.watchlist,[journal.watchlist,ledger.positions,watchOrder]);
+  async function reorder(from:string,to:string){if(from===to)return;await onSave({...journal,watchlist:moveWatchSymbol(orderedWatchlist,from,to)});chooseOrder('manual');}
   const cached = journal.bars.find(
       (b) => b.symbol === symbol && b.interval === interval,
     ),
@@ -237,12 +243,13 @@ export function Stocks({
     setSearchResults([]);
   }
   async function move(s: string, dir: number) {
-    const list = [...journal.watchlist],
+    const list = [...orderedWatchlist],
       i = list.indexOf(s),
       n = i + dir;
     if (n < 0 || n >= list.length) return;
     [list[i], list[n]] = [list[n], list[i]];
     await onSave({ ...journal, watchlist: list });
+    chooseOrder('manual');
   }
   async function search() {
     if (!query) return;
@@ -303,7 +310,7 @@ export function Stocks({
         <aside className="card watchlist">
           <div className="card-header">
             <h2>我的自选</h2>
-            <span className="count">{journal.watchlist.length}</span>
+            <select className="watch-order-select" aria-label="自选排序方式" value={watchOrder} onChange={e=>chooseOrder(e.target.value as 'position'|'manual')}><option value="position">持仓优先</option><option value="manual">手动排序</option></select>
           </div>
           <div className="watch-search">
             <input
@@ -351,15 +358,12 @@ export function Stocks({
             </div>
           )}
           <div className="watch-items">
-            {journal.watchlist.map((s, i) => {
+            {orderedWatchlist.map((s, i) => {
               const q = quotes[s],
                 name =
                   instrumentName(s, journal.instruments.find((x) => x.symbol === s)?.name);
               return (
-                <div
-                  key={s}
-                  className={`watch-item ${symbol === s ? "active" : ""}`}
-                >
+                <SortableWatchItem key={s} symbol={s} active={symbol===s} onMove={(from,to)=>void reorder(from,to).catch(e=>notify(e.message))}>
                   <button className="watch-symbol" onClick={() => setSymbol(s)}>
                     <div>
                       <b>{s}</b>
@@ -420,7 +424,7 @@ export function Stocks({
                       {displayTime(q.time)} ET
                     </small>
                   )}
-                </div>
+                </SortableWatchItem>
               );
             })}
           </div>
