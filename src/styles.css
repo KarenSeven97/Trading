@@ -3783,3 +3783,26 @@ td .pnl {
   .funds-rate { margin: 0 0 9px; font-size: 13px; }
 }
 @media (max-width: 700px) { .desktop-shortcut { display: none; } }
+
+/* Calendar typography stays readable on both compact desktops and phones. */
+.calendar-card .card-header { flex-wrap: wrap; gap: 10px; }
+.calendar-card .card-header h2 { font-size: 17px; }
+.calendar-card .card-header h2 svg { display: inline-flex; width: 18px; height: 18px; }
+.calendar-nav { font-size: 14px; gap: 6px; margin-left: auto; }
+.calendar-nav .icon-btn { min-width: 34px; min-height: 36px; }
+.calendar-grid { gap: 5px; }
+.calendar-grid .weekday { font-size: 13px; padding-bottom: 8px; }
+.calendar-day { min-height: 62px; gap: 5px; padding: 7px 2px; }
+.calendar-day > span { font-size: 15px; line-height: 1.3; }
+.calendar-day small { display: flex; flex-wrap: wrap; justify-content: center; font-family: inherit; font-size: 12px; line-height: 1.4; letter-spacing: -.25px; max-width: 100%; font-variant-numeric: tabular-nums; }
+.calendar-day small > span { white-space: nowrap; }
+.calendar-day small > span:first-child { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+.calendar-day.outside { opacity: .45; }
+.calendar-foot { font-size: 13px; flex-wrap: wrap; gap: 8px; }
+@media (max-width: 700px) {
+  .topbar .add-trade { display: none; }
+  .calendar-grid { gap: 3px; }
+  .calendar-day { min-height: 66px; }
+  .calendar-card .card-header h2 { font-size: 17px; }
+  .calendar-nav { font-size: 14px; }
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Plus, Trash2 } from "lucide-react";
 import { uid, type Execution, type Journal } from "../domain/model";
+import { watchExecutionSymbols } from "../domain/executionWatchlist";
 import { calculate, D } from "../domain/ledger";
 import { beijingInput, beijingToUTC, easternPreview } from "../domain/time";
 import { Field, Modal } from "./common";
@@ -121,7 +122,10 @@ export function TradeForm({
         const sell = added.filter((e) => e.side === "sell").at(-1);
         if (sell) next.reviews[sell.id] = { note: review, tags: added[0].tags };
       }
-      await onSave(next);
+      const saved = !editing || editing.symbol !== added[0].symbol
+        ? watchExecutionSymbols(next, added)
+        : next;
+      await onSave(saved);
       onClose();
     } catch (e) {
       setError((e as Error).message);

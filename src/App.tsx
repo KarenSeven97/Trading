@@ -16,7 +16,6 @@ import {
   CheckCircle2,
   AlertCircle,
   RefreshCw,
-  Download,
 } from "lucide-react";
 import {
   emptyJournal,
@@ -321,35 +320,7 @@ export default function App() {
         <div className="sidebar-rule" />
         <div className="sidebar-bottom">
           <FundsCard capital={journal.settings.capital} occupied={funds.occupied} available={funds.available} rateLabel={rateLabel} rateTitle={rateTitle} format={viewMoney} onEdit={()=>setSettingsOpen(true)}/>
-          <button
-            className="sidebar-settings"
-            onClick={() => setSettingsOpen(true)}
-          >
-            <SettingsIcon size={18} />
-            账户与数据设置
-          </button>
-          <button className="sidebar-settings desktop-install" onClick={() => setInstallOpen(true)}><Download size={18}/>下载安装</button>
-          <div className="sidebar-footer">
-            <button
-              className="icon-btn"
-              aria-label="切换深浅主题"
-              onClick={() =>
-                void save({
-                  ...journal,
-                  settings: {
-                    ...journal.settings,
-                    theme: journal.settings.theme === "dark" ? "light" : "dark",
-                  },
-                }).catch((e) => notify(e.message))
-              }
-            >
-              {journal.settings.theme === "dark" ? (
-                <Sun size={16} />
-              ) : (
-                <Moon size={16} />
-              )}
-            </button>
-          </div>
+
         </div>
       </aside>
       <div className="main">
@@ -360,6 +331,17 @@ export default function App() {
           <div className="topbar-actions">
             <button className={`toolbar-button sync-button ${syncStatus.kind}`} title={syncStatus.message} aria-label="同步账本" disabled={syncStatus.kind === "syncing" || !!form || settingsOpen || !!importData || !!detail} onClick={() => void refreshShared()}><RefreshCw size={21} className={syncStatus.kind === "syncing" ? "spin" : ""} /></button>
             <button className="toolbar-button currency-toggle" aria-label={fx.currency === "USD" ? "切换为人民币" : "切换为美元"} disabled={fx.busy} onClick={fx.toggle} title={fx.currency === "USD" ? "切换为人民币" : "切换为美元"}><CurrencySwapIcon currency={fx.currency}/></button>
+            <button
+              className="toolbar-button theme-toggle"
+              aria-label="切换深浅主题"
+              title={journal.settings.theme === "dark" ? "切换浅色主题" : "切换深色主题"}
+              onClick={() => void save({
+                ...journal,
+                settings: {...journal.settings, theme: journal.settings.theme === "dark" ? "light" : "dark"},
+              }).catch((e) => notify(e.message))}
+            >
+              {journal.settings.theme === "dark" ? <Sun size={21}/> : <Moon size={21}/>}
+            </button>
             <InstallApp open={installOpen} onOpen={() => setInstallOpen(true)} onClose={() => setInstallOpen(false)}/>
             <button
               className="toolbar-button toolbar-settings"
