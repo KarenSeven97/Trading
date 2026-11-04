@@ -48,7 +48,6 @@ export function PriceChart({
     setReady(false);
     const c = createChart(host.current, {
       autoSize: true,
-      height: 410,
       layout: {
         background: {
           type: ColorType.Solid,
@@ -56,6 +55,7 @@ export function PriceChart({
         },
         textColor: dark ? "#7e8b9e" : "#65748b",
         fontFamily: "Inter, system-ui, sans-serif",
+        fontSize: parseFloat(getComputedStyle(host.current).fontSize),
         attributionLogo: true,
       },
       grid: {
@@ -152,7 +152,10 @@ export function PriceChart({
         );
       else setLegend("");
     });
-    const observer = new ResizeObserver(update);
+    const observer = new ResizeObserver(() => {
+      if (host.current) c.applyOptions({layout: {fontSize: parseFloat(getComputedStyle(host.current).fontSize)}});
+      update();
+    });
     observer.observe(host.current);
     const node = host.current;
     node.addEventListener("wheel", update);
@@ -222,7 +225,7 @@ export function PriceChart({
           `${data.interval === "1day" ? "日线" : "分钟线"} · 美东 ET`}
       </div>
       <div ref={host} className="lw-chart" />
-      <svg className="trade-lines" width="100%" height="410" aria-hidden="true">
+      <svg className="trade-lines" width="100%" height="100%" aria-hidden="true">
         {ready &&
           trades
             .filter((t) => t.symbol === data.symbol)

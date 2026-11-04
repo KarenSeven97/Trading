@@ -4,7 +4,7 @@ import { MoneyContext } from "./currency/display";
 import { displayMoney } from "./currency/fx";
 import { useCurrency } from "./currency/useCurrency";
 import { InstallApp } from "./components/InstallApp";
-import { useEffect, useState, useMemo, useRef } from "react";
+import { useEffect, useLayoutEffect, useState, useMemo, useRef } from "react";
 import {
   BarChart3,
   ChartCandlestick,
@@ -122,8 +122,16 @@ export default function App() {
   useEffect(() => {
     const h = () => setPage(initialPage());
     addEventListener("hashchange",h);
-    return ()=>removeEventListener("hashchange",h);
+    const previous = history.scrollRestoration;
+    history.scrollRestoration = "manual";
+    return () => {
+      removeEventListener("hashchange",h);
+      history.scrollRestoration = previous;
+    };
   }, []);
+  useLayoutEffect(() => {
+    window.scrollTo({top: 0, left: 0, behavior: "instant"});
+  }, [page]);
   useEffect(() => {
     if (!("BroadcastChannel" in window)) return;
     const ch = new BroadcastChannel("tj-updates");
@@ -180,6 +188,7 @@ export default function App() {
     notify(result.mode === "live" && cloudEnabled ? (getSyncStatus().kind === "synced" ? "已保存并同步到共享账本" : "已保存本机，云端尚未同步；请查看同步提示") : "已保存到当前浏览器");
   }
   function nav(p: Page) {
+    if (page === p) window.scrollTo({top: 0, left: 0, behavior: "instant"});
     location.hash = p;
     setPage(p);
   }
@@ -405,11 +414,12 @@ export default function App() {
         </main>
 
       </div>
-      <nav className="bottom-nav">
+      <nav className="bottom-nav" aria-label="页面导航">
         {navItems.map(({ id, label, Icon }) => (
           <button
             key={id}
             className={page === id ? "active" : ""}
+            aria-current={page === id ? "page" : undefined}
             onClick={() => nav(id)}
           >
             <Icon size={21} />

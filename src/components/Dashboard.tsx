@@ -177,12 +177,16 @@ function DailyChart({
 }) {
   const money = useDisplayMoney();
   const [hover, setHover] = useState<string | null>(null);
-  const chartHost = useRef<HTMLDivElement>(null);
-  const [chartWidth, setChartWidth] = useState(850);
+  const chartHost = useRef<SVGSVGElement>(null);
+  const [chartSize, setChartSize] = useState({width: 850, height: 300, font: 14});
   useEffect(() => {
     const host = chartHost.current;
     if (!host) return;
-    const observer = new ResizeObserver(([entry]) => setChartWidth(entry.contentRect.width));
+    const observer = new ResizeObserver(([entry]) => setChartSize({
+      width: entry.contentRect.width,
+      height: entry.contentRect.height,
+      font: parseFloat(getComputedStyle(host).fontSize),
+    }));
     observer.observe(host);
     return () => observer.disconnect();
   }, []);
@@ -198,19 +202,19 @@ function DailyChart({
     goal = D(capital).mul(target).div(100).toNumber(),
     max = Math.max(goal * 1.5, 30, ...values),
     min = Math.min(-30, ...values),
-    height = 225,
-    w = Math.max(250, chartWidth),
-    left = 86,
+    height = chartSize.height,
+    w = Math.max(200, chartSize.width),
+    left = Math.min(w * 0.42, Math.max(76, Math.max(...[min, max].map(v => money(v, false).length)) * chartSize.font * 0.65 + 18)),
     right = 16,
-    top = 20,
-    bottom = 35,
+    top = 24,
+    bottom = 40,
     plotH = height - top - bottom;
   const y = (v: number) => top + ((max - v) / (max - min)) * plotH,
     step = (w - left - right) / Math.max(1, dates.length),
-    barW = Math.max(1, Math.min(24, step * 0.52));
+    barW = Math.max(1, Math.min(38, step * 0.52));
   const selected = (hover && days[hover]) || { pnl: "0", count: 0 };
   return (
-    <div className="daily-chart" ref={chartHost}>
+    <div className="daily-chart">
       <div className="chart-legend">
         <span>
           <i className="legend-dot blue" />
@@ -228,6 +232,7 @@ function DailyChart({
         )}
       </div>
       <svg
+        ref={chartHost}
         viewBox={`0 0 ${w} ${height}`}
         role="img"
         aria-label="每日已实现盈亏柱状图"
@@ -298,7 +303,7 @@ function DailyChart({
                 rx={3}
                 fill={v > 0 ? "#3288DB" : v < 0 ? "#E2AD2F" : "var(--border)"}
               />
-              {(i % Math.ceil(dates.length / Math.max(2, Math.floor((w - left - right) / 65)))) === 0 && (
+              {(i % Math.ceil(dates.length / Math.max(2, Math.floor((w - left - right) / (chartSize.font * 6))))) === 0 && (
                 <text
                   x={x}
                   y={height - 9}

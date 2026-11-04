@@ -1,0 +1,203 @@
+/* One bounded scale for every page. rem preserves browser zoom and font preferences. */
+:root {
+  --text-caption: clamp(.8125rem, .75rem + .1vw, .9375rem);
+  --text-small: clamp(.875rem, .8125rem + .125vw, 1rem);
+  --text-body: clamp(.9375rem, .875rem + .15625vw, 1.125rem);
+  --text-section: clamp(1rem, .925rem + .2vw, 1.25rem);
+  --text-title: clamp(1.125rem, 1rem + .25vw, 1.5rem);
+  --text-value: clamp(1.25rem, 1.1rem + .35vw, 1.75rem);
+  --text-metric: clamp(1.5rem, 1.25rem + .5vw, 2.25rem);
+  --text-display: clamp(1.75rem, 1.5rem + .5vw, 2.75rem);
+  --text-chart: clamp(.8125rem, .75rem + .15vw, 1rem);
+  --space-card: clamp(1rem, .75rem + .65vw, 1.75rem);
+  --space-grid: clamp(1rem, .65rem + .55vw, 1.75rem);
+  --sidebar-width: clamp(224px, 12vw, 280px);
+  --daily-chart-height: clamp(280px, 20vw, 360px);
+  --price-chart-height: clamp(420px, 48vh, 660px);
+  --faint: #7b899e;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+:root[data-theme="light"] { --faint: #6d7c90; }
+body { font-size: var(--text-body); line-height: 1.6; }
+h1 { font-size: var(--text-display); line-height: 1.35; }
+h2, .card-header h2, .calendar-card .card-header h2, .settings-title h3 { font-size: var(--text-section); }
+.pnl.large, .target-number { font-size: var(--text-metric); }
+.target-number { flex-wrap: wrap; row-gap: 4px; }
+.target-number small { font-size: var(--text-small); }
+.metric-label, .metric-foot, .metric-foot b, .return-chip span { font-size: var(--text-small); }
+.metric-label { flex-wrap: wrap; gap: 6px; line-height: 1.6; }
+.metric-foot { flex-wrap: wrap; gap: 6px; }
+.content { max-width: 2100px; padding: clamp(20px, 1.8vw, 48px); }
+.page-heading { margin-bottom: var(--space-card); flex-wrap: wrap; }
+.metrics, .overview-grid, .review-grid, .stocks-layout { gap: var(--space-grid); }
+.metrics > .card { padding: var(--space-card); min-height: clamp(200px, 12vw, 260px); }
+.card-header { padding: var(--space-card) var(--space-card) 0; flex-wrap: wrap; gap: 12px; }
+.chart-card .card-header { align-items: center; }
+.chart-summary { flex-wrap: wrap; gap: 10px 20px; font-size: var(--text-small); }
+.chart-summary b { font-size: inherit; }
+.chart-legend, .chart-legend b { font-size: var(--text-small); line-height: 1.6; }
+.daily-chart { padding: var(--space-card) 12px 10px; }
+.daily-chart svg { height: var(--daily-chart-height); min-height: 0; max-height: none; font-size: var(--text-chart); }
+.daily-chart .axis-text { font-size: inherit; font-family: "IBM Plex Mono", monospace; }
+.date-controls { min-width: 0; max-width: 100%; }
+.date-controls input { width: 9.5em; font-size: var(--text-small); min-height: 40px; }
+.btn, .text-btn, .segmented button, .segmented.compact button, .mini-tabs button { font-size: var(--text-small); min-height: 40px; }
+.btn.compact { min-height: 40px; }
+.filter-bar { flex-wrap: wrap; gap: 12px; padding: var(--space-card); }
+.filter-bar input, .filter-bar select { min-height: 42px; font-size: var(--text-small); }
+.review-filters .dates { flex-wrap: wrap; gap: 8px; }
+.review-card { padding: var(--space-card); }
+.review-card-head { flex-wrap: wrap; align-items: flex-start; }
+.review-card-head h2 { font-size: var(--text-title); }
+.review-card-head .pnl { font-size: var(--text-value); }
+.review-trade { gap: 14px; align-items: flex-start; }
+.review-trade b, .note-excerpt p, .execution-detail p { font-size: var(--text-body); }
+.review-meta { flex-wrap: wrap; gap: 8px 16px; font-size: var(--text-small); }
+.note-excerpt p { line-height: 1.85; }
+.review-card-foot { flex-wrap: wrap; gap: 10px; }
+.review-overview { gap: 20px 40px; flex-wrap: wrap; }
+.review-overview b { font-size: var(--text-metric); }
+.table-wrap { overflow: auto; }
+th, td { padding: 16px 14px; }
+.symbol-cell small { max-width: 100%; }
+.watchlist > .card-header { padding: var(--space-card); }
+.watch-order-select { max-width: 150px; min-height: 40px; }
+.watchlist .card-header { flex-wrap: wrap; }
+.watch-item { padding-top: 16px; padding-bottom: 16px; }
+.watch-symbol b { font-size: var(--text-body); }
+.watch-symbol small { max-width: 100%; }
+.watch-price b { font-size: var(--text-body); }
+.watch-search input { width: 100%; min-width: 0; }
+.stock-heading { padding: var(--space-card); }
+.stock-heading h2 { font-size: var(--text-title); }
+.stock-heading h2 span, .stock-price small { font-size: var(--text-small); }
+.stock-price b { font-size: var(--text-metric); }
+.chart-controls { flex-wrap: wrap; gap: 12px; padding: 12px var(--space-card); }
+.chart-controls .date-controls { flex-wrap: wrap; }
+.lw-chart { height: var(--price-chart-height); font-size: var(--text-chart); }
+.chart-shell .trade-lines { height: 100%; }
+.ohlc-legend { font-size: var(--text-caption); }
+.execution-marker { width: 28px; height: 28px; font-size: 13px; line-height: 24px; }
+.chart-tools button { font-size: var(--text-caption); min-height: 32px; }
+.marker-legend { flex-wrap: wrap; gap: 10px 18px; font-size: var(--text-caption); }
+.calendar-grid { gap: clamp(3px, .35vw, 8px); padding: 0 var(--space-card) var(--space-card); }
+.calendar-day { min-height: clamp(68px, 4.8vw, 96px); padding: 8px 2px; }
+.calendar-day > span { font-size: var(--text-section); }
+.calendar-day small, .calendar-grid .weekday { font-size: var(--text-caption); }
+.calendar-nav, .calendar-foot { font-size: var(--text-small); }
+.calendar-foot { flex-wrap: wrap; gap: 10px; }
+.topbar .breadcrumb { font-size: var(--text-small); }
+.account-funds .funds-label { font-size: var(--text-small); }
+.account-funds strong { font-size: var(--text-value); }
+.account-funds b { font-size: var(--text-title); }
+.field, .detail-stats small { font-size: var(--text-small); }
+.field input, .field select, .field textarea { font-size: max(1rem, var(--text-body)); min-height: 44px; }
+.modal { width: min(680px, 100%); }
+.modal.wide { width: min(980px, 100%); }
+.detail-stats { gap: 14px; }
+.execution-list > button { flex-wrap: wrap; gap: 10px; line-height: 1.7; }
+
+@media (min-width: 1101px) {
+  .sidebar { width: var(--sidebar-width); padding: 30px 20px 18px; }
+  .main { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); }
+  .brand { font-size: var(--text-section); gap: 10px; }
+  .brand .brand-mark { flex-shrink: 0; }
+  .sidebar nav button { font-size: var(--text-body); min-height: 60px; }
+  .stocks-layout { grid-template-columns: clamp(260px, 16vw, 350px) minmax(0, 1fr); }
+  .watchlist > .watch-items { max-height: min(70vh, 900px); }
+}
+@media (min-width: 1600px) {
+  .overview-grid { grid-template-columns: 1.5fr 1fr; }
+  .review-card { padding: 28px; }
+}
+@media (min-width: 701px) and (max-width: 1100px) {
+  .sidebar { width: 190px; }
+  .main { margin-left: 190px; width: calc(100% - 190px); }
+  .stocks-layout { grid-template-columns: minmax(0, 1fr); }
+  .watch-item { padding-left: 38px; }
+  .review-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 1300px) and (min-width: 701px) {
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .metrics > .card { min-height: 190px; }
+  .metrics > .cumulative { grid-column: auto; display: block; }
+  .metrics > .cumulative > .pnl { margin-top: 13px; font-size: var(--text-metric); }
+  .metrics > .cumulative > .small-return { margin-top: 5px; }
+  .metrics > .cumulative > .metric-foot { border-left: 0; border-top: 1px solid var(--border); padding: 12px 0 0; margin-top: 16px; }
+  .overview-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 700px) {
+  :root {
+    --daily-chart-height: 270px;
+    --price-chart-height: 390px;
+    --space-card: 16px;
+    --mobile-nav-height: 52px;
+    --mobile-nav-total: calc(var(--mobile-nav-height) + env(safe-area-inset-bottom, 0px));
+  }
+  /* Reserve both the fixed tabs and floating add button even without a footer. */
+  .content { padding: 20px 16px calc(var(--mobile-nav-total) + 76px); }
+  .bottom-nav {
+    height: var(--mobile-nav-total);
+    padding: 0 0 env(safe-area-inset-bottom, 0px);
+    align-items: flex-start;
+    justify-content: stretch;
+  }
+  .bottom-nav button {
+    flex: 1 1 0;
+    min-width: 0;
+    height: var(--mobile-nav-height);
+    min-height: var(--mobile-nav-height);
+    padding: 5px 8px;
+    gap: 3px;
+    font-size: 12px;
+    line-height: 15px;
+    justify-content: center;
+  }
+  .bottom-nav button svg { width: 24px; height: 24px; }
+  .mobile-fab { bottom: calc(var(--mobile-nav-total) + 12px); }
+  .toast { bottom: calc(var(--mobile-nav-total) + 12px); }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .metrics > .card { padding: 16px 12px; min-height: 190px; }
+  .return-chip { flex-wrap: wrap; }
+  .return-chip span { font-size: var(--text-caption); }
+  .metric-label .badge { font-size: var(--text-caption); }
+  .target-number small, .target-caption, .target-caption b { font-size: var(--text-caption); }
+  .metrics > .stacked-metrics { grid-column: 1 / -1; flex-direction: row; min-height: 0; }
+  .stacked-metrics > div:first-child { border-bottom: 0; border-right: 1px solid var(--border); padding: 0 12px 0 0; }
+  .stacked-metrics > div:last-child { padding: 0 0 0 12px; }
+  .stacked-metrics .pnl { flex-direction: column; align-items: flex-start; }
+  .metrics > .cumulative { grid-column: 1 / -1; min-height: 0; display: grid; grid-template-columns: 1fr auto; gap: 8px 12px; }
+  .metrics > .cumulative > .metric-label { grid-column: 1 / -1; }
+  .metrics > .cumulative > .pnl, .metrics > .cumulative > .small-return { margin: 0; align-self: center; }
+  .metrics > .cumulative > .metric-foot { grid-column: 1 / -1; margin: 0; padding: 8px 0 0; }
+  .review-grid { grid-template-columns: minmax(0, 1fr); }
+  .review-trade { flex-wrap: wrap; }
+  .review-trade > div { flex: 1 1 110px; min-width: 0; }
+  .review-trade b { overflow-wrap: anywhere; }
+  .review-card-head .symbol-cell { flex: 1 1 130px; min-width: 0; }
+  .review-card-head .pnl { margin-left: auto; }
+  .mobile-capital .account-funds .funds-label { font-size: var(--text-caption); }
+  .mobile-capital .account-funds strong, .mobile-capital .account-funds b { font-size: clamp(14px, 3.8vw, 18px); }
+  .topbar { position: static; }
+  .topbar-actions { gap: 8px; }
+  .date-controls input { font-size: 16px; width: 9em; }
+  .date-controls { flex-wrap: wrap; }
+  .date-controls input { flex: 1 1 120px; }
+  .btn, .icon-btn, .text-btn, .segmented button, .mini-tabs button, .filter-bar input, .filter-bar select { min-height: 44px; }
+  .filter-bar input, .filter-bar select { font-size: 16px; }
+  .chart-legend { padding: 0 4px 12px; gap: 8px 14px; }
+  .chart-summary { font-size: var(--text-caption); }
+  .calendar-grid { padding: 0 10px 14px; }
+  .calendar-day { min-height: 68px; }
+  .calendar-day > span { font-size: 16px; }
+  .calendar-day small { font-size: 12px; }
+  .modal, .modal.wide { width: 100%; }
+  .watchlist > .watch-items { max-height: 420px; }
+  .watch-item { padding-left: 45px; }
+}
+@media (max-width: 360px) {
+  .metrics { grid-template-columns: minmax(0, 1fr); }
+  .metrics > .card { min-height: 0; padding: 18px; }
+  .mobile-capital .account-funds { grid-template-columns: 1fr; }
+}

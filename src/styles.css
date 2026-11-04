@@ -104,20 +104,20 @@ p {
   margin: 0;
 }
 h2 {
-  font-size: 16px;
+  font-size: var(--text-section);
   line-height: 1.5;
   font-weight: 600;
   letter-spacing: 0.2px;
 }
 h3 {
-  font-size: 14px;
+  font-size: var(--text-body);
   font-weight: 600;
 }
 p {
   line-height: 1.7;
 }
 small {
-  font-size: 11px;
+  font-size: var(--text-small);
 }
 strong,
 b {
@@ -166,7 +166,7 @@ button svg {
   color: var(--muted);
 }
 .small {
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 .profit {
   color: var(--blue2);
@@ -217,7 +217,7 @@ button svg {
   gap: 8px;
   padding: 10px 15px;
   min-height: 40px;
-  font-size: 12px;
+  font-size: var(--text-small);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -240,7 +240,7 @@ button svg {
 .btn.compact {
   padding: 7px 10px;
   min-height: 34px;
-  font-size: 11px;
+  font-size: var(--text-small);
 }
 .icon-btn {
   border: 0;
@@ -262,7 +262,7 @@ button svg {
   border: 0;
   background: none;
   color: var(--blue2);
-  font-size: 12px;
+  font-size: var(--text-small);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -274,7 +274,7 @@ button svg {
   color: var(--text);
 }
 .badge {
-  font-size: 10px;
+  font-size: var(--text-caption);
   line-height: 1.3;
   font-weight: 500;
   color: var(--muted);
@@ -317,11 +317,11 @@ button svg {
   padding: 0 5px 40px;
   font-weight: 700;
   letter-spacing: -0.4px;
-  font-size: 17px;
+  font-size: var(--text-title);
   white-space: nowrap;
 }
 .brand small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   letter-spacing: 0.3px;
   font-weight: 400;
   color: var(--muted);
@@ -341,7 +341,7 @@ button svg {
   flex-shrink: 0;
 }
 .sidebar-label {
-  font-size: 9px;
+  font-size: var(--text-caption);
   letter-spacing: 1.6px;
   color: var(--faint);
   padding: 0 12px;
@@ -365,11 +365,11 @@ button svg {
   min-height: 57px;
   border-radius: 9px;
   padding: 10px 13px;
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 .sidebar nav button small {
   display: block;
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 400;
   margin-top: 4px;
   opacity: 0.7;
@@ -415,7 +415,7 @@ button svg {
   color: var(--muted);
   padding: 7px 14px;
   flex: 1;
-  font-size: 12px;
+  font-size: var(--text-small);
   min-height: 32px;
   white-space: nowrap;
 }
@@ -428,7 +428,7 @@ button svg {
   margin-top: 13px;
 }
 .ledger-select p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--faint);
   margin-top: 11px;
   line-height: 1.8;
@@ -446,7 +446,7 @@ button svg {
 }
 .capital-card > span {
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -454,12 +454,12 @@ button svg {
 .capital-card strong {
   font-family: "IBM Plex Mono", monospace;
   display: block;
-  font-size: 20px;
+  font-size: var(--text-value);
   letter-spacing: -0.5px;
   margin-top: 10px;
 }
 .capital-card small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--faint);
   display: block;
   margin-top: 7px;
@@ -472,7 +472,7 @@ button svg {
   border: 0;
   color: var(--muted);
   padding: 12px 14px;
-  font-size: 12px;
+  font-size: var(--text-small);
   border-radius: 7px;
   width: 100%;
 }
@@ -486,7 +486,7 @@ button svg {
   border-top: 1px solid var(--border);
   padding: 12px 8px 0;
   margin-top: 10px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--faint);
 }
 .sidebar-footer .icon-btn {
@@ -512,7 +512,7 @@ button svg {
 }
 .breadcrumb {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--text-small);
   white-space: nowrap;
 }
 .breadcrumb span {
@@ -532,7 +532,7 @@ button svg {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--muted);
   white-space: nowrap;
 }
@@ -548,7 +548,7 @@ button svg {
   gap: 10px;
   align-items: center;
   padding: 9px 32px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: #9daac0;
   background: #3288db09;
   border-bottom: 1px solid #3288db13;
@@ -556,7 +556,7 @@ button svg {
 }
 .demo-banner .badge {
   color: var(--blue2);
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 0.9px;
   border-color: #3288db50;
 }
@@ -568,14 +568,14 @@ button svg {
   align-items: center;
   gap: 5px;
   margin-left: auto;
-  font-size: 10px;
+  font-size: var(--text-caption);
   white-space: nowrap;
   min-height: 30px;
 }
 .stale-banner {
   background: var(--pale-yellow);
   padding: 10px 30px;
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--yellow);
 }
 .page-heading {
@@ -586,13 +586,13 @@ button svg {
   gap: 20px;
 }
 .eyebrow {
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 1.8px;
   font-weight: 600;
   color: var(--faint);
 }
 h1 {
-  font-size: 30px;
+  font-size: var(--text-display);
   line-height: 1.5;
   font-weight: 600;
   letter-spacing: 1px;
@@ -604,7 +604,7 @@ h1 {
 }
 .page-heading p {
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--text-small);
 }
 .date-controls {
   display: flex;
@@ -614,7 +614,7 @@ h1 {
   border: 1px solid var(--border);
   border-radius: 7px;
   padding: 5px 10px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--muted);
   white-space: nowrap;
 }
@@ -624,7 +624,7 @@ h1 {
   background: none;
   width: 103px;
   min-height: 27px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--text);
 }
 .date-controls svg {
@@ -652,12 +652,12 @@ h1 {
   align-items: center;
   justify-content: space-between;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
   gap: 8px;
   min-height: 18px;
 }
 .metric-label .badge {
-  font-size: 8px;
+  font-size: var(--text-caption);
   padding: 3px 5px;
 }
 .pnl {
@@ -668,22 +668,22 @@ h1 {
   flex-direction: column;
   gap: 4px;
   letter-spacing: -0.4px;
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 .pnl small {
   font-family: "DM Sans", sans-serif;
   letter-spacing: 0;
-  font-size: 10px;
+  font-size: var(--text-caption);
   text-align: inherit;
 }
 .pnl.large {
-  font-size: 27px;
+  font-size: var(--text-metric);
   letter-spacing: -1.2px;
   line-height: 1.6;
   font-weight: 500;
 }
 .pnl.large small {
-  font-size: 12px;
+  font-size: var(--text-small);
   letter-spacing: 0;
 }
 .today-card > .pnl,
@@ -694,12 +694,12 @@ h1 {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 11px;
+  font-size: var(--text-small);
   margin-top: 7px;
   font-weight: 500;
 }
 .return-chip span {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--faint);
   font-weight: 400;
   margin-left: 5px;
@@ -710,18 +710,18 @@ h1 {
   justify-content: space-between;
   border-top: 1px solid var(--border);
   margin-top: 16px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
   padding: 12px 0;
   gap: 6px;
 }
 .metric-foot > span {
   color: var(--faint);
-  font-size: 8px;
+  font-size: var(--text-caption);
 }
 .metric-foot b {
   font-weight: 400;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .today-card {
@@ -736,7 +736,7 @@ h1 {
 }
 .target-number {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 27px;
+  font-size: var(--text-metric);
   letter-spacing: -1px;
   margin-top: 13px;
   display: flex;
@@ -747,7 +747,7 @@ h1 {
 .target-number small {
   font-family: inherit;
   color: var(--muted);
-  font-size: 11px;
+  font-size: var(--text-small);
   letter-spacing: 0;
 }
 .progress-track {
@@ -766,7 +766,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
   margin-top: 12px;
   gap: 6px;
@@ -798,14 +798,14 @@ h1 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-size: 18px;
+  font-size: var(--text-title);
   gap: 4px;
 }
 .stacked-metrics .pnl small {
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .small-return {
-  font-size: 11px;
+  font-size: var(--text-small);
   display: block;
   margin-top: 5px;
 }
@@ -829,13 +829,13 @@ h1 {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 14px;
+  font-size: var(--text-body);
 }
 .card-header h2 svg {
   color: var(--muted);
 }
 .card-header p {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--faint);
   margin-top: 6px;
 }
@@ -852,7 +852,7 @@ h1 {
   border: 0;
   border-radius: 4px;
   padding: 5px 8px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
   min-height: 26px;
 }
@@ -870,7 +870,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--muted);
   align-items: center;
 }
@@ -880,7 +880,7 @@ h1 {
   align-items: center;
 }
 .chart-legend b {
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 500;
 }
 .legend-dot {
@@ -927,7 +927,7 @@ h1 {
 .axis-text {
   fill: var(--muted);
   font:
-    10px "IBM Plex Mono",
+    var(--text-chart) "IBM Plex Mono",
     monospace;
 }
 .chart-bar-group {
@@ -940,7 +940,7 @@ h1 {
   border-top: 1px solid var(--border);
   margin: 0 22px;
   padding: 15px 0;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .chart-summary b {
@@ -955,7 +955,7 @@ h1 {
   display: flex;
   align-items: center;
   gap: 3px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .calendar-nav .icon-btn {
@@ -971,7 +971,7 @@ h1 {
 }
 .weekday {
   text-align: center;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--faint);
   padding: 0 0 7px;
 }
@@ -990,11 +990,11 @@ h1 {
   color: var(--muted);
 }
 .calendar-day > span {
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .calendar-day small {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 7px;
+  font-size: var(--text-caption);
   color: var(--faint);
   letter-spacing: -0.6px;
 }
@@ -1036,7 +1036,7 @@ h1 {
   justify-content: space-between;
   margin: 0 22px;
   padding: 13px 0;
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .calendar-foot b {
   font-family: "IBM Plex Mono", monospace;
@@ -1045,7 +1045,7 @@ h1 {
 }
 .count {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 10px;
+  font-size: var(--text-caption);
   padding: 3px 6px;
   border-radius: 5px;
   background: var(--panel2);
@@ -1069,7 +1069,7 @@ h1 {
 }
 .filter-bar input,
 .filter-bar select {
-  font-size: 10px;
+  font-size: var(--text-caption);
   min-height: 32px;
   padding: 7px 10px;
   border-radius: 6px;
@@ -1091,7 +1091,7 @@ table {
 }
 th {
   text-align: left;
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 400;
   color: var(--faint);
   background: #080d1409;
@@ -1105,13 +1105,13 @@ td:first-child {
 }
 td {
   padding: 13px 15px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   font-variant-numeric: tabular-nums;
   border-bottom: 1px solid var(--border);
 }
 td > b {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 9px;
+  font-size: var(--text-caption);
   font-weight: 400;
 }
 tbody tr:last-child td {
@@ -1124,7 +1124,7 @@ tbody tr:hover {
   background: #3288db06;
 }
 td .pnl {
-  font-size: 11px;
+  font-size: var(--text-small);
 }
 .symbol-cell {
   display: flex;
@@ -1140,20 +1140,20 @@ td .pnl {
   border-radius: 9px;
   background: var(--hover);
   border: 1px solid var(--border);
-  font-size: 13px;
+  font-size: var(--text-body);
   font-weight: 600;
   color: #9bb0ca;
   flex-shrink: 0;
 }
 .symbol-cell b {
   font-family: "DM Sans", sans-serif;
-  font-size: 11px;
+  font-size: var(--text-small);
   letter-spacing: 0.4px;
 }
 .symbol-cell small {
   display: block;
   color: var(--faint);
-  font-size: 8px;
+  font-size: var(--text-caption);
   margin-top: 5px;
 }
 .note-state {
@@ -1161,7 +1161,7 @@ td .pnl {
   gap: 4px;
   align-items: center;
   color: var(--faint);
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .note-state.recorded {
   color: var(--muted);
@@ -1175,13 +1175,13 @@ td .pnl {
 }
 .executions-panel summary {
   padding: 17px 0;
-  font-size: 12px;
+  font-size: var(--text-small);
   cursor: pointer;
   line-height: 1.8;
 }
 .executions-panel summary > .muted {
   float: right;
-  font-size: 10px;
+  font-size: var(--text-caption);
   font-weight: 400;
 }
 .positions {
@@ -1189,7 +1189,7 @@ td .pnl {
   gap: 8px;
   flex-wrap: wrap;
   padding: 5px 0 17px;
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .positions > span {
   padding: 10px;
@@ -1212,7 +1212,7 @@ td .pnl {
   align-items: center;
   gap: 12px;
   padding: 13px 8px;
-  font-size: 11px;
+  font-size: var(--text-small);
   text-align: left;
   min-height: 48px;
 }
@@ -1225,13 +1225,13 @@ td .pnl {
 }
 .execution-list > button .muted {
   margin-left: auto;
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .side-label {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: var(--text-caption);
   border-radius: 4px;
   padding: 4px 6px;
   font-weight: 500;
@@ -1249,7 +1249,7 @@ td .pnl {
 }
 .footnote {
   color: var(--faint);
-  font-size: 9px;
+  font-size: var(--text-caption);
   margin: 17px 0 0;
   text-align: center;
   line-height: 1.9;
@@ -1261,7 +1261,7 @@ td .pnl {
   gap: 12px;
   padding: 22px 32px;
   border-top: 1px solid var(--border);
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--faint);
   margin-top: 15px;
 }
@@ -1318,7 +1318,7 @@ td .pnl {
   background: var(--panel);
 }
 .modal-head h2 {
-  font-size: 17px;
+  font-size: var(--text-title);
 }
 .form-body {
   padding: 22px 24px;
@@ -1327,7 +1327,7 @@ td .pnl {
   gap: 20px;
 }
 .form-intro {
-  font-size: 11px;
+  font-size: var(--text-small);
   color: var(--muted);
   display: flex;
   align-items: center;
@@ -1345,14 +1345,14 @@ td .pnl {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  font-size: 12px;
+  font-size: var(--text-small);
   min-width: 0;
 }
 .field > span {
   color: var(--muted);
 }
 .field small {
-  font-size: 10px;
+  font-size: var(--text-caption);
   line-height: 1.6;
 }
 .field input,
@@ -1384,7 +1384,7 @@ td .pnl {
   background: var(--input);
   color: var(--muted);
   border-radius: 6px;
-  font-size: 12px;
+  font-size: var(--text-small);
   min-height: 36px;
 }
 .side-control > button.buy.selected {
@@ -1407,7 +1407,7 @@ td .pnl {
   margin-top: 4px;
 }
 .form-footer > .muted {
-  font-size: 10px;
+  font-size: var(--text-caption);
   margin-right: auto;
 }
 .error,
@@ -1417,7 +1417,7 @@ td .pnl {
   border-radius: 8px;
   background: #e2ad2f0b;
   color: var(--yellow);
-  font-size: 12px;
+  font-size: var(--text-small);
   line-height: 1.8;
   overflow-wrap: anywhere;
 }
@@ -1444,7 +1444,7 @@ td .pnl {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 12px;
+  font-size: var(--text-small);
   max-width: calc(100vw - 32px);
   min-width: min(300px, calc(100vw - 32px));
   line-height: 1.6;
@@ -1458,16 +1458,16 @@ td .pnl {
   text-align: center;
   padding: 45px 20px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 .empty h3 {
-  font-size: 15px;
+  font-size: var(--text-section);
   color: var(--text);
   margin-bottom: 10px;
 }
 .empty-symbol {
   color: var(--blue2);
-  font-size: 23px;
+  font-size: var(--text-value);
   border: 1px solid var(--border);
   border-radius: 12px;
   width: 48px;
@@ -1488,7 +1488,7 @@ td .pnl {
 .detail-hero .eyebrow {
   display: block;
   letter-spacing: 0.5px;
-  font-size: 11px;
+  font-size: var(--text-small);
   margin-bottom: 7px;
 }
 .detail-hero .pnl {
@@ -1507,26 +1507,26 @@ td .pnl {
 .detail-stats small {
   color: var(--muted);
   display: block;
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .detail-stats b {
   display: block;
   font-family: "IBM Plex Mono", monospace;
   margin-top: 10px;
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 .execution-detail {
   padding: 16px 0;
   border-bottom: 1px solid var(--border);
 }
 .execution-detail > .section-top .inline {
-  font-size: 11px;
+  font-size: var(--text-small);
   flex-wrap: wrap;
 }
 .execution-values {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: var(--text-small);
   margin: 15px 0;
   gap: 12px;
 }
@@ -1534,13 +1534,13 @@ td .pnl {
   font-family: "IBM Plex Mono", monospace;
 }
 .execution-detail p {
-  font-size: 12px;
+  font-size: var(--text-small);
   white-space: pre-wrap;
   margin-bottom: 12px;
   overflow-wrap: anywhere;
 }
 .execution-detail > small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   overflow-wrap: anywhere;
 }
 .subtle-note {
@@ -1549,7 +1549,7 @@ td .pnl {
   padding: 14px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  font-size: 11px;
+  font-size: var(--text-small);
   line-height: 1.9;
 }
 .settings-title {
@@ -1561,7 +1561,7 @@ td .pnl {
 }
 .settings-title h3 {
   color: var(--text);
-  font-size: 13px;
+  font-size: var(--text-body);
 }
 .settings-title .badge {
   margin-left: auto;
@@ -1590,12 +1590,12 @@ td .pnl {
   align-items: center;
   padding: 13px;
   border-bottom: 1px solid var(--border);
-  font-size: 11px;
+  font-size: var(--text-small);
   flex-wrap: wrap;
   cursor: pointer;
 }
 .import-rows small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .import-rows > label:last-child {
@@ -1608,11 +1608,11 @@ td .pnl {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 .summary-text {
   font-family: "IBM Plex Mono", "Microsoft YaHei", monospace;
-  font-size: 11px;
+  font-size: var(--text-small);
   line-height: 1.9;
 }
 .review-overview {
@@ -1629,16 +1629,16 @@ td .pnl {
   gap: 7px;
 }
 .review-overview b {
-  font-size: 27px;
+  font-size: var(--text-metric);
   font-family: "IBM Plex Mono", monospace;
   font-weight: 500;
 }
 .review-overview span {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .review-overview .review-quote {
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--faint);
   margin-left: auto;
 }
@@ -1649,13 +1649,13 @@ td .pnl {
   border: 0;
 }
 .review-filters .dates {
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .checkbox {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .review-grid {
@@ -1673,14 +1673,14 @@ td .pnl {
   gap: 10px;
 }
 .review-card-head .pnl {
-  font-size: 18px;
+  font-size: var(--text-title);
   text-align: right;
 }
 .review-card-head .symbol-cell small {
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .review-card-head h2 {
-  font-size: 17px;
+  font-size: var(--text-title);
 }
 .review-trade {
   display: flex;
@@ -1701,12 +1701,12 @@ td .pnl {
 }
 .review-trade b {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 13px;
+  font-size: var(--text-body);
 }
 .review-trade small {
   display: block;
   width: 100%;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
   margin-top: 3px;
 }
@@ -1718,7 +1718,7 @@ td .pnl {
   justify-content: space-between;
   align-items: center;
   color: var(--faint);
-  font-size: 10px;
+  font-size: var(--text-caption);
   padding-bottom: 16px;
   border-bottom: 1px solid var(--border);
 }
@@ -1726,12 +1726,12 @@ td .pnl {
   padding: 18px 0 5px;
 }
 .note-excerpt > span {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--faint);
   text-transform: uppercase;
 }
 .note-excerpt p {
-  font-size: 11px;
+  font-size: var(--text-small);
   color: var(--muted);
   line-height: 1.9;
   margin: 6px 0 14px;
@@ -1754,7 +1754,7 @@ td .pnl {
   margin-right: auto;
 }
 .tags > span {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--blue2);
   padding: 3px 5px;
   background: var(--pale-blue);
@@ -1778,7 +1778,7 @@ td .pnl {
   padding: 15px 10px 12px;
 }
 .watch-search input {
-  font-size: 11px;
+  font-size: var(--text-small);
   width: 100%;
   min-width: 0;
   padding: 7px 8px;
@@ -1813,12 +1813,12 @@ td .pnl {
   text-align: left;
 }
 .watch-symbol b {
-  font-size: 12px;
+  font-size: var(--text-small);
 }
 .watch-symbol small {
   display: block;
   color: var(--faint);
-  font-size: 9px;
+  font-size: var(--text-caption);
   margin-top: 6px;
   max-width: 115px;
   overflow: hidden;
@@ -1830,10 +1830,10 @@ td .pnl {
 }
 .watch-symbol .watch-price b {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
+  font-size: var(--text-small);
 }
 .watch-symbol .watch-price small {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: inherit;
 }
 .watch-actions {
@@ -1843,7 +1843,7 @@ td .pnl {
   gap: 0;
 }
 .watch-actions > span {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--faint);
   margin-right: auto;
 }
@@ -1854,11 +1854,11 @@ td .pnl {
 .quote-time {
   display: block;
   color: var(--faint);
-  font-size: 8px;
+  font-size: var(--text-caption);
   margin-top: 4px;
 }
 .watch-note {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--faint);
   margin: 15px;
   line-height: 1.9;
@@ -1880,10 +1880,10 @@ td .pnl {
   background: var(--input);
   padding: 11px;
   text-align: left;
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 .search-results button small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
   max-width: 95px;
   overflow: hidden;
@@ -1904,12 +1904,12 @@ td .pnl {
   gap: 15px;
 }
 .stock-heading h2 {
-  font-size: 23px;
+  font-size: var(--text-value);
   letter-spacing: 0.5px;
   line-height: 1.2;
 }
 .stock-heading h2 > span {
-  font-size: 11px;
+  font-size: var(--text-small);
   color: var(--muted);
   font-weight: 400;
   letter-spacing: 0;
@@ -1917,21 +1917,21 @@ td .pnl {
 }
 .stock-price {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 25px;
+  font-size: var(--text-metric);
   margin: 14px 0 9px;
   display: flex;
   align-items: center;
   gap: 12px;
 }
 .stock-price > .muted {
-  font-size: 15px;
+  font-size: var(--text-section);
   font-family: inherit;
 }
 .stock-price small {
-  font-size: 11px;
+  font-size: var(--text-small);
 }
 .stock-heading > div > small {
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .chart-controls {
   border-top: 1px solid var(--border);
@@ -1947,7 +1947,7 @@ td .pnl {
   border-radius: 6px;
 }
 .segmented.compact button {
-  font-size: 10px;
+  font-size: var(--text-caption);
   padding: 6px 10px;
   min-height: 28px;
 }
@@ -1957,7 +1957,7 @@ td .pnl {
   gap: 5px;
 }
 .date-controls.small input {
-  font-size: 9px;
+  font-size: var(--text-caption);
   width: 92px;
 }
 .chart-controls > .btn {
@@ -1970,7 +1970,7 @@ td .pnl {
   display: flex;
   gap: 6px;
   align-items: center;
-  font-size: 9px;
+  font-size: var(--text-caption);
   padding: 10px 17px;
   color: var(--muted);
 }
@@ -1980,7 +1980,7 @@ td .pnl {
 }
 .data-source strong {
   margin-left: auto;
-  font-size: 8px;
+  font-size: var(--text-caption);
   letter-spacing: 1px;
 }
 .chart-shell {
@@ -1997,7 +1997,7 @@ td .pnl {
   left: 18px;
   z-index: 3;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
   pointer-events: none;
 }
@@ -2028,7 +2028,7 @@ td .pnl {
   min-height: 0;
   padding: 0;
   font:
-    600 10px "IBM Plex Mono",
+    600 var(--text-chart) "IBM Plex Mono",
     monospace;
   line-height: 17px;
   pointer-events: auto;
@@ -2063,7 +2063,7 @@ td .pnl {
   border-radius: 4px;
   padding: 5px 7px;
   min-height: 27px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .marker-legend {
@@ -2073,7 +2073,7 @@ td .pnl {
   gap: 14px;
   padding: 14px 18px;
   border-top: 1px solid var(--border);
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .marker-legend > span {
@@ -2082,11 +2082,11 @@ td .pnl {
   align-items: center;
 }
 .marker-legend small {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--faint);
 }
 .marker-badge {
-  font-size: 8px;
+  font-size: var(--text-caption);
   width: 14px;
   height: 14px;
   display: inline-flex;
@@ -2106,7 +2106,7 @@ td .pnl {
 .chart-bottom {
   padding: 10px 17px;
   border-top: 1px solid var(--border);
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--faint);
   display: flex;
   align-items: center;
@@ -2114,7 +2114,7 @@ td .pnl {
   flex-wrap: wrap;
 }
 .chart-bottom > .text-btn {
-  font-size: 9px;
+  font-size: var(--text-caption);
 }
 .chart-bottom > span {
   margin-right: auto;
@@ -2139,7 +2139,7 @@ td .pnl {
   gap: 10px;
 }
 .execution-note {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--faint);
   width: 100%;
   padding-left: 48px;
@@ -2151,7 +2151,7 @@ td .pnl {
   background: var(--pale-blue) !important;
 }
 .attribution {
-  font-size: 8px;
+  font-size: var(--text-caption);
   color: var(--faint);
   display: flex;
   align-items: center;
@@ -2168,11 +2168,11 @@ td .pnl {
   gap: 20px;
   padding: 30px;
   text-align: center;
-  font-size: 13px;
+  font-size: var(--text-body);
   color: var(--muted);
 }
 .app-loading h2 {
-  font-size: 23px;
+  font-size: var(--text-value);
   color: var(--text);
 }
 .app-loading p {
@@ -2213,10 +2213,10 @@ td .pnl {
     min-height: 196px;
   }
   .pnl.large {
-    font-size: 31px;
+    font-size: var(--text-display);
   }
   .target-number {
-    font-size: 31px;
+    font-size: var(--text-display);
   }
   .overview-grid {
     grid-template-columns: 1.65fr 1fr;
@@ -2234,10 +2234,10 @@ td .pnl {
     min-height: 43px;
   }
   .calendar-day small {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .metric-label {
-    font-size: 11px;
+    font-size: var(--text-small);
   }
 }
 @media (max-width: 1250px) {
@@ -2247,7 +2247,7 @@ td .pnl {
     padding-right: 12px;
   }
   .brand {
-    font-size: 16px;
+    font-size: var(--text-section);
     gap: 8px;
   }
   .main {
@@ -2281,11 +2281,11 @@ td .pnl {
     padding: 15px 18px;
   }
   .cumulative > .metric-label {
-    font-size: 10px;
+    font-size: var(--text-caption);
     gap: 12px;
   }
   .cumulative > .pnl {
-    font-size: 22px;
+    font-size: var(--text-value);
     margin: 0 0 0 auto;
   }
   .cumulative > .small-return {
@@ -2312,10 +2312,10 @@ td .pnl {
     gap: 4px;
   }
   .calendar-nav {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .calendar-card .card-header h2 {
-    font-size: 12px;
+    font-size: var(--text-small);
   }
   .calendar-card .card-header h2 svg {
     display: none;
@@ -2323,13 +2323,13 @@ td .pnl {
   .chart-summary {
     gap: 16px;
     margin: 0 17px;
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .daily-chart svg {
     min-height: 190px;
   }
   .chart-legend {
-    font-size: 7px;
+    font-size: var(--text-caption);
   }
   .calendar-day {
     min-height: 39px;
@@ -2348,10 +2348,10 @@ td .pnl {
     padding: 18px;
   }
   .stock-price {
-    font-size: 22px;
+    font-size: var(--text-value);
   }
   .review-card-head .pnl {
-    font-size: 15px;
+    font-size: var(--text-section);
   }
   .review-card-head small {
     max-width: 160px;
@@ -2364,7 +2364,7 @@ td .pnl {
     padding: 25px 10px 10px;
   }
   .brand {
-    font-size: 14px;
+    font-size: var(--text-body);
     gap: 6px;
     padding-left: 2px;
   }
@@ -2373,20 +2373,20 @@ td .pnl {
     height: 30px;
   }
   .brand small {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .sidebar nav button {
     padding: 10px;
     gap: 9px;
   }
   .sidebar nav button small {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .capital-card {
     padding: 12px;
   }
   .capital-card strong {
-    font-size: 18px;
+    font-size: var(--text-title);
   }
   .main {
     margin-left: 180px;
@@ -2402,7 +2402,7 @@ td .pnl {
     gap: 14px;
   }
   .clock {
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .page-heading {
     gap: 16px;
@@ -2421,7 +2421,7 @@ td .pnl {
     padding: 18px 16px 0;
   }
   .metrics > .cumulative > .pnl {
-    font-size: 27px;
+    font-size: var(--text-metric);
     margin-top: 13px;
   }
   .metrics > .cumulative > .small-return {
@@ -2435,7 +2435,7 @@ td .pnl {
     margin-top: 16px;
   }
   .stacked-metrics .pnl {
-    font-size: 18px;
+    font-size: var(--text-title);
   }
   .overview-grid {
     grid-template-columns: 1fr;
@@ -2452,19 +2452,19 @@ td .pnl {
     min-height: 52px;
   }
   .calendar-day > span {
-    font-size: 11px;
+    font-size: var(--text-small);
   }
   .calendar-day small {
-    font-size: 10px;
+    font-size: var(--text-caption);
   }
   .calendar-card .card-header h2 {
-    font-size: 14px;
+    font-size: var(--text-body);
   }
   .calendar-card .card-header h2 svg {
     display: inline;
   }
   .calendar-nav {
-    font-size: 11px;
+    font-size: var(--text-small);
   }
   .stocks-layout {
     grid-template-columns: 1fr;
@@ -2515,11 +2515,11 @@ td .pnl {
     grid-template-columns: 1fr;
   }
   .review-card-head .pnl {
-    font-size: 20px;
+    font-size: var(--text-value);
   }
   .app-footer {
     padding: 20px;
-    font-size: 8px;
+    font-size: var(--text-caption);
   }
   .filter-bar {
     padding: 12px 17px;
@@ -2535,14 +2535,14 @@ td .pnl {
     display: none;
   }
   .demo-banner {
-    font-size: 9px;
+    font-size: var(--text-caption);
     padding: 8px 20px;
   }
   .demo-banner button {
-    font-size: 9px;
+    font-size: var(--text-caption);
   }
   .page-heading .eyebrow {
-    font-size: 7px;
+    font-size: var(--text-caption);
     letter-spacing: 1.6px;
   }
 }
@@ -2568,7 +2568,7 @@ td .pnl {
     background: var(--bg);
   }
   .breadcrumb {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .breadcrumb > span,
   .breadcrumb > b {
@@ -2578,7 +2578,7 @@ td .pnl {
     content: "↗";
     display: inline-flex;
     color: var(--blue2);
-    font-size: 20px;
+    font-size: var(--text-value);
     margin-right: 7px;
   }
   .topbar-actions {
@@ -2595,7 +2595,7 @@ td .pnl {
     background: var(--panel2);
     padding: 7px 9px;
     min-height: 31px;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .mobile-settings {
     min-width: 36px;
@@ -2603,7 +2603,7 @@ td .pnl {
   }
   .demo-banner {
     padding: 10px 17px;
-    font-size: 13px;
+    font-size: var(--text-body);
     align-items: flex-start;
     gap: 7px;
     line-height: 1.8;
@@ -2619,7 +2619,7 @@ td .pnl {
   }
   .demo-banner button {
     margin: 0 0 0 auto;
-    font-size: 13px;
+    font-size: var(--text-body);
     min-height: 24px;
     padding: 0;
     flex: none;
@@ -2634,16 +2634,16 @@ td .pnl {
   }
   .eyebrow,
   .page-heading .eyebrow {
-    font-size: 13px;
+    font-size: var(--text-body);
     letter-spacing: 1.5px;
   }
   h1 {
-    font-size: 27px;
+    font-size: var(--text-metric);
     margin-top: 5px;
     margin-bottom: 6px;
   }
   .page-heading p {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .page-heading .date-controls {
     margin: 0;
@@ -2654,12 +2654,12 @@ td .pnl {
   }
   .date-controls input {
     width: 117px;
-    font-size: 13px;
+    font-size: var(--text-body);
     min-height: 30px;
   }
   .page-heading > .btn {
     margin-left: auto;
-    font-size: 13px;
+    font-size: var(--text-body);
     padding: 8px 10px;
   }
   .page-heading:has(> .btn) {
@@ -2676,15 +2676,15 @@ td .pnl {
     border-radius: 10px;
   }
   .metric-label {
-    font-size: 13px;
+    font-size: var(--text-body);
     gap: 4px;
   }
   .metric-label .badge {
-    font-size: 13px;
+    font-size: var(--text-body);
     padding: 3px 4px;
   }
   .pnl.large {
-    font-size: 24px;
+    font-size: var(--text-metric);
     letter-spacing: -1.2px;
   }
   .today-card > .pnl,
@@ -2692,19 +2692,19 @@ td .pnl {
     margin-top: 12px;
   }
   .return-chip {
-    font-size: 13px;
+    font-size: var(--text-body);
     gap: 3px;
     margin-top: 8px;
   }
   .return-chip span {
-    font-size: 13px;
+    font-size: var(--text-body);
     margin-left: 3px;
   }
   .return-chip svg {
     width: 14px;
   }
   .metric-foot {
-    font-size: 13px;
+    font-size: var(--text-body);
     padding: 11px 0;
     margin-top: 14px;
     gap: 3px;
@@ -2713,41 +2713,41 @@ td .pnl {
     display: none;
   }
   .metric-foot b {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .target-number {
-    font-size: 24px;
+    font-size: var(--text-metric);
     gap: 7px;
     margin-top: 12px;
     flex-wrap: wrap;
   }
   .target-number small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .progress-track {
     margin-top: 19px;
     height: 4px;
   }
   .target-caption {
-    font-size: 13px;
+    font-size: var(--text-body);
     margin-top: 12px;
     align-items: flex-start;
   }
   .target-caption b {
     display: block;
     margin-top: 3px;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .target-caption > span:last-child {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .stacked-metrics .pnl {
-    font-size: 16px;
+    font-size: var(--text-section);
     flex-wrap: wrap;
     gap: 5px;
   }
   .stacked-metrics .pnl small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .stacked-metrics > div:first-child {
     padding-bottom: 11px;
@@ -2764,16 +2764,16 @@ td .pnl {
     padding: 15px 13px 0;
   }
   .metrics > .cumulative > .pnl {
-    font-size: 24px;
+    font-size: var(--text-metric);
     margin-top: 12px;
   }
   .metrics > .cumulative > .metric-foot {
-    font-size: 13px;
+    font-size: var(--text-body);
     padding: 11px 0;
     margin-top: 14px;
   }
   .small-return {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .metrics > .cumulative > .small-return {
     margin-top: 7px;
@@ -2792,46 +2792,46 @@ td .pnl {
     padding: 17px 16px 0;
   }
   .card-header h2 {
-    font-size: 13px;
+    font-size: var(--text-body);
     gap: 7px;
   }
   .card-header p {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .mini-tabs button {
-    font-size: 13px;
+    font-size: var(--text-body);
     padding: 4px 7px;
   }
   .daily-chart {
     padding: 17px 6px 0;
   }
   .chart-legend {
-    font-size: 13px;
+    font-size: var(--text-body);
     gap: 12px;
     padding-left: 10px;
     padding-bottom: 8px;
   }
   .chart-legend b {
     width: 100%;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .daily-chart svg {
     min-height: 160px;
     max-height: 180px;
   }
   .axis-text {
-    font-size: 15px;
+    font-size: var(--text-section);
   }
   .chart-summary {
     gap: 16px;
     margin: 0 16px;
-    font-size: 13px;
+    font-size: var(--text-body);
     padding: 13px 0;
     justify-content: space-between;
   }
   .chart-summary b {
     margin-left: 2px;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .calendar-grid {
     padding: 0 13px 14px;
@@ -2842,23 +2842,23 @@ td .pnl {
     gap: 5px;
   }
   .calendar-day > span {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .calendar-day small {
-    font-size: 13px;
+    font-size: var(--text-body);
     letter-spacing: -0.5px;
   }
   .calendar-card .card-header {
     padding-bottom: 17px;
   }
   .calendar-card .card-header h2 {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .calendar-card .card-header h2 svg {
     width: 15px;
   }
   .calendar-nav {
-    font-size: 13px;
+    font-size: var(--text-body);
     gap: 5px;
   }
   .calendar-nav .icon-btn {
@@ -2868,7 +2868,7 @@ td .pnl {
   .calendar-foot {
     padding: 14px 0;
     margin: 0 16px;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .transactions .card-header {
     padding-bottom: 15px;
@@ -2876,7 +2876,7 @@ td .pnl {
     flex-wrap: wrap;
   }
   .transactions .card-header .text-btn {
-    font-size: 13px;
+    font-size: var(--text-body);
     min-height: 25px;
   }
   .filter-bar {
@@ -2885,7 +2885,7 @@ td .pnl {
   }
   .filter-bar input,
   .filter-bar select {
-    font-size: 13px;
+    font-size: var(--text-body);
     min-height: 37px;
     padding: 8px;
   }
@@ -2932,22 +2932,22 @@ td .pnl {
     height: 32px;
   }
   .trade-card b {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .trade-card small {
     display: block;
     color: var(--faint);
-    font-size: 13px;
+    font-size: var(--text-body);
     margin-top: 4px;
   }
   .trade-card .pnl {
     margin-left: auto;
     text-align: right;
-    font-size: 15px;
+    font-size: var(--text-section);
   }
   .trade-card .pnl small {
     color: inherit;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .trade-card-bottom {
     display: flex;
@@ -2955,7 +2955,7 @@ td .pnl {
     align-items: center;
     margin-top: 13px;
     color: var(--muted);
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .trade-card-bottom svg {
     color: var(--faint);
@@ -2965,7 +2965,7 @@ td .pnl {
     padding: 0 16px;
   }
   .executions-panel summary {
-    font-size: 13px;
+    font-size: var(--text-body);
     line-height: 1.9;
   }
   .executions-panel summary > .muted {
@@ -2975,39 +2975,39 @@ td .pnl {
   }
   .execution-list > button {
     flex-wrap: wrap;
-    font-size: 13px;
+    font-size: var(--text-body);
     gap: 8px;
     padding: 12px 1px;
   }
   .execution-list > button .muted {
     width: 100%;
     margin-left: 0;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .execution-list > button > svg {
     display: none;
   }
   .positions {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .positions > span {
     line-height: 1.7;
   }
   .footnote {
-    font-size: 13px;
+    font-size: var(--text-body);
     margin-top: 16px;
     line-height: 2;
   }
   .app-footer {
     margin-top: 5px;
     padding: 18px 17px 106px;
-    font-size: 13px;
+    font-size: var(--text-body);
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
   }
   .app-footer > span:last-of-type {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .bottom-nav {
     display: flex;
@@ -3034,7 +3034,7 @@ td .pnl {
     gap: 5px;
     min-width: 80px;
     min-height: 55px;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .bottom-nav button.active {
     color: var(--blue2);
@@ -3073,7 +3073,7 @@ td .pnl {
     padding: 15px 17px;
   }
   .modal-head h2 {
-    font-size: 16px;
+    font-size: var(--text-section);
   }
   .modal-head .icon-btn {
     min-width: 36px;
@@ -3084,10 +3084,10 @@ td .pnl {
     gap: 18px;
   }
   .form-intro {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .form-intro .right {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .form-grid {
     gap: 12px;
@@ -3099,18 +3099,18 @@ td .pnl {
     grid-column: 1/-1;
   }
   .field {
-    font-size: 13px;
+    font-size: var(--text-body);
     gap: 7px;
   }
   .field input,
   .field select,
   .field textarea {
-    font-size: 16px;
+    font-size: var(--text-section);
     padding: 10px;
     min-height: 44px;
   }
   .field small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .execution-form {
     padding: 14px;
@@ -3124,7 +3124,7 @@ td .pnl {
   .segmented button {
     min-height: 36px;
     padding: 6px 9px;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .form-footer {
     gap: 9px;
@@ -3132,25 +3132,25 @@ td .pnl {
     padding-top: 16px;
   }
   .form-footer > .muted {
-    font-size: 13px;
+    font-size: var(--text-body);
     flex: 1;
     min-width: 100px;
   }
   .form-footer .btn {
     min-height: 42px;
-    font-size: 13px;
+    font-size: var(--text-body);
     padding: 9px 13px;
   }
   .detail-hero .pnl.large {
-    font-size: 25px;
+    font-size: var(--text-metric);
     flex-direction: column;
     gap: 0;
   }
   .detail-hero .pnl.large small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .detail-hero > .btn {
-    font-size: 13px;
+    font-size: var(--text-body);
     padding: 8px 10px;
   }
   .detail-stats {
@@ -3159,14 +3159,14 @@ td .pnl {
     padding: 16px;
   }
   .detail-stats b {
-    font-size: 13px;
+    font-size: var(--text-body);
     margin-top: 7px;
   }
   .detail-stats small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .execution-detail .section-top .inline {
-    font-size: 13px;
+    font-size: var(--text-body);
     gap: 7px;
   }
   .execution-detail .section-top > .inline:last-child {
@@ -3177,43 +3177,43 @@ td .pnl {
     min-height: 38px;
   }
   .execution-values {
-    font-size: 13px;
+    font-size: var(--text-body);
     align-items: flex-start;
   }
   .execution-values > b {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .execution-detail p {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .execution-detail > small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .settings-title h3 {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .backup-actions .btn {
-    font-size: 13px;
+    font-size: var(--text-body);
     flex: 1;
     min-width: 135px;
   }
   .import-rows > label {
     padding: 13px 10px;
-    font-size: 13px;
+    font-size: var(--text-body);
     gap: 7px;
   }
   .import-rows small {
-    font-size: 13px;
+    font-size: var(--text-body);
     width: 100%;
     padding-left: 25px;
   }
   .import-stats {
-    font-size: 13px;
+    font-size: var(--text-body);
     flex-wrap: wrap;
   }
   .toast {
     bottom: calc(85px + env(safe-area-inset-bottom));
-    font-size: 13px;
+    font-size: var(--text-body);
     z-index: 250;
     padding: 12px 14px;
   }
@@ -3223,20 +3223,20 @@ td .pnl {
     padding-bottom: 22px;
   }
   .review-overview b {
-    font-size: 24px;
+    font-size: var(--text-metric);
   }
   .review-overview span {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .review-filters .dates {
-    font-size: 13px;
+    font-size: var(--text-body);
     gap: 7px;
   }
   .review-filters .dates input {
     width: 115px;
     min-width: 0;
     flex: 1;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .review-filters .dates > .right {
     display: block;
@@ -3250,33 +3250,33 @@ td .pnl {
     padding: 17px;
   }
   .review-card-head .pnl {
-    font-size: 17px;
+    font-size: var(--text-title);
   }
   .review-card-head .symbol-cell small {
     max-width: 155px;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .review-card-head h2 {
-    font-size: 15px;
+    font-size: var(--text-section);
   }
   .review-trade {
     margin-top: 16px;
     padding-top: 17px;
   }
   .review-trade b {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .review-trade small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .review-meta {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .note-excerpt p {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .review-card-foot .text-btn {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .review-card-foot .icon-btn {
     min-height: 35px;
@@ -3296,7 +3296,7 @@ td .pnl {
     padding: 11px 12px;
   }
   .watch-search input {
-    font-size: 13px;
+    font-size: var(--text-body);
     min-height: 38px;
   }
   .watch-search .icon-btn {
@@ -3313,16 +3313,16 @@ td .pnl {
     padding: 13px 12px 9px;
   }
   .watch-symbol b {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .watch-symbol small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .watch-symbol .watch-price b {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .watch-symbol .watch-price small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .watch-actions .icon-btn {
     min-width: 28px;
@@ -3332,25 +3332,25 @@ td .pnl {
     padding: 19px 16px 17px;
   }
   .stock-heading h2 {
-    font-size: 22px;
+    font-size: var(--text-value);
   }
   .stock-heading h2 span {
     display: block;
     margin: 7px 0 0;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .stock-price {
-    font-size: 22px;
+    font-size: var(--text-value);
     gap: 8px;
   }
   .stock-price small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .stock-price > .muted {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .stock-heading > div > small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .chart-controls {
     padding: 11px;
@@ -3362,11 +3362,11 @@ td .pnl {
   }
   .chart-controls .btn {
     order: 2;
-    font-size: 13px;
+    font-size: var(--text-body);
     min-height: 36px;
   }
   .segmented.compact button {
-    font-size: 13px;
+    font-size: var(--text-body);
     min-height: 33px;
     padding: 6px 8px;
   }
@@ -3379,10 +3379,10 @@ td .pnl {
   }
   .date-controls.small input {
     width: 114px;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .data-source {
-    font-size: 13px;
+    font-size: var(--text-body);
     padding: 9px 12px;
     line-height: 1.8;
     flex-wrap: wrap;
@@ -3394,11 +3394,11 @@ td .pnl {
   .marker-legend {
     padding: 12px;
     gap: 10px;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .marker-legend small {
     width: 100%;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .chart-bottom {
     padding: 12px;
@@ -3407,16 +3407,16 @@ td .pnl {
   }
   .chart-bottom > span {
     width: 100%;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .chart-bottom .text-btn {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .chart-executions .card-header {
     padding: 16px 14px;
   }
   .chart-executions .card-header p {
-    font-size: 13px;
+    font-size: var(--text-body);
     line-height: 1.7;
   }
   .chart-executions .execution-list {
@@ -3424,13 +3424,13 @@ td .pnl {
   }
   .execution-note {
     padding-left: 0;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .execution-marker {
     width: 25px;
     height: 25px;
     line-height: 21px;
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .chart-tools button {
     padding: 6px 8px;
@@ -3446,7 +3446,7 @@ td .pnl {
     margin: 11px;
   }
   .app-footer .text-btn {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .review-card .ticker-icon {
     width: 30px;
@@ -3468,14 +3468,14 @@ td .pnl {
 .trade-buy-time {
   display: block;
   color: var(--faint);
-  font-size: 8px;
+  font-size: var(--text-caption);
   margin-top: 7px;
   font-family: inherit;
   letter-spacing: 0;
   line-height: 1.6;
 }
 .chart-limit {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
   padding: 10px 14px;
   line-height: 1.8;
@@ -3489,20 +3489,20 @@ td .pnl {
 }
 .pending-pnl > b {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 22px;
+  font-size: var(--text-value);
   font-weight: 400;
 }
 .pending-pnl > small {
-  font-size: 9px;
+  font-size: var(--text-caption);
   white-space: nowrap;
 }
 .open-review-card .review-card-head h2 .badge {
-  font-size: 8px;
+  font-size: var(--text-caption);
   vertical-align: middle;
   margin-left: 6px;
 }
 .review-filter-hint {
-  font-size: 10px;
+  font-size: var(--text-caption);
   color: var(--muted);
   padding: 0 22px 14px;
   line-height: 1.8;
@@ -3518,7 +3518,7 @@ td .pnl {
   border-top: 1px solid var(--border);
   padding: 12px 18px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: var(--text-caption);
   line-height: 1.9;
 }
 .fifo-explainer summary {
@@ -3538,7 +3538,7 @@ td .pnl {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 12px;
-  font-size: 11px;
+  font-size: var(--text-small);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3548,42 +3548,42 @@ td .pnl {
   color: var(--muted);
   display: block;
   margin-top: 5px;
-  font-size: 10px;
+  font-size: var(--text-caption);
 }
 @media (max-width: 700px) {
   .review-filter-hint {
-    font-size: 13px;
+    font-size: var(--text-body);
     padding: 0 14px 13px;
   }
   .review-overview {
     gap: 22px;
   }
   .review-overview span {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .review-overview b {
-    font-size: 23px;
+    font-size: var(--text-value);
   }
   .pending-pnl > small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
   .review-card-head .symbol-cell small {
     max-width: 150px;
   }
   .open-review-card .review-card-head h2 .badge {
-    font-size: 13px;
+    font-size: var(--text-body);
     margin-left: 3px;
   }
   .fifo-match-row {
-    font-size: 13px;
+    font-size: var(--text-body);
     flex-wrap: wrap;
   }
   .fifo-match-row small {
-    font-size: 13px;
+    font-size: var(--text-body);
   }
 }
 .fifo-detail {
-  font-size: 12px;
+  font-size: var(--text-small);
   color: var(--muted);
   line-height: 1.8;
 }
@@ -3601,12 +3601,12 @@ td .pnl {
   border-radius: 7px;
   padding: 10px;
   margin-bottom: 12px;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--muted);
 }
 .review-buy-batches > small {
   display: block;
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--faint);
   margin-bottom: 5px;
 }
@@ -3618,24 +3618,24 @@ td .pnl {
   line-height: 1.9;
 }
 .review-buy-batches b {
-  font-size: 9px;
+  font-size: var(--text-caption);
   color: var(--text);
   font-weight: 400;
 }
 .install-action{white-space:nowrap;min-height:40px}@media(max-width:700px){.install-action{min-width:36px;min-height:36px;padding:7px}.install-action>span{display:none}.install-action svg{width:19px;height:19px}}
 
 .cloud-banner{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 28px;background:var(--panel);border-bottom:1px solid var(--border)}
-.cloud-banner>div:first-child{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;min-width:0}.cloud-banner strong{color:#3288db}.cloud-banner span,.cloud-banner small{color:var(--muted);font-size:12px}.cloud-banner small{width:100%;overflow-wrap:anywhere}.cloud-banner.error small,.cloud-banner.pending small{color:#e2ad2f}.cloud-actions{display:flex;gap:10px;flex-shrink:0;align-items:center}.cloud-actions .btn{white-space:nowrap}@media(max-width:700px){.cloud-banner{padding:12px 16px;align-items:flex-start;flex-direction:column;gap:10px}.cloud-actions{flex-wrap:wrap}.cloud-banner span{font-size: 13px}}
+.cloud-banner>div:first-child{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;min-width:0}.cloud-banner strong{color:#3288db}.cloud-banner span,.cloud-banner small{color:var(--muted);font-size: var(--text-small)}.cloud-banner small{width:100%;overflow-wrap:anywhere}.cloud-banner.error small,.cloud-banner.pending small{color:#e2ad2f}.cloud-actions{display:flex;gap:10px;flex-shrink:0;align-items:center}.cloud-actions .btn{white-space:nowrap}@media(max-width:700px){.cloud-banner{padding:12px 16px;align-items:flex-start;flex-direction:column;gap:10px}.cloud-actions{flex-wrap:wrap}.cloud-banner span{font-size: var(--text-body)}}
 
-.sync-button{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:8px;color:var(--muted)}.sync-button.synced{color:var(--blue)}.sync-button.error,.sync-button.pending{color:var(--yellow)}.sync-error{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 24px;font-size:12px;color:var(--yellow);border-bottom:1px solid var(--border)}.sync-error span{overflow-wrap:anywhere}.watch-symbol .watch-price .profit{color:var(--blue)}.watch-symbol .watch-price .loss{color:var(--yellow)}.watch-symbol .watch-price .neutral{color:var(--muted)}
+.sync-button{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:8px;color:var(--muted)}.sync-button.synced{color:var(--blue)}.sync-button.error,.sync-button.pending{color:var(--yellow)}.sync-error{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:10px 24px;font-size: var(--text-small);color:var(--yellow);border-bottom:1px solid var(--border)}.sync-error span{overflow-wrap:anywhere}.watch-symbol .watch-price .profit{color:var(--blue)}.watch-symbol .watch-price .loss{color:var(--yellow)}.watch-symbol .watch-price .neutral{color:var(--muted)}
 
-.currency-control{display:flex;flex-direction:column;align-items:flex-end;gap:2px;max-width:250px}.currency-toggle{white-space:nowrap;font-size:12px;min-height:36px}.currency-control small{font-size:9px;color:var(--muted);text-align:right;line-height:1.3}.dashboard-range{flex-wrap:wrap}.daily-chart .axis-text{font-size:9px}@media(max-width:700px){.currency-control{max-width:150px}.currency-control small{font-size: 13px}.topbar-actions{flex-wrap:wrap;gap:6px}.currency-toggle{font-size: 13px}}
+.currency-control{display:flex;flex-direction:column;align-items:flex-end;gap:2px;max-width:250px}.currency-toggle{white-space:nowrap;font-size: var(--text-small);min-height:36px}.currency-control small{font-size: var(--text-caption);color:var(--muted);text-align:right;line-height:1.3}.dashboard-range{flex-wrap:wrap}.daily-chart .axis-text{font-size: var(--text-caption)}@media(max-width:700px){.currency-control{max-width:150px}.currency-control small{font-size: var(--text-body)}.topbar-actions{flex-wrap:wrap;gap:6px}.currency-toggle{font-size: var(--text-body)}}
 @media(max-width:1200px){.topbar .breadcrumb{display:none}.topbar{height:auto;min-height:73px;padding:10px 16px}.topbar-actions{width:100%;min-width:0;justify-content:flex-end;flex-wrap:wrap;gap:8px}}@media(max-width:700px){.topbar{min-height:64px}.currency-control{max-width:145px}.currency-toggle{min-height:40px}}
 /* Shared desktop/mobile toolbar and principal summary. */
-.topbar{height:auto;min-height:80px;padding:12px 24px}.topbar-actions{align-items:flex-start;gap:8px}.topbar .toolbar-button{height:40px;min-height:40px;min-width:40px;border:1px solid var(--border);border-radius:9px;background:var(--panel2);color:var(--text);padding:8px 12px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:12px;white-space:nowrap;line-height:1.2}.topbar .toolbar-button:hover{background:var(--hover)}.topbar .toolbar-button:disabled{opacity:.55}.topbar .toolbar-button.primary{background:var(--blue);border-color:var(--blue);color:white}.topbar .toolbar-button.synced{color:var(--blue)}.topbar .toolbar-button.error,.topbar .toolbar-button.pending{color:var(--yellow)}.topbar .toolbar-settings{display:inline-flex}.topbar .currency-control{width:116px;max-width:116px;align-items:stretch;gap:4px}.topbar .currency-toggle{gap:10px}.selected-currency{color:var(--blue);font-weight:700}.currency-toggle span{font-size:18px;line-height:1}.currency-control small{text-align:center;font-size:10px;line-height:1.4;white-space:nowrap}.mobile-capital{display:none}.account-funds{display:grid;gap:13px}.account-funds .funds-label{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:11px;color:var(--muted);min-height:22px}.account-funds .funds-label .icon-btn{width:30px;height:30px;min-width:30px;min-height:30px;padding:5px}.account-funds strong{font-size:23px;margin:4px 0 0}.account-funds b{display:block;font-family:"IBM Plex Mono",monospace;font-size:17px;margin-top:4px;overflow-wrap:anywhere}
-.watch-order-select{max-width:115px;font-size:11px;padding:5px 7px;min-height:32px}.watchlist{display:block}.watchlist>.watch-items{display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto;max-height:620px}.watch-item{position:relative;min-width:0;padding-left:32px;border-left:0;border-top:1px solid var(--border)}.watch-item.active{border-left:0;border-bottom-color:transparent;box-shadow:inset 3px 0 var(--blue)}.watch-item.dragging{opacity:.55;outline:1px dashed var(--blue);outline-offset:-2px}.watch-drag-handle{position:absolute;left:3px;top:12px;width:26px;min-width:26px;min-height:36px;cursor:grab;touch-action:none;user-select:none}.watch-item.dragging .watch-drag-handle{cursor:grabbing}.watchlist .card-header{display:flex;justify-content:space-between;gap:6px}
+.topbar{height:auto;min-height:80px;padding:12px 24px}.topbar-actions{align-items:flex-start;gap:8px}.topbar .toolbar-button{height:40px;min-height:40px;min-width:40px;border:1px solid var(--border);border-radius:9px;background:var(--panel2);color:var(--text);padding:8px 12px;display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size: var(--text-small);white-space:nowrap;line-height:1.2}.topbar .toolbar-button:hover{background:var(--hover)}.topbar .toolbar-button:disabled{opacity:.55}.topbar .toolbar-button.primary{background:var(--blue);border-color:var(--blue);color:white}.topbar .toolbar-button.synced{color:var(--blue)}.topbar .toolbar-button.error,.topbar .toolbar-button.pending{color:var(--yellow)}.topbar .toolbar-settings{display:inline-flex}.topbar .currency-control{width:116px;max-width:116px;align-items:stretch;gap:4px}.topbar .currency-toggle{gap:10px}.selected-currency{color:var(--blue);font-weight:700}.currency-toggle span{font-size: var(--text-title);line-height:1}.currency-control small{text-align:center;font-size: var(--text-caption);line-height:1.4;white-space:nowrap}.mobile-capital{display:none}.account-funds{display:grid;gap:13px}.account-funds .funds-label{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size: var(--text-small);color:var(--muted);min-height:22px}.account-funds .funds-label .icon-btn{width:30px;height:30px;min-width:30px;min-height:30px;padding:5px}.account-funds strong{font-size: var(--text-value);margin:4px 0 0}.account-funds b{display:block;font-family:"IBM Plex Mono",monospace;font-size: var(--text-title);margin-top:4px;overflow-wrap:anywhere}
+.watch-order-select{max-width:115px;font-size: var(--text-small);padding:5px 7px;min-height:32px}.watchlist{display:block}.watchlist>.watch-items{display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto;max-height:620px}.watch-item{position:relative;min-width:0;padding-left:32px;border-left:0;border-top:1px solid var(--border)}.watch-item.active{border-left:0;border-bottom-color:transparent;box-shadow:inset 3px 0 var(--blue)}.watch-item.dragging{opacity:.55;outline:1px dashed var(--blue);outline-offset:-2px}.watch-drag-handle{position:absolute;left:3px;top:12px;width:26px;min-width:26px;min-height:36px;cursor:grab;touch-action:none;user-select:none}.watch-item.dragging .watch-drag-handle{cursor:grabbing}.watchlist .card-header{display:flex;justify-content:space-between;gap:6px}
 @media(max-width:1100px){.watchlist>.watch-items{max-height:340px}.watchlist>.card-header,.watchlist>.watch-search{width:100%}.watch-symbol{width:100%}.watch-item{padding:12px 12px 12px 35px}}
-@media(max-width:700px){.topbar{min-height:78px;padding:10px 16px}.topbar-actions{justify-content:flex-end;gap:7px;flex-wrap:nowrap}.topbar .toolbar-button{min-width:36px;height:38px;min-height:38px;padding:7px 9px}.topbar .sync-button>span,.topbar .install-action>span,.topbar .add-trade>span{display:none}.topbar .add-trade{display:inline-flex}.topbar .currency-control{width:108px;max-width:108px}.currency-control small{font-size: 13px}.mobile-capital{display:block;padding:12px 16px 0}.mobile-capital .account-funds{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px;margin:0}.mobile-capital .account-funds strong,.mobile-capital .account-funds b{font-size:clamp(11px,3.4vw,16px);margin:4px 0 0}.mobile-capital .account-funds .funds-label{font-size: 13px;min-height:30px}.mobile-capital .account-funds .icon-btn{width:25px;min-width:25px;padding:3px}.watchlist>.watch-items{max-height:320px}}
+@media(max-width:700px){.topbar{min-height:78px;padding:10px 16px}.topbar-actions{justify-content:flex-end;gap:7px;flex-wrap:nowrap}.topbar .toolbar-button{min-width:36px;height:38px;min-height:38px;padding:7px 9px}.topbar .sync-button>span,.topbar .install-action>span,.topbar .add-trade>span{display:none}.topbar .add-trade{display:inline-flex}.topbar .currency-control{width:108px;max-width:108px}.currency-control small{font-size: var(--text-body)}.mobile-capital{display:block;padding:12px 16px 0}.mobile-capital .account-funds{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px;margin:0}.mobile-capital .account-funds strong,.mobile-capital .account-funds b{font-size:clamp(11px,3.4vw,16px);margin:4px 0 0}.mobile-capital .account-funds .funds-label{font-size: var(--text-body);min-height:30px}.mobile-capital .account-funds .icon-btn{width:25px;min-width:25px;padding:3px}.watchlist>.watch-items{max-height:320px}}
 
 /* Icon-only toolbar; the rate is a separate, persistent caption. */
 .topbar { min-height: 92px; }
@@ -3646,94 +3646,94 @@ td .pnl {
 .topbar .currency-toggle > .currency-swap-icon { width: 38px; height: 38px; }
 .currency-swap-icon .coin-back { fill: var(--panel2); }
 .currency-swap-icon .coin-front { fill: var(--panel2); }
-.currency-control small { font-size: 12px; }
+.currency-control small { font-size: var(--text-small); }
 .form-footer { justify-content: flex-end; }
 @media (max-width: 700px) {
-  :root { font-size: 16px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
-  body { font-size: 14px; line-height: 1.5; }
+  :root { font-size: 100%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { font-size: var(--text-body); line-height: 1.5; }
   small, .small, .badge, .count, .tags, .tags > span, .side-label, .weekday,
   .pending-pnl > small, .review-buy-batches, .review-buy-batches > small,
   .review-buy-batches b, .trade-buy-time, .data-source, .ohlc-legend,
-  .chart-tools, .attribution, .fifo-detail, .fifo-match-row small { font-size: 12px; }
+  .chart-tools, .attribution, .fifo-detail, .fifo-match-row small { font-size: var(--text-small); }
   .topbar { position: static; top: auto; min-height: 92px; padding: 10px 16px; }
   .topbar-actions { gap: 7px; width: 100%; justify-content: flex-end; align-items: flex-start; }
   .topbar .toolbar-button { width: 44px; min-width: 44px; height: 44px; min-height: 44px; padding: 10px; }
   .topbar .currency-toggle { padding: 3px; }
   .topbar .currency-control { width: 100px; max-width: 100px; }
-  .currency-control small { font-size: 12px; line-height: 1.5; }
+  .currency-control small { font-size: var(--text-small); line-height: 1.5; }
   .mobile-capital { padding-top: 14px; }
   .mobile-capital .account-funds { gap: 10px; padding: 12px; }
-  .mobile-capital .account-funds .funds-label { font-size: 13px; flex-wrap: wrap; gap: 0; }
+  .mobile-capital .account-funds .funds-label { font-size: var(--text-body); flex-wrap: wrap; gap: 0; }
   .mobile-capital .account-funds strong, .mobile-capital .account-funds b { font-size: clamp(14px, 3.8vw, 18px); letter-spacing: -.5px; }
   .mobile-capital .account-funds .icon-btn { min-height: 30px; }
   .content { padding-top: 20px; }
-  h2, .card-header h2, .calendar-card .card-header h2, .settings-title h3 { font-size: 16px; }
-  .btn, .text-btn, .field, .side-control > button { font-size: 14px; }
+  h2, .card-header h2, .calendar-card .card-header h2, .settings-title h3 { font-size: var(--text-section); }
+  .btn, .text-btn, .field, .side-control > button { font-size: var(--text-body); }
   .btn, .icon-btn, .text-btn, .segmented button, .segmented.compact button, .mini-tabs button { min-height: 44px; }
   .icon-btn { min-width: 40px; }
   .field input, .field select, .field textarea, .filter-bar input, .filter-bar select,
   .watch-search input, .date-controls input, .date-controls.small input,
-  .review-filters .dates input, .watch-order-select { font-size: 16px; min-height: 44px; }
-  .field small, .subtle-note, .error, .success, .toast { font-size: 13px; line-height: 1.65; }
+  .review-filters .dates input, .watch-order-select { font-size: var(--text-section); min-height: 44px; }
+  .field small, .subtle-note, .error, .success, .toast { font-size: var(--text-body); line-height: 1.65; }
   .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .metrics > .card { min-width: 0; min-height: 190px; padding: 16px 12px 12px; }
-  .metric-label { font-size: 13px; flex-wrap: wrap; line-height: 1.6; }
-  .metric-label .badge { font-size: 12px; }
-  .metric-foot { flex-wrap: wrap; font-size: 13px; }
-  .metric-foot b { font-size: 13px; }
-  .return-chip { flex-wrap: wrap; font-size: 14px; }
-  .return-chip span { font-size: 12px; }
+  .metric-label { font-size: var(--text-body); flex-wrap: wrap; line-height: 1.6; }
+  .metric-label .badge { font-size: var(--text-small); }
+  .metric-foot { flex-wrap: wrap; font-size: var(--text-body); }
+  .metric-foot b { font-size: var(--text-body); }
+  .return-chip { flex-wrap: wrap; font-size: var(--text-body); }
+  .return-chip span { font-size: var(--text-small); }
   .target-number { align-items: flex-start; }
-  .target-number small { font-size: 13px; line-height: 1.6; }
-  .chart-summary { flex-wrap: wrap; gap: 8px 14px; font-size: 13px; }
-  .chart-summary b { font-size: 13px; }
+  .target-number small { font-size: var(--text-body); line-height: 1.6; }
+  .chart-summary { flex-wrap: wrap; gap: 8px 14px; font-size: var(--text-body); }
+  .chart-summary b { font-size: var(--text-body); }
   .calendar-card .card-header { flex-wrap: wrap; gap: 10px; }
-  .calendar-nav { margin-left: auto; font-size: 14px; }
+  .calendar-nav { margin-left: auto; font-size: var(--text-body); }
   .calendar-nav .icon-btn { min-height: 40px; min-width: 36px; }
   .calendar-grid { padding: 0 9px 14px; gap: 3px; }
   .calendar-day { min-height: 64px; padding: 6px 1px; }
-  .calendar-day > span { font-size: 14px; }
-  .calendar-day small { font-family: inherit; font-size: 12px; line-height: 1.35; letter-spacing: -.4px; max-width: 100%; overflow-wrap: anywhere; }
-  .calendar-foot { flex-wrap: wrap; gap: 8px; font-size: 13px; }
+  .calendar-day > span { font-size: var(--text-body); }
+  .calendar-day small { font-family: inherit; font-size: var(--text-small); line-height: 1.35; letter-spacing: -.4px; max-width: 100%; overflow-wrap: anywhere; }
+  .calendar-foot { flex-wrap: wrap; gap: 8px; font-size: var(--text-body); }
   .filter-bar > input, .filter-bar > select { min-width: 120px; }
   .filter-bar > svg { display: none; }
-  .trade-card b, .trade-card-bottom, .trade-card .pnl small { font-size: 14px; }
-  .trade-card small { font-size: 13px; line-height: 1.65; }
+  .trade-card b, .trade-card-bottom, .trade-card .pnl small { font-size: var(--text-body); }
+  .trade-card small { font-size: var(--text-body); line-height: 1.65; }
   .trade-card .inline { flex-wrap: wrap; }
-  .trade-card .pnl { font-size: 19px; }
+  .trade-card .pnl { font-size: var(--text-value); }
   .review-card-head { flex-wrap: wrap; gap: 12px; }
-  .review-card-head h2 { font-size: 18px; }
-  .review-card-head .symbol-cell small { max-width: 100%; white-space: normal; font-size: 13px; }
+  .review-card-head h2 { font-size: var(--text-title); }
+  .review-card-head .symbol-cell small { max-width: 100%; white-space: normal; font-size: var(--text-body); }
   .review-trade { gap: 10px; }
-  .review-trade b { font-size: 16px; }
-  .review-trade small { font-size: 13px; line-height: 1.6; overflow-wrap: anywhere; }
-  .review-meta, .note-excerpt p, .execution-detail p, .execution-values, .execution-values > b { font-size: 14px; }
+  .review-trade b { font-size: var(--text-section); }
+  .review-trade small { font-size: var(--text-body); line-height: 1.6; overflow-wrap: anywhere; }
+  .review-meta, .note-excerpt p, .execution-detail p, .execution-values, .execution-values > b { font-size: var(--text-body); }
   .review-overview { justify-content: space-between; gap: 12px; }
-  .review-overview span { font-size: 13px; }
-  .review-overview b { font-size: 26px; }
+  .review-overview span { font-size: var(--text-body); }
+  .review-overview b { font-size: var(--text-metric); }
   .review-filters .dates { flex-wrap: wrap; }
   .review-filters .dates input { width: 100%; flex: 1 1 120px; }
   .watch-order-select { max-width: 145px; }
-  .watch-symbol b, .watch-symbol .watch-price b { font-size: 16px; }
-  .watch-symbol small, .watch-symbol .watch-price small { font-size: 13px; }
+  .watch-symbol b, .watch-symbol .watch-price b { font-size: var(--text-section); }
+  .watch-symbol small, .watch-symbol .watch-price small { font-size: var(--text-body); }
   .watch-symbol .watch-price { gap: 7px; flex-wrap: wrap; }
   .watch-item { padding-left: 44px; }
   .watch-drag-handle { min-width: 38px; min-height: 44px; left: 2px; }
   .watch-actions .icon-btn { min-width: 40px; min-height: 40px; }
   .watchlist > .watch-items { max-height: 390px; }
-  .stock-heading h2 span, .stock-price small { font-size: 14px; }
-  .stock-heading > div > small { font-size: 12px; }
+  .stock-heading h2 span, .stock-price small { font-size: var(--text-body); }
+  .stock-heading > div > small { font-size: var(--text-small); }
   .chart-controls .date-controls { flex-wrap: wrap; gap: 4px; padding: 7px; }
   .date-controls.small input, .dashboard-range input { width: 0; min-width: 0; flex: 1 1 115px; }
   .date-controls.small > span, .dashboard-range > span { flex: 0; }
   .chart-bottom { flex-wrap: wrap; }
-  .execution-list > button, .execution-list > button .muted, .execution-note { font-size: 13px; line-height: 1.7; }
+  .execution-list > button, .execution-list > button .muted, .execution-note { font-size: var(--text-body); line-height: 1.7; }
   .execution-detail .section-top { flex-wrap: wrap; gap: 8px; }
-  .execution-detail .section-top .inline { flex-wrap: wrap; font-size: 13px; }
-  .detail-stats b { font-size: 16px; }
-  .detail-stats small { font-size: 13px; }
-  .bottom-nav button { font-size: 13px; }
-  .summary-text { font-size: 16px; }
+  .execution-detail .section-top .inline { flex-wrap: wrap; font-size: var(--text-body); }
+  .detail-stats b { font-size: var(--text-section); }
+  .detail-stats small { font-size: var(--text-body); }
+  .bottom-nav button { font-size: var(--text-body); }
+  .summary-text { font-size: var(--text-section); }
 }
 @media (max-width: 360px) {
   .topbar { padding-left: 12px; padding-right: 12px; }
@@ -3743,25 +3743,25 @@ td .pnl {
   .metrics > .card { min-height: 0; padding: 16px; }
   .mobile-capital .account-funds { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .mobile-capital .account-funds > :first-child { grid-column: 1/-1; }
-  .mobile-capital .account-funds strong, .mobile-capital .account-funds b { font-size: 18px; }
+  .mobile-capital .account-funds strong, .mobile-capital .account-funds b { font-size: var(--text-title); }
 }
 @media (max-width: 700px) {
   .daily-chart svg { height: 225px; min-height: 225px; max-height: none; }
-  .daily-chart .axis-text { font-size: 12px; }
+  .daily-chart .axis-text { font-size: var(--text-small); }
   .calendar-day small { display: flex; flex-wrap: wrap; justify-content: center; }
   .calendar-day small > span { white-space: nowrap; }
   .stacked-metrics .metric-label, .cumulative .metric-label, .metrics > .cumulative > .metric-foot,
-  .executions-panel summary > .muted { font-size: 13px; }
+  .executions-panel summary > .muted { font-size: var(--text-body); }
 }
 @media (max-width: 700px) {
   .chart-controls > .date-controls { flex: 0 0 100%; width: 100%; min-width: 0; }
   .chart-controls > .date-controls input { width: 0; min-width: 0; flex: 1 1 0; }
-  .chart-controls > .date-controls > span { font-size: 14px; }
+  .chart-controls > .date-controls > span { font-size: var(--text-body); }
   .stock-price { flex-wrap: wrap; }
 }
 @media (max-width: 700px) {
-  .watch-actions > span, .watch-item .quote-time { font-size: 12px; }
-  .chart-tools button, .marker-legend .marker-badge { font-size: 12px; }
+  .watch-actions > span, .watch-item .quote-time { font-size: var(--text-small); }
+  .chart-tools button, .marker-legend .marker-badge { font-size: var(--text-small); }
 }
 @media (max-width: 360px) {
   .chart-controls > .date-controls input { flex-basis: 100%; width: 100%; }
@@ -3772,37 +3772,37 @@ td .pnl {
 .topbar { min-height: 70px; }
 .topbar-actions { align-items: center; gap: 8px; }
 .topbar .currency-toggle { padding: 10px; }
-.funds-rate { margin: 0 5px 10px; color: var(--muted); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.funds-rate { margin: 0 5px 10px; color: var(--muted); font-size: var(--text-small); line-height: 1.5; overflow-wrap: anywhere; }
 .target-number { font-family: "IBM Plex Mono", ui-monospace, monospace; font-weight: 500; letter-spacing: -1.2px; }
 .target-number > span { font-family: inherit; font-weight: 500; font-variant-numeric: tabular-nums; }
 .install-guide section { display: grid; gap: 8px; }
-.install-guide p { font-size: 14px; }
+.install-guide p { font-size: var(--text-body); }
 @media (max-width: 700px) {
   .topbar { min-height: 64px; padding: 10px 16px; }
   .topbar-actions { gap: 8px; justify-content: flex-end; }
-  .funds-rate { margin: 0 0 9px; font-size: 13px; }
+  .funds-rate { margin: 0 0 9px; font-size: var(--text-body); }
 }
 @media (max-width: 700px) { .desktop-shortcut { display: none; } }
 
 /* Calendar typography stays readable on both compact desktops and phones. */
 .calendar-card .card-header { flex-wrap: wrap; gap: 10px; }
-.calendar-card .card-header h2 { font-size: 17px; }
+.calendar-card .card-header h2 { font-size: var(--text-title); }
 .calendar-card .card-header h2 svg { display: inline-flex; width: 18px; height: 18px; }
-.calendar-nav { font-size: 14px; gap: 6px; margin-left: auto; }
+.calendar-nav { font-size: var(--text-body); gap: 6px; margin-left: auto; }
 .calendar-nav .icon-btn { min-width: 34px; min-height: 36px; }
 .calendar-grid { gap: 5px; }
-.calendar-grid .weekday { font-size: 13px; padding-bottom: 8px; }
+.calendar-grid .weekday { font-size: var(--text-body); padding-bottom: 8px; }
 .calendar-day { min-height: 62px; gap: 5px; padding: 7px 2px; }
-.calendar-day > span { font-size: 15px; line-height: 1.3; }
-.calendar-day small { display: flex; flex-wrap: wrap; justify-content: center; font-family: inherit; font-size: 12px; line-height: 1.4; letter-spacing: -.25px; max-width: 100%; font-variant-numeric: tabular-nums; }
+.calendar-day > span { font-size: var(--text-section); line-height: 1.3; }
+.calendar-day small { display: flex; flex-wrap: wrap; justify-content: center; font-family: inherit; font-size: var(--text-small); line-height: 1.4; letter-spacing: -.25px; max-width: 100%; font-variant-numeric: tabular-nums; }
 .calendar-day small > span { white-space: nowrap; }
 .calendar-day small > span:first-child { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
 .calendar-day.outside { opacity: .45; }
-.calendar-foot { font-size: 13px; flex-wrap: wrap; gap: 8px; }
+.calendar-foot { font-size: var(--text-body); flex-wrap: wrap; gap: 8px; }
 @media (max-width: 700px) {
   .topbar .add-trade { display: none; }
   .calendar-grid { gap: 3px; }
   .calendar-day { min-height: 66px; }
-  .calendar-card .card-header h2 { font-size: 17px; }
-  .calendar-nav { font-size: 14px; }
+  .calendar-card .card-header h2 { font-size: var(--text-title); }
+  .calendar-nav { font-size: var(--text-body); }
 }
